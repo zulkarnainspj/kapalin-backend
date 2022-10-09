@@ -22,5 +22,5 @@ date_default_timezone_set('Asia/Jakarta');
 
 Route::post('/admin/login', LoginController::class)->name('login');
 Route::post('/admin/logout', LogoutController::class);
-Route::get('/admin/kapal', [KapalController::class, 'index']);
-Route::post('/admin/kapal/store', [KapalController::class, 'store']);
+Route::get('/admin/kapal', [KapalController::class, 'index'])->middleware('jwt.verify');
+Route::post('/admin/kapal/store', [KapalController::class, 'store'])->middleware('jwt.verify');
