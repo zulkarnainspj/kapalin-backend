@@ -26,7 +26,7 @@
                         <li class="nav-header">Kapal</li>
 
                         <li class="nav-item">
-                            <a href="/ships" class="nav-link {{ $nvb == 'ships' ? 'active' : '' }}">
+                            <a href="/admin/ships" class="nav-link {{ $nvb == 'ships' ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-ship"></i>
                                 <p>
                                     Kapal
