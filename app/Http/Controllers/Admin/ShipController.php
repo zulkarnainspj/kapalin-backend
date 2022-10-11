@@ -36,4 +36,25 @@ class ShipController extends Controller
 
         return redirect('/admin/ships');
     }
+
+    public function edit($id)
+    {
+        $ship = Ship::find($id);
+
+        return view('admin.ships.edit', [
+            'title' => 'Kapal',
+            'nvb' => 'ships',
+            'ship' => $ship
+        ]);
+    }
+
+    public function update(Request $request)
+    {
+        $ship = Ship::find($request->id);
+        $ship->name = $request->name;
+        $ship->kapasitas = $request->capacity;
+        $ship->save();
+
+        return redirect('/admin/ships');
+    }
 }
