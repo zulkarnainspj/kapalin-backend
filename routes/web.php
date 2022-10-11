@@ -26,3 +26,4 @@ Route::get('/admin/ships/add', [Admin\ShipController::class, 'create'])->middlew
 Route::post('/admin/ships/store', [Admin\ShipController::class, 'store'])->middleware('auth');
 Route::get('/admin/ships/edit/{id}', [Admin\ShipController::class, 'edit'])->middleware('auth');
 Route::post('/admin/ships/update', [Admin\ShipController::class, 'update'])->middleware('auth');
+Route::get('/admin/ships/remove/{id}', [Admin\ShipController::class, 'destroy'])->middleware('auth');

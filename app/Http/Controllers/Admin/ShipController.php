@@ -57,4 +57,12 @@ class ShipController extends Controller
 
         return redirect('/admin/ships');
     }
+
+    public function destroy($id)
+    {
+        $ship = Ship::find($id);
+        $ship->delete();
+
+        return redirect('/admin/ships');
+    }
 }
