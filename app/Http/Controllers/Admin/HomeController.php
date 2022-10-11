@@ -9,6 +9,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return 'hello';
+        return view('admin.index', [
+            'title' => 'Dashboard',
+            'nvb' => 'home'
+        ]);
     }
 }

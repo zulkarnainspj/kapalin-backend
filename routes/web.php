@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [Admin\HomeController::class, 'index'])->middleware('auth');
+Route::get('/', [LoginController::class, 'index'])->middleware('auth');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login/req', [LoginController::class, 'login']);
