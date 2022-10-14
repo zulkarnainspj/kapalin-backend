@@ -34,3 +34,10 @@ Route::post('/admin/ports/store', [Admin\PortController::class, 'store'])->middl
 Route::get('/admin/ports/edit/{id}', [Admin\PortController::class, 'edit'])->middleware('auth');
 Route::post('/admin/ports/update', [Admin\PortController::class, 'update'])->middleware('auth');
 Route::get('/admin/ports/remove/{id}', [Admin\PortController::class, 'destroy'])->middleware('auth');
+
+Route::get('/admin/routes', [Admin\RouteController::class, 'index'])->middleware('auth');
+Route::get('/admin/routes/add', [Admin\RouteController::class, 'create'])->middleware('auth');
+Route::post('/admin/routes/store', [Admin\RouteController::class, 'store'])->middleware('auth');
+Route::get('/admin/routes/edit/{id}', [Admin\RouteController::class, 'edit'])->middleware('auth');
+Route::post('/admin/routes/update', [Admin\RouteController::class, 'update'])->middleware('auth');
+Route::get('/admin/routes/remove/{id}', [Admin\RouteController::class, 'destroy'])->middleware('auth');
