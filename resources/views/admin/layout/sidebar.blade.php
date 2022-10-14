@@ -35,7 +35,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="/" class="nav-link">
+                            <a href="/admin/ports" class="nav-link {{ $nvb == 'ports' ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-anchor"></i>
                                 <p>
                                     Pelabuhan
