@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Ship;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ShipController extends Controller
 {
@@ -33,6 +34,8 @@ class ShipController extends Controller
         $ship->name = $request->name;
         $ship->kapasitas = $request->capacity;
         $ship->save();
+
+        Alert::success('Sukses', $ship->name . ' berhasil ditambahkan');
 
         return redirect('/admin/ships');
     }

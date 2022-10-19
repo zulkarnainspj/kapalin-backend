@@ -25,6 +25,7 @@
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
+        @include('sweetalert::alert')
         @include('admin.layout.navbar')
         @include('admin.layout.sidebar')
         @yield('container')

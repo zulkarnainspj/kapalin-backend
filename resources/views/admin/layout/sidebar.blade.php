@@ -59,7 +59,7 @@
                 <li class="nav-header">Pengguna</li>
 
                 <li class="nav-item">
-                    <a href="/admin/users" class="nav-link">
+                    <a href="/admin/users" class="nav-link {{ ($nvb == 'users') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-people-fill"></i>
                         <p>
                             Admin & Petugas

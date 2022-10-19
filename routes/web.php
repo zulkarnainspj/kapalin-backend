@@ -41,3 +41,10 @@ Route::post('/admin/routes/store', [Admin\RouteController::class, 'store'])->mid
 Route::get('/admin/routes/edit/{id}', [Admin\RouteController::class, 'edit'])->middleware('auth');
 Route::post('/admin/routes/update', [Admin\RouteController::class, 'update'])->middleware('auth');
 Route::get('/admin/routes/remove/{id}', [Admin\RouteController::class, 'destroy'])->middleware('auth');
+
+Route::get('/admin/users', [Admin\UserController::class, 'index'])->middleware('auth');
+Route::get('/admin/users/add', [Admin\UserController::class, 'create'])->middleware('auth');
+Route::post('/admin/users/store', [Admin\UserController::class, 'store'])->middleware('auth');
+Route::get('/admin/users/edit/{id}', [Admin\UserController::class, 'edit'])->middleware('auth');
+Route::post('/admin/users/update', [Admin\UserController::class, 'update'])->middleware('auth');
+Route::get('/admin/users/remove/{id}', [Admin\UserController::class, 'destroy'])->middleware('auth');
