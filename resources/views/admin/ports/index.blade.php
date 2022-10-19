@@ -25,7 +25,8 @@
                             <div class="card">
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <a href="/admin/ports/add" class="btn btn-success" style="position: absolute; z-index : 1"><i class="fas fa-plus"></i> NEW</a>
+                                    <a href="/admin/ports/add" class="btn btn-success"
+                                        style="position: absolute; z-index : 1"><i class="fas fa-plus"></i> NEW</a>
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr class="text-center">
@@ -45,11 +46,13 @@
                                                         <a href="/admin/ports/edit/{{ $item->id }}"
                                                             class="btn btn-sm btn-warning text-light" title="Edit"><span
                                                                 class="fas fa-fw fa-edit"></span></a>
-                                                        <a href="/admin/ports/remove/{{ $item->id }}"
-                                                            onclick="return confirm('Are you sure you want to remove this data?');"
-                                                            class="btn btn-sm btn-danger" title="Remove"><span
-                                                                class="fas fa-fw fa-trash"></span></a>
 
+                                                        @if (isset($item->next_route->id) == false && isset($item->route->id) == false)
+                                                            <a href="/admin/ports/remove/{{ $item->id }}"
+                                                                onclick="return confirm('Are you sure you want to remove this data?');"
+                                                                class="btn btn-sm btn-danger" title="Remove"><span
+                                                                    class="fas fa-fw fa-trash"></span></a>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach
