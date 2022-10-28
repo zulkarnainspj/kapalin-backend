@@ -57,8 +57,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="role">Role</label>
-                                                <select name="role" id="role" class="form-control"
-                                                    onchange="cekRole()">
+                                                <select name="role" id="role" class="form-control">
                                                     <option value="0">Admin</option>
                                                     <option value="1">Petugas</option>
                                                 </select>

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
@@ -56,12 +58,30 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
+        DB::beginTransaction();
         $user = User::find($request->id);
         $user->name = $request->name;
         $user->phone = $request->hp;
         $user->email = $request->email;
         $user->role = $request->role;
         $user->save();
+
+        $profile = Profile::find($user->id);
+        
+        if ($profile) {
+            $profile->user_id = $user->id;
+            $profile->date_of_birth = $request->date_of_birth;
+            $profile->address = $request->address;
+            $profile->save();
+        }else{
+            $profile = new Profile;
+            $profile->user_id = $user->id;
+            $profile->date_of_birth = $request->date_of_birth;
+            $profile->address = $request->address;
+            $profile->save();
+        }
+        
+        DB::commit();
 
         Alert::success('Sukses', $user->name . ' berhasil diperbarui');
 

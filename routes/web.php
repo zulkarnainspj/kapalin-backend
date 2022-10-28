@@ -18,6 +18,8 @@ Route::get('/', [LoginController::class, 'index'])->middleware('auth');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login/req', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
+
 
 Route::get('/admin', [Admin\HomeController::class, 'index'])->middleware('auth');
 

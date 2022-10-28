@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Port;
 use App\Models\Route;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RouteController extends Controller
 {
@@ -40,6 +41,8 @@ class RouteController extends Controller
         $route->distance = $request->distance;
         $route->save();
 
+        Alert::success('Sukses', 'Rute berhasil ditambahkan');
+
         return redirect('/admin/routes');
     }
 
@@ -64,6 +67,8 @@ class RouteController extends Controller
         $route->next_port_id = $request->next_port;
         $route->distance = $request->distance;
         $route->save();
+
+        Alert::success('Sukses', 'Rute berhasil diperbarui');
 
         return redirect('/admin/routes');
     }

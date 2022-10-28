@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Port;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PortController extends Controller
 {
@@ -34,6 +35,8 @@ class PortController extends Controller
         $port->name = $request->name;
         $port->save();
 
+        Alert::success('Sukses', $port->name . ' berhasil diperbarui');
+
         return redirect('/admin/ports');
     }
 
@@ -54,6 +57,8 @@ class PortController extends Controller
         $port->code = $request->code;
         $port->name = $request->name;
         $port->save();
+
+        Alert::success('Sukses', $port->name . ' berhasil diperbarui');
 
         return redirect('/admin/ports');
     }

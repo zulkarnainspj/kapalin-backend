@@ -58,6 +58,8 @@ class ShipController extends Controller
         $ship->kapasitas = $request->capacity;
         $ship->save();
 
+        Alert::success('Sukses', $ship->name . ' berhasil diperbarui');
+
         return redirect('/admin/ships');
     }
 

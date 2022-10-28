@@ -25,6 +25,9 @@
                             @csrf
                             <input type="hidden" name="id" value="{{ $user->id }}">
                             <div class="card">
+                                <div class="card-header">
+                                    <h3>Profil</h3>
+                                </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6">
@@ -34,6 +37,35 @@
                                                     autofocus autocomplete="off" value="{{ $user->name }}" required>
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="date_of_birth">Tanggal Lahir</label>
+                                                <input type="date" step="any" name="date_of_birth" id="date_of_birth" class="form-control" value="{{ isset($user->profile->date_of_birth) ? $user->profile->date_of_birth : '' }}" autocomplete="off" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="address">Alamat</label>
+                                                <textarea name="address" id="address" cols="30" rows="2" class="form-control">{{ isset($user->profile->address) ? $user->profile->address : '' }}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>Akun</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        {{-- <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="name">Nama</label>
+                                                <input type="text" name="name" id="name" class="form-control"
+                                                    autofocus autocomplete="off" value="{{ $user->name }}" required>
+                                            </div>
+                                        </div> --}}
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="hp">HP</label>
@@ -58,8 +90,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="role">Role</label>
-                                                <select name="role" id="role" class="form-control"
-                                                    onchange="cekRole()">
+                                                <select name="role" id="role" class="form-control">
                                                     <option value="0" {{ ($user->role == 0) ? 'selected' : '' }}>Admin</option>
                                                     <option value="1" {{ ($user->role == 1) ? 'selected' : '' }}>Petugas</option>
                                                 </select>
@@ -97,7 +128,7 @@
         </section>
     </div>
 
-    <script>
+    {{-- <script>
         function cekRole() {
             var role = $('#role').val();
             var dataPetugas = $('#dataPetugas');
@@ -108,5 +139,5 @@
                 dataPetugas.css('display', 'none');
             }
         }
-    </script>
+    </script> --}}
 @endsection
