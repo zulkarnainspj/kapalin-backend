@@ -48,7 +48,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="/" class="nav-link">
+                    <a href="/admin/schedules" class="nav-link {{ $nvb == 'schedules' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-calendar"></i>
                         <p>
                             Jadwal Kapal

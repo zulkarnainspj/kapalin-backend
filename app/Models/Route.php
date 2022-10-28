@@ -18,4 +18,9 @@ class Route extends Model
     {
         return $this->belongsTo(Port::class, 'next_port_id');
     }
+
+    public function schedule()
+    {
+        return $this->hasOne(Schedule::class, 'route_id', 'id');
+    }
 }
