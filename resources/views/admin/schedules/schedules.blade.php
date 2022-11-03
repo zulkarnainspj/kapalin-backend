@@ -11,6 +11,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/admin/schedules">{{ $ship->name }}</a></li>
                             <li class="breadcrumb-item active">Jadwal</li>
                         </ol>
                     </div>
@@ -25,7 +26,7 @@
                             <div class="card">
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <a href="/admin/schedules/add" class="btn btn-success"
+                                    <a href="/admin/schedules/add/{{ $ship->id }}" class="btn btn-success"
                                         style="position: absolute; z-index : 1"><i class="fas fa-plus"></i> NEW</a>
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>

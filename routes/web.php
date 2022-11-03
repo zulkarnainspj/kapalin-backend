@@ -52,6 +52,8 @@ Route::post('/admin/users/update', [Admin\UserController::class, 'update'])->mid
 Route::get('/admin/users/remove/{id}', [Admin\UserController::class, 'destroy'])->middleware('auth');
 
 Route::get('/admin/schedules', [Admin\ScheduleController::class, 'index'])->middleware('auth');
-Route::get('/admin/schedules/add', [Admin\ScheduleController::class, 'create'])->middleware('auth');
+Route::get('/admin/schedules/add', [Admin\ScheduleController::class, 'create'])-> middleware('auth');
+Route::get('/admin/schedules/add/{id}', [Admin\ScheduleController::class, 'create2'])->middleware('auth');
 Route::post('/admin/schedules/store', [Admin\ScheduleController::class, 'store'])->middleware('auth');
 Route::get('/admin/schedules/{id}', [Admin\ScheduleController::class, 'schedule'])->middleware('auth');
+Route::post('/admin/schedules/ships/store', [Admin\ScheduleController::class, 'store2'])->middleware('auth');

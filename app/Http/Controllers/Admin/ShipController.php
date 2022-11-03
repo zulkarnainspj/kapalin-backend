@@ -38,7 +38,7 @@ class ShipController extends Controller
         Alert::success('Sukses', $ship->name . ' berhasil ditambahkan');
 
         return redirect('/admin/ships');
-    }
+    }    
 
     public function edit($id)
     {

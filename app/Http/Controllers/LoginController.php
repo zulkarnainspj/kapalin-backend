@@ -24,6 +24,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+        
         $user_credential = [
             'email' => $request->email,
             'password' => $request->password,
