@@ -83,6 +83,70 @@
                     <!-- /.col -->
                 </div>
                 <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <hr style="height: 2px; border-color : #ffff">
+                        <h3>Validasi Tiket</h3>
+                    </div>
+
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <div class="mr-2 w-75">
+                            <input type="text" class="form-control" style="font-size: 30px; height:50px"
+                                autocomplete="off" autofocus>
+                        </div>
+                        <div>
+                            <button class="btn btn-success" style="height:50px">Cek</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-10 mt-3">
+                        <h6>Informasi Pemesanan Tiket</h6>
+                        <div class="card bg-transparent mb-3">
+                            <div class="card-header" style="background-color: rgba(0,0,0,.1);">
+                                <div class="d-flex justify-content-between">
+                                    <h4 class="card-title">KM Sabuk Nusantara 115</h4>
+                                    <p class="card-text">Sapeken-Pagerungan Besar</p>
+                                </div>
+                            </div>
+                            <div class="card-body text-light">
+                                <div class="row">
+                                    <div class="col-md-12 d-flex justify-content-between">
+                                        <div class="">
+                                            <table class="table table-borderless">
+                                                <tr>
+                                                    <th>Penumpang</th>
+                                                    <td>: Zulkarnain</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>ETA</th>
+                                                    <td>: 3 November 2022 12:00</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>ETD</th>
+                                                    <td>: 4 November 2022 12:00</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+
+                                        <div class="">
+                                            <p class="card-text">
+                                                Total Harga
+                                            </p>
+                                            <h1>Rp. 50.000</h1>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="card-footer d-flex justify-content-end">                                
+                                <button class="btn btn-primary">Cetak Tiket</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!--/. container-fluid -->
         </section>

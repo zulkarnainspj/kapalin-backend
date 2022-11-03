@@ -69,4 +69,4 @@ Route::post('/admin/schedules/ships/store', [Admin\ScheduleController::class, 's
 |--------------------------------------------------------------------------
 */
 
-Route::get('/employee', [Admin\HomeController::class, 'index'])->middleware('auth');
+Route::get('/employee', [Employee\HomeController::class, 'index'])->middleware('auth');
