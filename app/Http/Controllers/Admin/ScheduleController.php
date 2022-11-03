@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Route;
-use App\Models\Schedule;
-use App\Models\Ship;
+use App\Models\Admin\Route;
+use App\Models\Admin\Schedule;
+use App\Models\Admin\Ship;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 

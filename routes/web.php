@@ -20,6 +20,11 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login/req', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
+/*
+|--------------------------------------------------------------------------
+| Admin
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/admin', [Admin\HomeController::class, 'index'])->middleware('auth');
 
@@ -57,3 +62,11 @@ Route::get('/admin/schedules/add/{id}', [Admin\ScheduleController::class, 'creat
 Route::post('/admin/schedules/store', [Admin\ScheduleController::class, 'store'])->middleware('auth');
 Route::get('/admin/schedules/{id}', [Admin\ScheduleController::class, 'schedule'])->middleware('auth');
 Route::post('/admin/schedules/ships/store', [Admin\ScheduleController::class, 'store2'])->middleware('auth');
+
+/*
+|--------------------------------------------------------------------------
+| Petugas
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/employee', [Admin\HomeController::class, 'index'])->middleware('auth');

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Port;
+use App\Models\Admin\Port;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 

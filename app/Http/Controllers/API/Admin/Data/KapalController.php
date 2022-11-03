@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API\Admin\Data;
 
 use App\Http\Controllers\Controller;
-use App\Models\Ship;
+use App\Models\Admin\Ship;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
