@@ -26,10 +26,10 @@
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
         @include('sweetalert::alert')
-        @include('admin.layout.navbar')
-        @include('admin.layout.sidebar')
+        @include('employee.layout.navbar')
+        @include('employee.layout.sidebar')
         @yield('container')
-        @include('admin.layout.footer')
+        @include('employee.layout.footer')
     </div>
     <!-- REQUIRED SCRIPTS -->
     <!-- jQuery -->

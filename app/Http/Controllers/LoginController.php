@@ -13,7 +13,7 @@ class LoginController extends Controller
             if (auth()->user()->role == 0) {
                 return redirect('/admin');
             } elseif (auth()->user()->role == 1) {
-                return redirect('/loket');
+                return redirect('/employee');
             }
         } else {
             return view('login.index', [

@@ -21,57 +21,21 @@
                 <li class="nav-header">Kapal</li>
 
                 <li class="nav-item">
-                    <a href="/admin/ships" class="nav-link {{ $nvb == 'ships' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-ship"></i>
-                        <p>
-                            Kapal
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="/admin/ports" class="nav-link {{ $nvb == 'ports' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-anchor"></i>
-                        <p>
-                            Pelabuhan
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="/admin/routes" class="nav-link {{ $nvb == 'routes' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-route"></i>
-                        <p>
-                            Rute
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="/admin/schedules" class="nav-link {{ $nvb == 'schedules' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-calendar"></i>
+                    <a href="/admin/schedules" class="nav-link {{ $nvb == 'schedules' ? 'active' : '' }} disabled">
+                        <i class="bi bi-calendar-range-fill mr-2"></i>
                         <p>
                             Jadwal Kapal
                         </p>
                     </a>
                 </li>
 
-                <li class="nav-header">Pengguna</li>
+                <li class="nav-header">Tiket</li>
 
                 <li class="nav-item">
-                    <a href="/admin/users" class="nav-link {{ ($nvb == 'users') ? 'active' : '' }}">
-                        <i class="nav-icon bi bi-people-fill"></i>
+                    <a href="/admin/users" class="nav-link {{ ($nvb == 'users') ? 'active' : '' }} disabled">
+                        <i class="bi bi-ticket-perforated-fill mr-2"></i>
                         <p>
-                            Admin & Petugas
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="/admin/passengers" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>
-                            Penumpang
+                            Pembelian Tiket
                         </p>
                     </a>
                 </li>

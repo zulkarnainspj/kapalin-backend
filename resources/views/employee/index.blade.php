@@ -95,13 +95,13 @@
                                 autocomplete="off" autofocus>
                         </div>
                         <div>
-                            <button class="btn btn-success" style="height:50px">Cek</button>
+                            <button class="btn btn-success" style="height:50px" onclick="validasiTiket()">Cek</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="row d-flex justify-content-center">
-                    <div class="col-md-10 mt-3">
+                    <div class="col-md-10 mt-3" id="informasiTiket" style="display: none">
                         <h6>Informasi Pemesanan Tiket</h6>
                         <div class="card bg-transparent mb-3">
                             <div class="card-header" style="background-color: rgba(0,0,0,.1);">
@@ -150,4 +150,11 @@
             </div>
             <!--/. container-fluid -->
         </section>
+
+
+        <script>
+            function validasiTiket(){
+                $('#informasiTiket').css('display', 'block');
+            }
+        </script>
     @endsection
