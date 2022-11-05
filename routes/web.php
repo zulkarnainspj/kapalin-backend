@@ -70,3 +70,6 @@ Route::post('/admin/schedules/ships/store', [Admin\ScheduleController::class, 's
 */
 
 Route::get('/employee', [Employee\HomeController::class, 'index'])->middleware('auth');
+
+Route::get('/employee/schedules', [Employee\ScheduleController::class, 'index'])->middleware('auth');
+Route::get('/employee/schedules/{id}', [Employee\ScheduleController::class, 'schedule'])->middleware('auth');

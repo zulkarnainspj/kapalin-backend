@@ -21,7 +21,7 @@
                 <li class="nav-header">Kapal</li>
 
                 <li class="nav-item">
-                    <a href="/admin/schedules" class="nav-link {{ $nvb == 'schedules' ? 'active' : '' }} disabled">
+                    <a href="/employee/schedules" class="nav-link {{ $nvb == 'schedules' ? 'active' : '' }}">
                         <i class="bi bi-calendar-range-fill mr-2"></i>
                         <p>
                             Jadwal Kapal
