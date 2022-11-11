@@ -26,6 +26,8 @@
                             <div class="card">
                                 <!-- /.card-header -->
                                 <div class="card-body">
+                                    <a href="#" class="btn btn-success"
+                                        style="position: absolute; z-index : 1"><i class="fa fas fa-download"></i> Download</a>
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr class="text-center">

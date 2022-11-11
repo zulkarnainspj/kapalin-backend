@@ -32,7 +32,7 @@
                 <li class="nav-header">Tiket</li>
 
                 <li class="nav-item">
-                    <a href="/admin/users" class="nav-link {{ ($nvb == 'users') ? 'active' : '' }} disabled">
+                    <a href="/employee/tickets" class="nav-link {{ ($nvb == 'users') ? 'active' : '' }}">
                         <i class="bi bi-ticket-perforated-fill mr-2"></i>
                         <p>
                             Pembelian Tiket

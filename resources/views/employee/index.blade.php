@@ -150,11 +150,4 @@
             </div>
             <!--/. container-fluid -->
         </section>
-
-
-        <script>
-            function validasiTiket(){
-                $('#informasiTiket').css('display', 'block');
-            }
-        </script>
     @endsection
