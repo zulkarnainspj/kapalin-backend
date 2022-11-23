@@ -13,7 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('persons', function (Blueprint $table) {
+            $table->id();
+            $table->string('no_id')->nullable();
+            $table->string('name');
+            $table->date('date_of_birth')->nullable();
+            $table->smallInteger('gender'); // 1 Pria; 2 Wanita
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('persons');
     }
 };
