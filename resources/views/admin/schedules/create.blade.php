@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="ship">Kapal</label>
                                                 <select name="ship" class="form-control" id="ship">
@@ -38,7 +38,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="route">Rute</label>
                                                 <select name="route" class="form-control" id="route">
@@ -48,6 +48,12 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="price">Harga</label>
+                                                <input type="number" class="form-control" name="price" placeholder="ex. 20000">
                                             </div>
                                         </div>
                                     </div>
@@ -71,7 +77,7 @@
 
                                                     <div class="col-md-3">
                                                         <input type="time" step="any" name="eta_time" id="eta_time"
-                                                            class="form-control" required>
+                                                            class="form-control" value="00:00" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -87,7 +93,7 @@
 
                                                     <div class="col-md-3">
                                                         <input type="time" step="any" name="etd_time" id="etd_time"
-                                                            class="form-control" required>
+                                                            class="form-control" value="00:00" required>
                                                     </div>
                                                 </div>
                                             </div>

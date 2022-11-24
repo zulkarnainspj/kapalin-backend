@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('route_id');
             $table->dateTime('eta');
             $table->dateTime('etd');
+            $table->float('price');
             $table->timestamps();
             $table->foreign('ship_id')->references('id')->on('ships');
             $table->foreign('route_id')->references('id')->on('routes');

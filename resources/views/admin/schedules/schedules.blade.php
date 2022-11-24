@@ -36,6 +36,7 @@
                                                 <th>Tujuan</th>
                                                 <th>ETA (Tiba)</th>
                                                 <th>ETD (Berangkat)</th>
+                                                <th>Harga</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -47,6 +48,7 @@
                                                     <td class="text-center">{{ $item->route->next_port->name }}</td>
                                                     <td class="text-center">{{ date_create($item->eta)->format('d-m-Y H:i') }}</td>
                                                     <td class="text-center">{{ date_create($item->etd)->format('d-m-Y H:i') }}</td>
+                                                    <td class="text-center">{{ $item->price }}</td>
                                                     <td align="center">
                                                         <a href="/admin/schedules/{{ $item->ship->id }}/edit/{{ $item->id }}"
                                                             class="btn btn-sm btn-warning text-light" title="Edit"><span

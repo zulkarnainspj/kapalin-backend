@@ -7,6 +7,7 @@ use App\Models\Admin\Route;
 use App\Models\Admin\Schedule;
 use App\Models\Admin\Ship;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 
 class TicketController extends Controller
 {
@@ -38,5 +39,17 @@ class TicketController extends Controller
         $schedule = Schedule::select('id', 'etd')->orderBy('eta', 'desc')->where('ship_id', $ship_id)->where('route_id', $route_id)->get();
 
         return response()->json($schedule);
+    }
+
+    public function price($schedule_id)
+    {
+        $schedule = Schedule::select('id', 'price')->where('id', $schedule_id)->first();
+
+        return response()->json($schedule);
+    }
+
+    public function order(Request $request)
+    {
+        return response()->json($request);
     }
 }

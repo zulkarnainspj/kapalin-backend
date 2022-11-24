@@ -77,3 +77,6 @@ Route::get('/employee/tickets', [Employee\TicketController::class, 'index'])->mi
 
 Route::get('/employee/tickets/route/{ship_id}', [Employee\TicketController::class, 'route'])->middleware('auth');
 Route::get('/employee/tickets/schedule/{ship_id}/{route_id}', [Employee\TicketController::class, 'schedule'])->middleware('auth');
+Route::get('/employee/tickets/price/{schedule_id}', [Employee\TicketController::class, 'price'])->middleware('auth');
+
+Route::post('/employee/order', [Employee\TicketController::class, 'order'])->middleware('auth');

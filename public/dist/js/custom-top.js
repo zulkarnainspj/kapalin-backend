@@ -1,5 +1,28 @@
+function formatRupiah(angka, prefix) {
+    var angka = angka + '';
+    var number_string = angka.replace(/[^,\d]/g, '').toString(),
+        split = number_string.split(','),
+        sisa = split[0].length % 3,
+        rupiah = split[0].substr(0, sisa),
+        ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+    // tambahkan titik jika yang di input sudah menjadi angka ribuan
+    if (ribuan) {
+        separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+    }
+
+    rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+    return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+}
+
 function getPersons() {
     var person = $('#jumlahPenumpang').val();
+    var price = $('#price').val();
+    var harga = $('#hargaTiket');
+
+    harga.text(formatRupiah(price * person, 'Rp. '));
+
     var pers2 = $('#pers2');
     var pers3 = $('#pers3');
     var pers4 = $('#pers4');
@@ -54,7 +77,6 @@ function getRoutes() {
         dataType: 'json',
         success: function (data) {
             $.each(data, function (key, values) {
-                $('#kodeBooking').text(kode);
 
                 route_id = data[key].route_id;
                 name = data[key].name;
@@ -94,4 +116,21 @@ function getSchedules() {
         }
 
     });
+}
+
+function getPrice() {
+    var scheduleID = $('#schedule').val();
+    var price = $('#price');
+    var harga = $('#hargaTiket');
+    var person = $('#jumlahPenumpang').val();
+
+    $.ajax({
+        url: "/employee/tickets/price/" + scheduleID,
+        type : 'GET',
+        dataType : 'json',
+        success : function (data) {
+            price.val((data.price));
+            harga.text(formatRupiah(price.val() * person, 'Rp. '));
+        }
+    })
 }

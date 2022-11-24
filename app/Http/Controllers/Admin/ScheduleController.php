@@ -42,6 +42,7 @@ class ScheduleController extends Controller
         $schedule->route_id = $request->route;
         $schedule->eta = $request->eta_date . ' ' . $request->eta_time;
         $schedule->etd = $request->etd_date . ' ' . $request->etd_time;
+        $schedule->price = $request->price;
         $schedule->save();
 
         Alert::success('Sukses', 'Jadwal berhasil ditambahkan');
@@ -68,6 +69,7 @@ class ScheduleController extends Controller
         $schedule->route_id = $request->route;
         $schedule->eta = $request->eta_date . ' ' . $request->eta_time;
         $schedule->etd = $request->etd_date . ' ' . $request->etd_time;
+        $schedule->price = $request->price;
         $schedule->save();
 
         Alert::success('Sukses', 'Jadwal berhasil ditambahkan');

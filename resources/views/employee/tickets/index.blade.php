@@ -15,9 +15,10 @@
                     </div>
                 </div>
         </section>
-        <form action="" method="post">
+        <form action="/employee/order" method="POST">
             @csrf
             <input type="hidden" name="booking_code" value="KB{{ date_create()->format('Hidysm') }}">
+            <input type="hidden" name="price" id="price" value="0">
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
@@ -115,7 +116,7 @@
 
                                     <div class="form-group">
                                         <label for="schedule">Jadwal</label>
-                                        <select name="schedule" id="schedule" class="form-control">
+                                        <select name="schedule" id="schedule" class="form-control" onchange="getPrice()">
                                             <option value="0">Pilih Jadwal</option>
                                         </select>
                                     </div>
