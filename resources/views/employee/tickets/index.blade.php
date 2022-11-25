@@ -162,7 +162,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12 position-absolute" style="width: 99%">
+                            <div class="col-md-12 position-absolute" style="width: 98%; right:1px;">
                                 <button type="submit" style="float:right" class="btn btn-lg w-100 btn-success mr-2"><b>Cetak</b></button>
                             </div>
                         </div>
