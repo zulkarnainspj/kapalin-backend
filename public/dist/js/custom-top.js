@@ -167,7 +167,7 @@ function validasiTiket() {
             keberangkatan.text(': ' + etd_format);
 
             // Price
-            price.text(formatRupiah(data.ticket.price, 'Rp. '));
+            price.text(formatRupiah(Math.floor(data.ticket.price), 'Rp. '));
             $('#informasiTiket').css('display', 'block');
         }
     });
