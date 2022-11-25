@@ -14,7 +14,3 @@ $(function () {
         "responsive": true,
     });
 });
-
-function validasiTiket() {
-    $('#informasiTiket').css('display', 'block');
-}

@@ -91,7 +91,7 @@
 
                     <div class="col-md-12 d-flex justify-content-center">
                         <div class="mr-2 w-75">
-                            <input type="text" class="form-control" style="font-size: 30px; height:50px"
+                            <input type="text" class="form-control" id="ticketCode" style="font-size: 30px; height:50px"
                                 autocomplete="off" autofocus>
                         </div>
                         <div>
@@ -106,8 +106,8 @@
                         <div class="card bg-transparent mb-3">
                             <div class="card-header" style="background-color: rgba(0,0,0,.1);">
                                 <div class="d-flex justify-content-between">
-                                    <h4 class="card-title">KM Sabuk Nusantara 115</h4>
-                                    <p class="card-text">Sapeken-Pagerungan Besar</p>
+                                    <h4 class="card-title" id="ship"></h4>
+                                    <p class="card-text" id="route"></p>
                                 </div>
                             </div>
                             <div class="card-body text-light">
@@ -116,16 +116,16 @@
                                         <div class="">
                                             <table class="table table-borderless">
                                                 <tr>
+                                                    <th>Pemesan</th>
+                                                    <td id="pemesan">:</td>
+                                                </tr>
+                                                <tr>
                                                     <th>Penumpang</th>
-                                                    <td>: Zulkarnain</td>
+                                                    <td id="penumpang">:</td>
                                                 </tr>
                                                 <tr>
-                                                    <th>ETA</th>
-                                                    <td>: 3 November 2022 12:00</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>ETD</th>
-                                                    <td>: 4 November 2022 12:00</td>
+                                                    <th>Keberangkatan</th>
+                                                    <td id="etd">:</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -134,15 +134,18 @@
                                             <p class="card-text">
                                                 Total Harga
                                             </p>
-                                            <h1>Rp. 50.000</h1>
+                                            <h1 id="harga">Rp. 50.000</h1>
                                         </div>
                                     </div>
 
                                 </div>
                             </div>
 
-                            <div class="card-footer d-flex justify-content-end">                                
-                                <button class="btn btn-primary">Cetak Tiket</button>
+                            <div class="card-footer d-flex justify-content-end">
+                                <form action="/employee/tickets/print" method="POST">
+                                    <input type="hidden" name="ticket_code" id="tCodeLink">
+                                    <button class="btn btn-primary">Cetak Tiket</button>
+                                </form>                                
                             </div>
                         </div>
                     </div>

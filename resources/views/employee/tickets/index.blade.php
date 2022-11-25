@@ -17,7 +17,7 @@
         </section>
         <form action="/employee/order" method="POST">
             @csrf
-            <input type="hidden" name="booking_code" value="KB{{ date_create()->format('Hidysm') }}">
+            <input type="hidden" name="ticket_code" value="KB{{ date_create()->format('Hidysm') }}">
             <input type="hidden" name="price" id="price" value="0">
             <section class="content">
                 <div class="container-fluid">
@@ -59,11 +59,11 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="name">Nama Penumpang</label>
-                                        <input type="text" class="form-control" name="name_1" id="name" autofocus>
+                                        <input type="text" class="form-control" name="name[]" id="name" autofocus>
                                     </div>
                                     <div class="form-group">
                                         <label for="no_id">No. Identitas (Opsional)</label>
-                                        <input type="text" class="form-control" name="no_id_1" id="no_id"
+                                        <input type="text" class="form-control" name="no_id[]" id="no_id"
                                             placeholder="KTP/SIM/PASSPORT/KIA">
                                     </div>
                                     <div class="row">
@@ -71,14 +71,14 @@
                                             <div class="form-group">
                                                 <label for="date_of_birth">Tanggal Lahir (Opsional)</label>
                                                 <input type="date" step="any" class="form-control"
-                                                    name="date_of_birth_1" id="date_of_birth">
+                                                    name="date_of_birth[]" id="date_of_birth">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="gender">Jenis Kelamin</label>
-                                                <select name="gender_1" class="form-control" id="gender">
+                                                <select name="gender[]" class="form-control" id="gender">
                                                     <option value="1">Pria</option>
                                                     <option value="2">Wanita</option>
                                                 </select>
@@ -139,12 +139,12 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="name">Nama Penumpang</label>
-                                        <input type="text" class="form-control" name="name_2" id="name"
+                                        <input type="text" class="form-control" name="name[]" id="name"
                                             autofocus>
                                     </div>
                                     <div class="form-group">
                                         <label for="no_id">No. Identitas (Opsional)</label>
-                                        <input type="text" class="form-control" name="no_id_2" id="no_id"
+                                        <input type="text" class="form-control" name="no_id[]" id="no_id"
                                             placeholder="KTP/SIM/PASSPORT/KIA">
                                     </div>
                                     <div class="row">
@@ -152,14 +152,14 @@
                                             <div class="form-group">
                                                 <label for="date_of_birth">Tanggal Lahir (Opsional)</label>
                                                 <input type="date" step="any" class="form-control"
-                                                    name="date_of_birth_2" id="date_of_birth">
+                                                    name="date_of_birth[]" id="date_of_birth">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="gender">Jenis Kelamin</label>
-                                                <select name="gender_2" class="form-control" id="gender">
+                                                <select name="gender[]" class="form-control" id="gender">
                                                     <option value="1">Pria</option>
                                                     <option value="2">Wanita</option>
                                                 </select>
@@ -182,12 +182,12 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="name">Nama Penumpang</label>
-                                        <input type="text" class="form-control" name="name_3" id="name"
+                                        <input type="text" class="form-control" name="name[]" id="name"
                                             autofocus>
                                     </div>
                                     <div class="form-group">
                                         <label for="no_id">No. Identitas (Opsional)</label>
-                                        <input type="text" class="form-control" name="no_id_3" id="no_id"
+                                        <input type="text" class="form-control" name="no_id[]" id="no_id"
                                             placeholder="KTP/SIM/PASSPORT/KIA">
                                     </div>
                                     <div class="row">
@@ -195,14 +195,14 @@
                                             <div class="form-group">
                                                 <label for="date_of_birth">Tanggal Lahir (Opsional)</label>
                                                 <input type="date" step="any" class="form-control"
-                                                    name="date_of_birth_3" id="date_of_birth">
+                                                    name="date_of_birth[]" id="date_of_birth">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="gender">Jenis Kelamin</label>
-                                                <select name="gender_3" class="form-control" id="gender">
+                                                <select name="gender[]" class="form-control" id="gender">
                                                     <option value="1">Pria</option>
                                                     <option value="2">Wanita</option>
                                                 </select>
@@ -225,12 +225,12 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="name">Nama Penumpang</label>
-                                        <input type="text" class="form-control" name="name_4" id="name"
+                                        <input type="text" class="form-control" name="name[]" id="name"
                                             autofocus>
                                     </div>
                                     <div class="form-group">
                                         <label for="no_id">No. Identitas (Opsional)</label>
-                                        <input type="text" class="form-control" name="no_id_4" id="no_id"
+                                        <input type="text" class="form-control" name="no_id[]" id="no_id"
                                             placeholder="KTP/SIM/PASSPORT/KIA">
                                     </div>
                                     <div class="row">
@@ -238,13 +238,13 @@
                                             <div class="form-group">
                                                 <label for="date_of_birth">Tanggal Lahir (Opsional)</label>
                                                 <input type="date" step="any" class="form-control"
-                                                    name="date_of_birth_4" id="date_of_birth">
+                                                    name="date_of_birth[]" id="date_of_birth">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="gender">Jenis Kelamin</label>
-                                                <select name="gender_4" class="form-control" id="gender">
+                                                <select name="gender[]" class="form-control" id="gender">
                                                     <option value="1">Pria</option>
                                                     <option value="2">Wanita</option>
                                                 </select>
@@ -267,12 +267,12 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="name">Nama Penumpang</label>
-                                        <input type="text" class="form-control" name="name_5" id="name"
+                                        <input type="text" class="form-control" name="name[]" id="name"
                                             autofocus>
                                     </div>
                                     <div class="form-group">
                                         <label for="no_id">No. Identitas (Opsional)</label>
-                                        <input type="text" class="form-control" name="no_id_5" id="no_id"
+                                        <input type="text" class="form-control" name="no_id[]" id="no_id"
                                             placeholder="KTP/SIM/PASSPORT/KIA">
                                     </div>
                                     <div class="row">
@@ -280,14 +280,14 @@
                                             <div class="form-group">
                                                 <label for="date_of_birth">Tanggal Lahir (Opsional)</label>
                                                 <input type="date" step="any" class="form-control"
-                                                    name="date_of_birth_5" id="date_of_birth">
+                                                    name="date_of_birth[]" id="date_of_birth">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="gender">Jenis Kelamin</label>
-                                                <select name="gender_5" class="form-control" id="gender">
+                                                <select name="gender[]" class="form-control" id="gender">
                                                     <option value="1">Pria</option>
                                                     <option value="2">Wanita</option>
                                                 </select>
