@@ -36,6 +36,8 @@
                                                 <th>Tujuan</th>
                                                 <th>ETA (Tiba)</th>
                                                 <th>ETD (Berangkat)</th>
+                                                <th>Harga</th>
+                                                <th>Penumpang</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -46,6 +48,8 @@
                                                     <td class="text-center">{{ $item->route->next_port->name }}</td>
                                                     <td class="text-center">{{ date_create($item->eta)->format('d-m-Y H:i') }}</td>
                                                     <td class="text-center">{{ date_create($item->etd)->format('d-m-Y H:i') }}</td>
+                                                    <td class="text-center">{{ "Rp " . number_format($item->price,0,',','.') }}</td>
+                                                    <td class="text-center">{{ $item->pCount() }}/{{ $item->ship->kapasitas }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

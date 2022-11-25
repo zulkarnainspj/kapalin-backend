@@ -18,4 +18,11 @@ class Schedule extends Model
     {
         return $this->belongsTo(Ship::class, 'ship_id');
     }
+    
+    public function pCount()
+    {
+        $person = Ticket::where('schedule_id', $this->id)->count();
+
+        return $person;
+    }
 }

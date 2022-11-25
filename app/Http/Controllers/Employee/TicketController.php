@@ -33,7 +33,17 @@ class TicketController extends Controller
         DB::beginTransaction();
         $schedule = Schedule::find($request->schedule);
         
-        for ($i=0; $i < $jumlahPenumpang; $i++) { 
+        for ($i=0; $i < $jumlahPenumpang; $i++) {
+            $request->validate([
+                'ship' => ['required', 'numeric', 'not_in:0'],
+                'route' => ['required','numeric', 'not_in:0'],
+                'schedule' => ['required','numeric', 'not_in:0'],
+                "no_id.$i" => ['numeric', 'nullable'],
+                "name.$i" => ['required', 'min:3'],
+                "date_of_birth.$i" => ['nullable'],
+                "gender.$i" => ['numeric', 'required'],
+            ]);
+            
             $person = new Person;
             $person->no_id = $request->no_id[$i];
             $person->name = $request->name[$i];
@@ -48,6 +58,7 @@ class TicketController extends Controller
             $ticket->ticket_code = $request->ticket_code;
             $ticket->price = ($schedule->price * $jumlahPenumpang);
             $ticket->save();
+            
         }
         DB::commit();
 
