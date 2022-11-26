@@ -14,7 +14,7 @@ class PassengerController extends Controller
         
         return view('admin.passengers.index', [
             'title' => 'Penumpang',
-            'nvb' => 'passenger',
+            'nvb' => 'passengers',
             'passengers' => $passengers
         ]);
     }
