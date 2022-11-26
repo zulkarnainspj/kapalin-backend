@@ -68,7 +68,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="/admin/passengers" class="nav-link">
+                    <a href="/admin/passengers" class="nav-link {{ ($nvb == 'passengers') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Penumpang
