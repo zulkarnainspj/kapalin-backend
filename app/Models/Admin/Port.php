@@ -11,7 +11,7 @@ class Port extends Model
 
     public function route()
     {
-        return $this->hasOne(Route::class, 'port_id', 'id');
+        return $this->hasMany(Route::class, 'port_id', 'id');
     }
 
     public function next_route()

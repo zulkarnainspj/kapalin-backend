@@ -47,7 +47,7 @@
                                                             class="btn btn-sm btn-warning text-light" title="Edit"><span
                                                                 class="fas fa-fw fa-edit"></span></a>
 
-                                                        @if (isset($item->next_route->id) == false && isset($item->route->id) == false)
+                                                        @if (isset($item->next_route->id) == false && isset($item->route[0]->id) == false)
                                                             <a href="/admin/ports/remove/{{ $item->id }}"
                                                                 onclick="return confirm('Are you sure you want to remove this data?');"
                                                                 class="btn btn-sm btn-danger" title="Remove"><span
