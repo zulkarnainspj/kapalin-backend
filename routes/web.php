@@ -64,6 +64,10 @@ Route::get('/admin/schedules/add/{id}', [Admin\ScheduleController::class, 'creat
 Route::post('/admin/schedules/store', [Admin\ScheduleController::class, 'store'])->middleware('auth');
 Route::get('/admin/schedules/{id}', [Admin\ScheduleController::class, 'schedule'])->middleware('auth');
 Route::post('/admin/schedules/ships/store', [Admin\ScheduleController::class, 'store2'])->middleware('auth');
+Route::get('/admin/schedules/{ship_id}/edit/{schedule_id}', [Admin\ScheduleController::class, 'edit'])->middleware('auth');
+Route::post('/admin/schedules/ships/update', [Admin\ScheduleController::class, 'update'])->middleware('auth');
+
+
 
 /*
 |--------------------------------------------------------------------------

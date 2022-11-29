@@ -25,4 +25,9 @@ class Schedule extends Model
 
         return $person;
     }
+
+    public function ticket()
+    {
+        return $this->hasOne(Ticket::class, 'schedule_id');
+    }
 }

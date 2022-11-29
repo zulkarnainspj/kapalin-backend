@@ -7,6 +7,7 @@ use App\Models\Admin\Route;
 use App\Models\Admin\Schedule;
 use App\Models\Admin\Ship;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ScheduleController extends Controller
@@ -88,5 +89,37 @@ class ScheduleController extends Controller
             'schedules' => $schedules,
             'ship' => $ship
         ]);
+    }
+
+    public function edit($ship_id, $schedule_id)
+    {
+        $schedule = Schedule::findOrFail($schedule_id);
+        $ship = Ship::findOrFail($ship_id);
+        $routes = Route::get();
+
+        
+        return view('admin.schedules.edit', [
+            'title' => 'Edit Jadwal',
+            'nvb' => 'schedules',
+            'schedule' => $schedule,
+            'ship' => $ship,
+            'routes' => $routes
+        ]);
+    }
+
+    public function update(Request $request)
+    {
+        DB::beginTransaction();
+        $schedule = Schedule::find($request->schedule_id);
+        $schedule->route_id = $request->route;
+        $schedule->eta = $request->eta_date . ' ' . $request->eta_time;
+        $schedule->etd = $request->etd_date . ' ' . $request->etd_time;
+        $schedule->price = $request->price;
+        $schedule->save();
+        DB::commit();
+
+        Alert::success('Sukses', 'Jadwal berhasil diperbarui');
+
+        return redirect('/admin/schedules/' . $request->ship_id . '/edit/' . $request->schedule_id);
     }
 }

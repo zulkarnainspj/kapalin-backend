@@ -12,7 +12,7 @@
                             <li class="breadcrumb-item"><a href="/">Home</a></li>
                             <li class="breadcrumb-item active"><a href="/admin/schedules">Jadwal</a></li>
                             <li class="breadcrumb-item"><a href="/admin/schedules/{{ $ship->id }}">{{ $ship->name }}</a></li>                            
-                            <li class="breadcrumb-item active">Add</li>
+                            <li class="breadcrumb-item active">Edit</li>
                         </ol>
                     </div>
                 </div>
@@ -20,9 +20,11 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12">
-                        <form action="/admin/schedules/ships/store" method="post">
+                <div class="col-12">
+                        <form action="/admin/schedules/ships/update" method="post">
                             @csrf
+                            <input type="hidden" name="schedule_id" value="{{ $schedule->id }}">
+                            <input type="hidden" name="ship_id" value="{{ $ship->id }}">
                             <div class="card">
                                 <div class="card-header">
                                     <h3>Informasi Kapal</h3>
@@ -42,7 +44,7 @@
                                                 <label for="route">Rute</label>
                                                 <select name="route" class="form-control" id="route">
                                                     @foreach ($routes as $route)
-                                                        <option value="{{ $route->id }}">
+                                                        <option value="{{ $route->id }}" {{ ($schedule->route_id == $route->id) ? 'selected' : '' }}>
                                                             {{ $route->port->name . ' - ' . $route->next_port->name }}
                                                         </option>
                                                     @endforeach
@@ -53,7 +55,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="price">Harga</label>
-                                                <input type="number" class="form-control" name="price" placeholder="ex. 20000">
+                                                <input type="number" class="form-control" name="price" placeholder="ex. 20000" value="{{ $schedule->price }}">
                                             </div>
                                         </div>
                                     </div>
@@ -71,12 +73,12 @@
                                                 <label for="eta_date">ETA (Kedatangan)</label>
                                                 <div class="row">
                                                     <div class="col-md-9">
-                                                        <input type="date" step="any" name="eta_date" id="eta_date"
+                                                        <input type="date" step="any" name="eta_date" id="eta_date" value="{{ date_create($schedule->eta)->format('Y-m-d') }}"
                                                             class="form-control" required>
                                                     </div>
 
                                                     <div class="col-md-3">
-                                                        <input type="time" step="any" name="eta_time" id="eta_time"
+                                                        <input type="time" step="any" name="eta_time" id="eta_time" value="{{ date_create($schedule->eta)->format('H:i:s') }}"
                                                             class="form-control" required>
                                                     </div>
                                                 </div>
@@ -87,12 +89,12 @@
                                                 <label for="etd_date">ETD (Keberangkatan)</label>
                                                 <div class="row">
                                                     <div class="col-md-9">
-                                                        <input type="date" step="any" name="etd_date" id="etd_date"
+                                                        <input type="date" step="any" name="etd_date" id="etd_date" value="{{ date_create($schedule->etd)->format('Y-m-d') }}"
                                                             class="form-control" required>
                                                     </div>
 
                                                     <div class="col-md-3">
-                                                        <input type="time" step="any" name="etd_time" id="etd_time"
+                                                        <input type="time" step="any" name="etd_time" id="etd_time" value="{{ date_create($schedule->etd)->format('H:i:s') }}"
                                                             class="form-control" required>
                                                     </div>
                                                 </div>

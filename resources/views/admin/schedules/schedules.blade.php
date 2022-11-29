@@ -46,18 +46,23 @@
                                                     <td class="text-center">{{ $loop->iteration }}</td>
                                                     <td class="text-center">{{ $item->route->port->name }}</td>
                                                     <td class="text-center">{{ $item->route->next_port->name }}</td>
-                                                    <td class="text-center">{{ date_create($item->eta)->format('d-m-Y H:i') }}</td>
-                                                    <td class="text-center">{{ date_create($item->etd)->format('d-m-Y H:i') }}</td>
+                                                    <td class="text-center">
+                                                        {{ date_create($item->eta)->format('d-m-Y H:i') }}</td>
+                                                    <td class="text-center">
+                                                        {{ date_create($item->etd)->format('d-m-Y H:i') }}</td>
                                                     <td class="text-center">{{ $item->price }}</td>
                                                     <td align="center">
                                                         <a href="/admin/schedules/{{ $item->ship->id }}/edit/{{ $item->id }}"
                                                             class="btn btn-sm btn-warning text-light" title="Edit"><span
                                                                 class="fas fa-fw fa-edit"></span></a>
 
+                                                        @if (! isset($item->ticket->id))
                                                             <a href="/admin/schedules/{{ $item->ship->id }}/remove/{{ $item->id }}"
                                                                 onclick="return confirm('Are you sure you want to remove this data?');"
                                                                 class="btn btn-sm btn-danger" title="Remove"><span
                                                                     class="fas fa-fw fa-trash"></span></a>
+                                                        @endif
+
                                                     </td>
                                                 </tr>
                                             @endforeach
