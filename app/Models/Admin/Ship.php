@@ -21,7 +21,7 @@ class Ship extends Model
 
         $schedule_active = Schedule::where('ship_id', $this->id)
             ->whereBetween('etd', [$date, $last_date])
-            ->orderBy('etd')
+            ->orderBy('etd', 'asc')
             ->get();
         
         return $schedule_active;

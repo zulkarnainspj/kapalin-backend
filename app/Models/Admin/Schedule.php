@@ -30,4 +30,9 @@ class Schedule extends Model
     {
         return $this->hasOne(Ticket::class, 'schedule_id');
     }
+
+    public function getRoute()
+    {
+        return Route::findOrFail('id', $this->route_id);
+    }
 }

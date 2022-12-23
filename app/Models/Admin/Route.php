@@ -23,4 +23,14 @@ class Route extends Model
     {
         return $this->hasOne(Schedule::class, 'route_id', 'id');
     }
+
+    public function getPort()
+    {
+        return Port::findOrFail($this->port_id);
+    }
+
+    public function getNextPort()
+    {
+        return Port::findOrFail($this->next_port_id);
+    }
 }

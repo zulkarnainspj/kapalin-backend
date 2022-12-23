@@ -22,6 +22,15 @@ class ShipListController extends Controller
     {
         $ship = Ship::findOrFail($id);
         $schedule = $ship->schedule_active();
+        $route = [];
+        $next_route = [];
+
+        $no = 0;
+        foreach ($schedule as $schd) {
+            $route[$no] = $schd->route->port;
+            $next_route[$no] = $schd->route->next_port;
+            $no++;
+        }
 
         return response()->json([
             'success' => true,
