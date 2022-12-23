@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\Admin\Auth\LoginController;
 use App\Http\Controllers\API\Admin\Auth\LogoutController;
 use App\Http\Controllers\API\Admin\Data\KapalController;
+use App\Http\Controllers\API\ShipListController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,3 +25,6 @@ Route::post('/admin/login', LoginController::class)->name('login');
 Route::post('/admin/logout', LogoutController::class);
 Route::get('/admin/kapal', [KapalController::class, 'index'])->middleware('jwt.verify');
 Route::post('/admin/kapal/store', [KapalController::class, 'store'])->middleware('jwt.verify');
+
+Route::get('/ship', [ShipListController::class, 'index']);
+Route::get('/ship/{id}', [ShipListController::class, 'schedule_list']);

@@ -13,4 +13,17 @@ class Ship extends Model
     {
         return $this->hasMany(Schedule::class, 'ship_id', 'id');
     }
+
+    public function schedule_active()
+    {
+        $date = date_create()->format('Y-m-d') . ' 00:00:00';
+        $last_date = date('Y-m-d' . ' 23:59:59', strtotime($date . ' + 1 years'));
+
+        $schedule_active = Schedule::where('ship_id', $this->id)
+            ->whereBetween('etd', [$date, $last_date])
+            ->orderBy('etd')
+            ->get();
+        
+        return $schedule_active;
+    }
 }
