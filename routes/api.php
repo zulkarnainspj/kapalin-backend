@@ -6,6 +6,7 @@ use App\Http\Controllers\API\Auth\CheckController;
 use App\Http\Controllers\API\Auth\LoginController;
 use App\Http\Controllers\API\ShipListController;
 use App\Http\Controllers\API\Auth\RegisterController;
+use App\Http\Controllers\API\Customer\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,3 +34,4 @@ Route::get('/ship/{id}', [ShipListController::class, 'schedule_list']);
 Route::post('/login', LoginController::class)->name('login');
 Route::post('/register', RegisterController::class);
 Route::get('/check', [CheckController::class, 'check'])->middleware('jwt.verify');
+Route::post('/order', [OrderController::class, 'index']);

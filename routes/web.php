@@ -87,3 +87,12 @@ Route::get('/employee/tickets/price/{schedule_id}', [Employee\TicketController::
 Route::get('/employee/tickets/validate/{tCode}', [Employee\TicketController::class, 'check'])->middleware('auth');
 
 Route::post('/employee/order', [Employee\TicketController::class, 'order'])->middleware('auth');
+
+
+/*
+|--------------------------------------------------------------------------
+| Penumpang
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/cus/order/{j_penumpang}/{pemesan}', [Customer\OrderController::class, 'index']);
