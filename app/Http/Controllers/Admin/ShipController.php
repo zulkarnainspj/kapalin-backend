@@ -46,7 +46,7 @@ class ShipController extends Controller
     }    
 
     public function edit($id)
-    {
+    {        
         $ship = Ship::find($id);
 
         return view('admin.ships.edit', [
@@ -58,6 +58,11 @@ class ShipController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'name' => ['required', 'min:3'],
+            'capacity' => ['required', 'numeric'],
+        ]);
+        
         $ship = Ship::find($request->id);
         $ship->name = $request->name;
         $ship->kapasitas = $request->capacity;

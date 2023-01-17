@@ -34,17 +34,29 @@
                                                 <div class="form-group">
                                                     <label for="name">Nama Kapal</label>
                                                     <input type="text" name="name" id="name"
-                                                        class="form-control" value="{{ $ship->name }}" autofocus autocomplete="off">
+                                                        class="form-control @error('name') is-invalid @enderror"
+                                                        value="{{ $ship->name }}" autofocus autocomplete="off">
+                                                    @error('name')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="capacity">Kapasitas Penumpang</label>
                                                     <input type="number" name="capacity" id="capacity"
-                                                        class="form-control" value="{{ $ship->kapasitas }}" autocomplete="off">
+                                                        class="form-control @error('capacity') is-invalid @enderror"
+                                                        value="{{ $ship->kapasitas }}" autocomplete="off">
+                                                    @error('capacity')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
                                             </div>
-                                        
+
                                             <div class="col-md-12 d-flex justify-content-end">
                                                 <a href="/admin/ships" class="btn btn-danger mr-2">Cancel</a>
                                                 <button type="submit" class="btn btn-success">Save</button>
