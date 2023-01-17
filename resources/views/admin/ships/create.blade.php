@@ -33,14 +33,25 @@
                                                 <div class="form-group">
                                                     <label for="name">Nama Kapal</label>
                                                     <input type="text" name="name" id="name"
-                                                        class="form-control" autofocus autocomplete="off">
+                                                        class="form-control @error('name') is-invalid @enderror" autofocus autocomplete="off">
+                                                    
+                                                    @error('name')
+                                                    <div class="invalid-feedback">                                                        
+                                                        {{ $message }}
+                                                    </div>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="capacity">Kapasitas Penumpang</label>
                                                     <input type="number" name="capacity" id="capacity"
-                                                        class="form-control" autocomplete="off">
+                                                        class="form-control @error('capacity') is-invalid @enderror" autocomplete="off">
+                                                    @error('capacity')
+                                                    <div class="invalid-feedback">                                                        
+                                                        {{ $message }}
+                                                    </div>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         

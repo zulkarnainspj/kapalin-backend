@@ -30,6 +30,11 @@ class ShipController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => ['required', 'min:3'],
+            'capacity' => ['required', 'numeric'],            
+        ]);
+        
         $ship = new Ship;
         $ship->name = $request->name;
         $ship->kapasitas = $request->capacity;
