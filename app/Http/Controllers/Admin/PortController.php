@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Port;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PortController extends Controller
@@ -12,11 +13,13 @@ class PortController extends Controller
     public function index()
     {
         $ports = Port::orderBy('name')->get();
+        $origin_port = Port::orderBy('name')->where('origin_port', 1)->count();
 
         return view('admin.ports.index', [
             'title' => 'Pelabuhan',
             'nvb' => 'ports',
-            'ports' => $ports
+            'ports' => $ports,
+            'origin_port' => $origin_port
         ]);
     }
 
@@ -67,6 +70,25 @@ class PortController extends Controller
     {
         $port = Port::find($id);
         $port->delete();
+
+        Alert::success('Sukses', $port->name . ' berhasil dihapus');
+
+        return redirect('/admin/ports');
+    }
+
+    public function origin($id)
+    {
+        DB::beginTransaction();
+
+        Port::query()->update(['origin_port' => 0]);
+
+        $port = Port::find($id);
+        $port->origin_port = 1;
+        $port->save();
+
+        DB::commit();
+
+        Alert::success('Sukses', $port->name . ' dijadikan pelabuhan utama');
 
         return redirect('/admin/ports');
     }

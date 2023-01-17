@@ -34,7 +34,7 @@
                                                     <label for="port">Pelabuhan Asal</label>
                                                     <select name="port" id="port" class="form-control">
                                                         @foreach ($ports as $port)
-                                                            @if ($port->name == 'Sapeken')
+                                                            @if ($port->origin_port == 1)
                                                                 <option value="{{ $port->id }}">{{ $port->name }}
                                                                 </option>
                                                             @endif
@@ -47,7 +47,7 @@
                                                     <label for="next_port">Pelabuhan Asal</label>
                                                     <select name="next_port" id="next_port" class="form-control">
                                                         @foreach ($next_ports as $next_port)
-                                                            @if ($next_port->name != 'Sapeken')
+                                                            @if ($next_port->origin_port == 0)
                                                                 <option value="{{ $next_port->id }}">{{ $next_port->name }}
                                                                 </option>
                                                             @endif

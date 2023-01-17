@@ -40,7 +40,10 @@
                                             @foreach ($ports as $item)
                                                 <tr>
                                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                                    <td class="text-center">{{ $item->code }}</td>
+                                                    <td class="text-center">{{ $item->code }} 
+                                                        @if ($item->origin_port == 1)
+                                                            <span class="fas fa-anchor" title="Pelabuhan Utama"></span>
+                                                        @endif                                                        
                                                     <td>{{ $item->name }}</td>
                                                     <td align="center">
                                                         <a href="/admin/ports/edit/{{ $item->id }}"
@@ -52,6 +55,12 @@
                                                                 onclick="return confirm('Are you sure you want to remove this data?');"
                                                                 class="btn btn-sm btn-danger" title="Remove"><span
                                                                     class="fas fa-fw fa-trash"></span></a>
+                                                        @endif
+
+                                                        @if ($item->origin_port != 1)
+                                                            <a href="/admin/ports/origin/{{ $item->id }}"
+                                                                class="btn btn-sm btn-success text-light"
+                                                                title="Jadikan Pelabuhan Utama"><span class="fas fa-anchor"></span></a>
                                                         @endif
                                                     </td>
                                                 </tr>
