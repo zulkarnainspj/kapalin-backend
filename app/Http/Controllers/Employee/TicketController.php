@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use RealRashid\SweetAlert\Facades\Alert;
 
+
 class TicketController extends Controller
 {
     public function index()

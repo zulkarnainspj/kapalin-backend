@@ -95,4 +95,6 @@ Route::post('/employee/order', [Employee\TicketController::class, 'order'])->mid
 |--------------------------------------------------------------------------
 */
 
-Route::get('/cus/order/{j_penumpang}/{pemesan}', [Customer\OrderController::class, 'index']);
+Route::get('/cus/order/{j_penumpang}/{pemesan}/{schedule}', [Customer\OrderController::class, 'index']);
+Route::post('/cus/submit', [Customer\OrderController::class, 'order']);
+Route::get('/cus/{t_code}', [Customer\OrderController::class, 'tiket']);
