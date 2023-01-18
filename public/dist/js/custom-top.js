@@ -126,9 +126,9 @@ function getPrice() {
 
     $.ajax({
         url: "/employee/tickets/price/" + scheduleID,
-        type : 'GET',
-        dataType : 'json',
-        success : function (data) {
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
             price.val((data.price));
             harga.text(formatRupiah(price.val() * person, 'Rp. '));
         }
@@ -150,26 +150,34 @@ function validasiTiket() {
         type: 'GET',
         dataType: 'json',
         success: function (data) {
-            ship.text(data.ticket.sname);
-            route.text('Sapeken - ' + data.ticket.pname);
-            uName.text(': ' + data.ticket.uname);
-            persons.text(': ' + data.person);
+            if (data.ticket) {
+                $('#OnError').css('display', 'none');
+                ship.text(data.ticket.sname);
+                route.text('Sapeken - ' + data.ticket.pname);
+                uName.text(': ' + data.ticket.uname);
+                persons.text(': ' + data.person);
 
-            tCodeLink.val(tCode);
+                tCodeLink.val(tCode);
 
-            // ETD
-            const etd = new Date(data.ticket.etd);
-            const month = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+                // ETD
+                const etd = new Date(data.ticket.etd);
+                const month = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
 
-            etd_hours = (etd.getHours() < 10) ? '0' + etd.getHours() : etd.getHours();
-            etd_minutes = (etd.getMinutes() < 10) ? '0' + etd.getMinutes() : etd.getMinutes();
-            etd_format = etd.getDate() + ' ' + month[etd.getMonth()] + ' ' + etd.getFullYear() + ' ' + etd_hours + ':' + etd_minutes;
-            keberangkatan.text(': ' + etd_format);
+                etd_hours = (etd.getHours() < 10) ? '0' + etd.getHours() : etd.getHours();
+                etd_minutes = (etd.getMinutes() < 10) ? '0' + etd.getMinutes() : etd.getMinutes();
+                etd_format = etd.getDate() + ' ' + month[etd.getMonth()] + ' ' + etd.getFullYear() + ' ' + etd_hours + ':' + etd_minutes;
+                keberangkatan.text(': ' + etd_format);
 
-            // Price
-            price.text(formatRupiah(Math.floor(data.ticket.price), 'Rp. '));
-            $('#informasiTiket').css('display', 'block');
+                // Price
+                price.text(formatRupiah(Math.floor(data.ticket.price), 'Rp. '));
+                $('#informasiTiket').css('display', 'block');
+            }else{
+                $('#OnError').css('display', 'block');
+            }
+        },
+        error: function (error) {
+
         }
     });
-    
+
 }
