@@ -80,6 +80,8 @@ Route::get('/employee', [Employee\HomeController::class, 'index'])->middleware('
 
 Route::get('/employee/schedules', [Employee\ScheduleController::class, 'index'])->middleware('auth');
 Route::get('/employee/schedules/{id}', [Employee\ScheduleController::class, 'schedule'])->middleware('auth');
+Route::get('/employee/schedules/{ship_id}/{schedule_id}', [Employee\ScheduleController::class, 'passenger'])->middleware('auth');
+
 Route::get('/employee/tickets', [Employee\TicketController::class, 'index'])->middleware('auth');
 Route::get('/employee/validation', [Employee\ValidationController::class, 'index'])->middleware('auth');
 

@@ -173,7 +173,10 @@ function validasiTiket() {
                 $('#informasiTiket').css('display', 'block');
             }else{
                 $('#OnError').css('display', 'block');
+                $('#informasiTiket').css('display', 'none');
             }
+
+            $('#ticketCode').select();
         },
         error: function (error) {
 
