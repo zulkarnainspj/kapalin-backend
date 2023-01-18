@@ -12,7 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Exception;
 
 class TicketController extends Controller
 {
@@ -113,5 +114,36 @@ class TicketController extends Controller
         ];
 
         return response()->json($data);
+    }
+
+    public function print(Request $request)
+    {
+        $ticket = Ticket::where('ticket_code', $request->ticket_code)->first();
+        $route = Schedule::select('route_id', 'name')
+        ->join('routes', 'routes.id', '=', 'schedules.route_id')
+        ->join('ports', 'ports.id', '=', 'routes.port_id')
+        ->where('schedules.id', $ticket->schedule->id)
+        ->first();
+
+        $next_route = Schedule::select('route_id', 'name')
+        ->join('routes', 'routes.id', '=', 'schedules.route_id')
+        ->join('ports', 'ports.id', '=', 'routes.next_port_id')
+        ->where('schedules.id', $ticket->schedule->id)
+        ->first();
+
+        $persons = Ticket::where('ticket_code', $request->ticket_code)->get();
+
+        try {
+            $pdf = FacadePdf::loadView('employee.tickets.print', [
+                'tiket' => $ticket,
+                'route' => $route,
+                'next_route' => $next_route,
+                'persons' => $persons
+            ]);
+
+            return $pdf->stream();
+        } catch (Exception $e) {
+            return $e;
+        }
     }
 }

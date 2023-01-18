@@ -46,7 +46,7 @@
                     <button class="btn btn-link p-0 position-relative" type="button" id="profileDropdown"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <picture>
-                            <img class="f-w-10 rounded-circle" src="{{ url('') }}/apollo/assets/images/profile-small.jpeg"
+                            <img class="f-w-10 rounded-circle" src="{{ url('') }}/dist/img/avatar5.png"
                                 alt="HTML Bootstrap Admin Template by Pixel Rocket">
                         </picture>
                         <span
@@ -55,28 +55,31 @@
                         </span>
                     </button>
                     <ul class="dropdown-menu dropdown-md dropdown-menu-end" aria-labelledby="profileDropdown">
-                        <li><a class="dropdown-item d-flex align-items-center" href="#">Set Visibility</a></li>
-                        <li><a class="dropdown-item d-flex align-items-center" href="#">Edit Profile</a></li>
-                        <li><a class="dropdown-item d-flex align-items-center" href="#">Edit Settings</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
                         <li class="d-flex py-2 align-items-start">
-                            <button class="btn-icon bg-primary-faded text-primary fw-bolder me-3">J</button>
+                            <button
+                                class="btn-icon bg-primary-faded text-primary fw-bolder me-3">{{ mb_substr(auth()->user()->name, 0, 1) }}</button>
                             <div class="d-flex align-items-start justify-content-between flex-grow-1">
                                 <div>
-                                    <p class="lh-1 mb-2 fw-semibold text-body">John Daniels</p>
-                                    <p class="text-muted lh-1 mb-2 small">john@email.com</p>
+                                    <p class="lh-1 mb-2 fw-semibold text-body">{{ auth()->user()->name }}</p>
+                                    <p class="text-muted lh-1 mb-2 small">{{ auth()->user()->email }}</p>
                                 </div>
-                                <small class="badge bg-success-faded text-success rounded-pill">Pro</small>
                             </div>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item d-flex align-items-center" href="#">Account Settings</a>
                         </li>
-                        <li><a class="dropdown-item d-flex align-items-center" href="#">Logout</a></li>
+                        <li>
+                            <form action="/logout" method="post">
+                                @csrf
+                                <button type="submit" class="dropdown-item d-flex align-items-center"
+                                    style="background-color: transparent; border : none;">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </button>
+                            </form>
+
+                        </li>
                     </ul>
                 </div> <!-- / Profile Menu-->
 
