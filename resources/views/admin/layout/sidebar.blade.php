@@ -54,7 +54,7 @@
                     <li class="menu-section mt-4">Kapal</li>
 
                     <li class="menu-item {{ $nvb == 'ships' ? 'active' : '' }}">
-                        <a class="d-flex align-items-center" href="/admin/ships/">
+                        <a class="d-flex align-items-center" href="/admin/ships">
                             <span class="menu-icon">
                                 <i class="nav-icon fas fa-ship"></i>
                             </span>
@@ -65,7 +65,7 @@
                     </li>
 
                     <li class="menu-item {{ $nvb == 'ports' ? 'active' : '' }}">
-                        <a class="d-flex align-items-center" href="/admin/ports/">
+                        <a class="d-flex align-items-center" href="/admin/ports">
                             <span class="menu-icon">
                                 <i class="nav-icon fas fa-anchor"></i>
                             </span>
@@ -76,7 +76,7 @@
                     </li>
 
                     <li class="menu-item {{ $nvb == 'routes' ? 'active' : '' }}">
-                        <a class="d-flex align-items-center" href="/admin/routes/">
+                        <a class="d-flex align-items-center" href="/admin/routes">
                             <span class="menu-icon">
                                 <i class="nav-icon fas fa-route"></i>
                             </span>
@@ -87,7 +87,7 @@
                     </li>
 
                     <li class="menu-item {{ $nvb == 'schedules' ? 'active' : '' }}">
-                        <a class="d-flex align-items-center" href="/admin/schedules/">
+                        <a class="d-flex align-items-center" href="/admin/schedules">
                             <span class="menu-icon">
                                 <i class="nav-icon fas fa-calendar"></i>
                             </span>
@@ -100,7 +100,7 @@
                     <li class="menu-section mt-4">Pengguna</li>
 
                     <li class="menu-item {{ ($nvb == 'users') ? 'active' : '' }}">
-                        <a class="d-flex align-items-center" href="/admin/users/">
+                        <a class="d-flex align-items-center" href="/admin/users">
                             <span class="menu-icon">
                                 <i class="nav-icon bi bi-people-fill"></i>
                             </span>
