@@ -14,13 +14,13 @@ class HomeController extends Controller
     public function index()
     {
         $date = date_create();
-        $dipesan = Ticket::where('status', 1)->where('created_at', $date)->count();
-        $checkin = Ticket::where('status', '>', 1)->where('created_at', $date)->count();
+        $dipesan = Ticket::where('status', '>', 0)->where('created_at', $date)->count();
+        $checkin = Ticket::where('status', 3)->where('created_at', $date)->count();
         $jadawal_aktif = Schedule::where('status', 1)->where('etd', '>=', $date)->count();
         $kapal = Ship::count();
-        $total_tiket = Ticket::whereYear('created_at', $date->format('Y'))->where('status', '>', 1)->count();
+        $total_tiket = Ticket::whereYear('created_at', $date->format('Y'))->where('status', 3)->count();
         $order_terbaru = Ticket::orderBy('created_at', 'desc')->limit(10)->get();
-        $chart = Ticket::select(DB::raw('count(id) as jum'), DB::raw('MONTH(created_at) as bulan'))->whereYear('created_at', $date->format('Y'))->where('status', '>', 1)->groupBy('bulan')->get();
+        $chart = Ticket::select(DB::raw('count(id) as jum'), DB::raw('MONTH(created_at) as bulan'))->whereYear('created_at', $date->format('Y'))->where('status', 3)->groupBy('bulan')->get();
 
         return view('admin.index', [
             'title' => 'Dashboard',

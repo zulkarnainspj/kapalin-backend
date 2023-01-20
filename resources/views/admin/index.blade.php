@@ -60,7 +60,7 @@
 
                         </div>
                         <div class="d-flex align-items-center">
-                            <span class="fs-9 ms-2" style="color: rgb(156, 156, 156)">Total penumpang yang sudah check in di
+                            <span class="fs-9 ms-2" style="color: rgb(156, 156, 156)">Total penumpang yang sudah check in dan mencetak tiket di
                                 loket hari ini di seluruh jadwal yang tersedia</span>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                         <h6 class="card-title m-0">Penjualan Tiket Tahun Ini</h6>
                     </div>
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-5">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
                             <div class="d-flex align-items-center">
                                 <h4 class="fs-3 fw-bold mb-0 me-3">Total : {{ number_format($total_tiket, 0, ',', '.') }}
                                 </h4>
@@ -136,6 +136,7 @@
                             </div>
                         </div>
                         <div class="chart">
+                            <label for="" class="muted mb-2 mt-0">Hanya tiket dengan status selesai yang akan ditampilkan </label>
                             <div class="chart chart-lg">
                                 <canvas id="penjualanTiket"></canvas>
                             </div>
