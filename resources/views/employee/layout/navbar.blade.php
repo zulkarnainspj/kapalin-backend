@@ -1,7 +1,7 @@
 <!-- Navbar-->
 <nav class="navbar navbar-expand-lg navbar-light border-bottom py-0 fixed-top bg-white">
     <div class="container-fluid">
-        <a class="navbar-brand d-flex justify-content-start align-items-center border-end" href="./index.html">
+        <a class="navbar-brand d-flex justify-content-start align-items-center border-end" href="/employee">
             <div class="d-flex align-items-center">
                 <svg class="f-w-5 me-2 text-primary d-flex align-self-center lh-1" xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 203.58 182">

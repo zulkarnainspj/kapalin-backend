@@ -13,9 +13,12 @@
     <meta name="keywords" content="">
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ url('') }}/apollo/assets/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ url('') }}/apollo/assets/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ url('') }}/apollo/assets/images/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="{{ url('') }}/apollo/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="{{ url('') }}/apollo/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="{{ url('') }}/apollo/assets/images/favicon/favicon-16x16.png">
     <link rel="mask-icon" href="{{ url('') }}/apollo/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
@@ -76,14 +79,21 @@
 
             <div class="shadow-lg rounded p-4 p-sm-5 bg-white form">
                 <h3 class="fw-bold">Login</h3>
-                <p class="text-muted">Welcome back!</p>
+                <p class="text-muted">Selamat datang!</p>
+
+                @if (session('loginError'))
+                    <div class="alert alert-danger">
+                        <h6>Login gagal! username atau password salah</h6>
+                    </div>
+                @endif
 
                 <!-- Login Form-->
                 <form class="mt-4" action="/login/req" method="post">
                     @csrf
                     <div class="form-group">
-                        <label class="form-label" for="login-email">Email address</label>
-                        <input type="email" name="email" class="form-control" id="login-email" placeholder="name@email.com" autofocus>
+                        <label class="form-label" for="login-email">Email</label>
+                        <input type="email" name="email" class="form-control" id="login-email"
+                            placeholder="ex. nama@email.com" autofocus required>
                     </div>
                     <div class="form-group">
                         <label for="login-password"
@@ -93,8 +103,8 @@
                                 class="text-muted small ms-2 text-decoration-underline">Forgotten
                                 password?</a> --}}
                         </label>
-                        <input type="password" name="password" class="form-control" id="login-password"
-                            placeholder="Enter your password">
+                        <input type="password" name="password" class="form-control" id="login-password" required
+                            placeholder="Masukkan Password">
                     </div>
                     <button type="submit" class="btn btn-primary d-block w-100 my-4">Login</button>
                 </form>

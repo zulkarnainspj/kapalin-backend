@@ -7,7 +7,7 @@
             <nav class="mb-0" aria-label="breadcrumb">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="/employee/">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Validasi Tiket</li>
+                    <li class="breadcrumb-item active" aria-current="page">Penjualan Tiket</li>
                 </ol>
             </nav>
         </div>
@@ -32,6 +32,12 @@
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <b>Terjadi kesalahan, silahkan periksa kembali data!</b>
+                </div>
+            @endif
+            
+            @if (session('tCode'))
+                <div class="alert alert-success">
+                    <p class="m-0">Pembelian Tiket dengan Kode <strong>{{ session('tCode') }}</strong> Berhasil, <a href="/employee/tickets/manual/print/{{ session('tCode') }}" style="font-weight: bold" target="_blank">Klik disini</a> untuk mencetak tiket</p> 
                 </div>
             @endif
 
@@ -177,7 +183,7 @@
                 </div>
             </div>
 
-            <div class="row" id="pers2" style="display: none;">
+            <div class="row mt-3" id="pers2" style="display: none;">
                 <div class="col-6" id="informasiPenumpang">
                     <div class="card">
                         <div class="card-header">
@@ -233,7 +239,7 @@
                 </div>
             </div>
 
-            <div class="row" id="pers3" style="display: none;">
+            <div class="row mt-3" id="pers3" style="display: none;">
                 <div class="col-6" id="informasiPenumpang">
                     <div class="card">
                         <div class="card-header">
@@ -289,7 +295,7 @@
                 </div>
             </div>
 
-            <div class="row" id="pers4" style="display: none;">
+            <div class="row mt-3" id="pers4" style="display: none;">
                 <div class="col-6" id="informasiPenumpang">
                     <div class="card">
                         <div class="card-header">
@@ -345,7 +351,7 @@
                 </div>
             </div>
 
-            <div class="row" id="pers5" style="display: none;">
+            <div class="row mt-3" id="pers5" style="display: none;">
                 <div class="col-6" id="informasiPenumpang">
                     <div class="card">
                         <div class="card-header">

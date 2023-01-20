@@ -86,6 +86,7 @@ Route::get('/employee/schedules/{ship_id}/{schedule_id}', [Employee\ScheduleCont
 
 Route::get('/employee/tickets', [Employee\TicketController::class, 'index'])->middleware('auth');
 Route::post('/employee/tickets/print', [Employee\TicketController::class, 'print'])->middleware('auth');
+Route::get('/employee/tickets/manual/print/{tCdoe}', [Employee\TicketController::class, 'manual'])->middleware('auth');
 
 Route::get('/employee/validation', [Employee\ValidationController::class, 'index'])->middleware('auth');
 

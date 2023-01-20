@@ -80,7 +80,7 @@
                                 </div>
 
                                 <div class="card-footer d-flex justify-content-end">
-                                    <form action="/employee/tickets/print" method="POST">
+                                    <form action="/employee/tickets/print" method="POST" target="_blank">
                                         @csrf
                                         <input type="hidden" name="ticket_code" id="tCodeLink">
                                         <button class="btn btn-primary">Cetak Tiket</button>

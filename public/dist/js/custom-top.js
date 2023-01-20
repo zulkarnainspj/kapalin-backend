@@ -109,7 +109,7 @@ function getSchedules() {
                 const etd = new Date(temp_etd);
                 etd_hours = (etd.getHours() < 10) ? '0' + etd.getHours() : etd.getHours();
                 etd_minutes = (etd.getMinutes() < 10) ? '0' + etd.getMinutes() : etd.getMinutes();
-                etd_format = etd.getDate() + '-' + etd.getMonth() + '-' + etd.getFullYear() + ' ' + etd_hours + ':' + etd_minutes;
+                etd_format = etd.getDate() + '-' + (etd.getMonth() + 1) + '-' + etd.getFullYear() + ' ' + etd_hours + ':' + etd_minutes;
                 $('#schedule').append('<option value="' + schedule_id + '">' + etd_format + '</option>');
 
             });
