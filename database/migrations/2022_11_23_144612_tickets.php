@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('schedule_id');
             $table->string('ticket_code');
             $table->float('price');
+            $table->integer('status')->default(1); // 0 Batal, 1 Dipesan, 2 Check In, 3 Selesai
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('person_id')->references('id')->on('persons');

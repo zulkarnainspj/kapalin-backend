@@ -46,6 +46,8 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{ url('') }}/apollo/assets/css/theme.bundle.css" />
 
+    <script src="{{ url('') }}/plugins/chart.js/Chart.min.js"></script>
+
     <!-- Fix for custom scrollbar if JS is disabled-->
     <noscript>
         <style>
@@ -104,7 +106,6 @@
     <script src="{{ url('') }}/plugins/jquery-mapael/jquery.mapael.min.js"></script>
     <script src="{{ url('') }}/plugins/jquery-mapael/maps/usa_states.min.js"></script>
     <!-- ChartJS -->
-    <script src="{{ url('') }}/plugins/chart.js/Chart.min.js"></script>
 
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ url('') }}/dist/js/pages/dashboard2.js"></script>

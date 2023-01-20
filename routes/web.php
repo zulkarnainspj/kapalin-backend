@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 
+date_default_timezone_set('Asia/Jakarta');
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
