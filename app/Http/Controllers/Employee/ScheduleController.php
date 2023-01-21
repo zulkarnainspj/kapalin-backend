@@ -8,6 +8,7 @@ use App\Models\Admin\Schedule;
 use App\Models\Admin\Ship;
 use App\Models\Admin\Ticket;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ScheduleController extends Controller
 {
@@ -25,7 +26,7 @@ class ScheduleController extends Controller
     public function schedule($id)
     {
         $ship = Ship::find($id);
-        $schedules = Schedule::where('ship_id', $id)->orderBy('eta')->get();
+        $schedules = Schedule::where('ship_id', $id)->orderBy('etd', 'desc')->get();
 
         return view('employee.schedules.schedules', [
             'title' => 'Jadwal',
@@ -62,5 +63,27 @@ class ScheduleController extends Controller
             'route' => $route,
             'next_route' => $next_route
         ]);
+    }
+
+    public function disable($id)
+    {
+        $schedule = Schedule::find($id);
+        $schedule->status = 0;
+        $schedule->save();
+
+        Alert::success('Sukses', 'Penjualan tiket pada jadwal ini di nonaktifkan');
+
+        return redirect('/employee/schedules/' . $schedule->ship_id);
+    }
+
+    public function enable($id)
+    {
+        $schedule = Schedule::find($id);
+        $schedule->status = 1;
+        $schedule->save();
+
+        Alert::success('Sukses', 'Penjualan tiket pada jadwal ini di aktifkan');
+
+        return redirect('/employee/schedules/' . $schedule->ship_id);
     }
 }

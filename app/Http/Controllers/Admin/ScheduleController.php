@@ -81,7 +81,7 @@ class ScheduleController extends Controller
     public function schedule($id)
     {
         $ship = Ship::find($id);
-        $schedules = Schedule::where('ship_id', $id)->orderBy('eta')->get();
+        $schedules = Schedule::where('ship_id', $id)->orderBy('etd', 'desc')->get();
 
         return view('admin.schedules.schedules', [
             'title' => 'Jadwal',
@@ -121,5 +121,27 @@ class ScheduleController extends Controller
         Alert::success('Sukses', 'Jadwal berhasil diperbarui');
 
         return redirect('/admin/schedules/' . $request->ship_id . '/edit/' . $request->schedule_id);
+    }
+
+    public function disable($id)
+    {
+        $schedule = Schedule::find($id);
+        $schedule->status = 0;
+        $schedule->save();
+
+        Alert::success('Sukses', 'Penjualan tiket pada jadwal ini di nonaktifkan');
+
+        return redirect('/admin/schedules/' . $schedule->ship_id);
+    }
+
+    public function enable($id)
+    {
+        $schedule = Schedule::find($id);
+        $schedule->status = 1;
+        $schedule->save();
+
+        Alert::success('Sukses', 'Penjualan tiket pada jadwal ini di aktifkan');
+
+        return redirect('/admin/schedules/' . $schedule->ship_id);
     }
 }

@@ -67,6 +67,8 @@ Route::get('/admin/schedules/add/{id}', [Admin\ScheduleController::class, 'creat
 Route::post('/admin/schedules/store', [Admin\ScheduleController::class, 'store'])->middleware('auth');
 Route::get('/admin/schedules/{id}', [Admin\ScheduleController::class, 'schedule'])->middleware('auth');
 Route::post('/admin/schedules/ships/store', [Admin\ScheduleController::class, 'store2'])->middleware('auth');
+Route::get('/admin/schedules/enable/{id}', [Admin\ScheduleController::class, 'enable'])->middleware('auth');
+Route::get('/admin/schedules/disable/{id}', [Admin\ScheduleController::class, 'disable'])->middleware('auth');
 Route::get('/admin/schedules/{ship_id}/edit/{schedule_id}', [Admin\ScheduleController::class, 'edit'])->middleware('auth');
 Route::post('/admin/schedules/ships/update', [Admin\ScheduleController::class, 'update'])->middleware('auth');
 
@@ -82,7 +84,10 @@ Route::get('/employee', [Employee\HomeController::class, 'index'])->middleware('
 
 Route::get('/employee/schedules', [Employee\ScheduleController::class, 'index'])->middleware('auth');
 Route::get('/employee/schedules/{id}', [Employee\ScheduleController::class, 'schedule'])->middleware('auth');
+Route::get('/employee/schedules/enable/{id}', [Employee\ScheduleController::class, 'enable'])->middleware('auth');
+Route::get('/employee/schedules/disable/{id}', [Employee\ScheduleController::class, 'disable'])->middleware('auth');
 Route::get('/employee/schedules/{ship_id}/{schedule_id}', [Employee\ScheduleController::class, 'passenger'])->middleware('auth');
+
 
 Route::get('/employee/tickets', [Employee\TicketController::class, 'index'])->middleware('auth');
 Route::post('/employee/tickets/print', [Employee\TicketController::class, 'print'])->middleware('auth');
