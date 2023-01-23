@@ -119,9 +119,7 @@ class TicketController extends Controller
 
         $person = Ticket::where('ticket_code', $tCode)->count();
 
-        $update_ticket = Ticket::where('ticket_code', $tCode)->first();
-        $update_ticket->status = 2;
-        $update_ticket->save();
+        $update_ticket = Ticket::where('ticket_code', $tCode)->update(['status' => 2]);
 
         DB::commit();
 
@@ -152,9 +150,7 @@ class TicketController extends Controller
 
         $persons = Ticket::where('ticket_code', $request->ticket_code)->get();
 
-        $update_ticket = Ticket::find($ticket->id);
-        $update_ticket->status = 3;
-        $update_ticket->save();
+        $update_ticket = Ticket::where('ticket_code', $request->ticket_code)->update(['status' => 3]);
         DB::commit();
 
         try {
@@ -190,9 +186,7 @@ class TicketController extends Controller
 
         $persons = Ticket::where('ticket_code', $tCode)->get();
 
-        $update_ticket = Ticket::find($ticket->id);
-        $update_ticket->status = 3;
-        $update_ticket->save();
+        $update_ticket = Ticket::where('ticket_code', $tCode)->update(['status' => 3]);
         DB::commit();
 
         try {

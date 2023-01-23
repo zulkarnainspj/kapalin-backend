@@ -99,10 +99,43 @@ class OrderController extends Controller
         // return redirect('/cus/' . 'KB112625224711');
     }
 
-    public function tiket($t_code)
+    public function order_success($t_code)
     {
         $ticket = Ticket::where('ticket_code', $t_code)->first();
+
         $route = Schedule::select('route_id', 'name')
+        ->join('routes', 'routes.id', '=', 'schedules.route_id')
+        ->join('ports', 'ports.id', '=', 'routes.port_id')
+        ->where('schedules.id', $ticket->schedule->id)
+        ->first();
+
+        $next_route = Schedule::select('route_id', 'name')
+        ->join('routes', 'routes.id', '=', 'schedules.route_id')
+        ->join('ports', 'ports.id', '=', 'routes.next_port_id')
+        ->where('schedules.id', $ticket->schedule->id)
+        ->first();
+
+        $persons = Ticket::where('ticket_code', $t_code)->get();
+
+        return view('customers.tiket.index', [
+            'tiket' => $ticket,
+            'rute' => $route,
+            'next_route' => $next_route,
+            'persons' => $persons
+        ]);
+    }
+
+    public function ticket($t_code)
+    {
+        $ticket = Ticket::where('ticket_code', $t_code)->first();
+
+        $route = Schedule::select('route_id', 'name')
+        ->join('routes', 'routes.id', '=', 'schedules.route_id')
+        ->join('ports', 'ports.id', '=', 'routes.port_id')
+        ->where('schedules.id', $ticket->schedule->id)
+        ->first();
+
+        $next_route = Schedule::select('route_id', 'name')
         ->join('routes', 'routes.id', '=', 'schedules.route_id')
         ->join('ports', 'ports.id', '=', 'routes.next_port_id')
         ->where('schedules.id', $ticket->schedule->id)
@@ -114,14 +147,35 @@ class OrderController extends Controller
             $pdf = FacadePdf::loadView('customers.tiket.tiket', [
                 'tiket' => $ticket,
                 'rute' => $route,
+                'next_route' => $next_route,
                 'persons' => $persons
             ]);
 
-            return $pdf->stream();
+            return $pdf->download("Kapalin_" . $t_code . ".pdf");
         }catch(Exception $e){
             return $e;
         }
         
+    }
+
+    public function get_user_data($email)
+    {
+
+        $user_profile = User::select('name', 'no_id', 'gender', 'date_of_birth', 'email')
+            ->join('passengers', 'passengers.user_id', '=', 'users.id')
+            ->where('email', $email)
+            ->get();
+        
+        $user_no_profile = User::where('email', $email)->get();
+
+        if (isset($user_profile->no_id)){
+            $user = $user_profile;
+        }else{
+            $user = $user_no_profile;
+        }
+
+
+        return response()->json($user);
     }
 }
 

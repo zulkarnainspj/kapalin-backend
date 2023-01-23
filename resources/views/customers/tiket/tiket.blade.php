@@ -145,10 +145,10 @@
                                 <td align="center">
                                     @php
                                         $doh = $item->person->date_of_birth;
-                                        if ($doh){
+                                        if ($doh) {
                                             if ($doh < 1) {
                                                 echo '<1';
-                                            }else{
+                                            } else {
                                                 echo $diff->y;
                                             }
                                         }
@@ -166,6 +166,40 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+
+        <div class="col-md-12 mt-3" style="font-size: 15px">
+            <p style="font-weight: bold" class="m-0">Penukaran Tiket</p>
+            <p class="m-0">Kantor Pelabuhan Sapeken</p>
+
+            <p style="font-weight: bold" class="mx-0 mb-0 mt-3">Syarat dan Ketentuan</p>
+            <ol class="mb-4">
+                <li>Bukti Pembayaran ini wajib ditukar menjadi tiket selambat-lambatnya 2 jam sebelum kapal
+                    berangkat di kantor cabang atau terminal penumpang</li>
+                <li>Kode booking yang tertera pada Bukti Pembelian adalah bersifat rahasia, Kapalin tidak
+                    bertanggung jawab apabila terjadi penyalah gunaan kode booking yang digunakan pihak lain.</li>
+                <li>Pengangkut tidak bertanggungjawab atas kerugian yang ditimbulkan akibat pembatalan/keterlambatan
+                    calon penumpang</li>
+                <li>Penumpang dilarang berjudi, mengkonsumsi minuman keras, berdagang di atas kapal, dan membawa
+                    barang-barangterlarang</li>
+                <li>Barang terlarang yaitu:
+                    <ul>
+                        <li>Petasan, bahan peledak, senjata api dan senjata lainnya</li>
+                        <li>Barang-barang berbau</li>
+                        <li>Barang-barang yang berbahaya</li>
+                        <li>Barang-barang yang mengotori</li>
+                        <li>Hewan</li>
+                        <li>Narkoba</li>
+                        <li>Barang-barang yang dilarang perundangan yang berlaku</li>
+                    </ul>
+                </li>
+                    
+                <li>Kapalin dan penyedia kapal tidak bertanggung jawab atas hilang/rusaknya tiket dan barang-barang
+                    bawaan penumpang</li>
+                <li>Penumpang diharapkan untuk mengikuti perubahan waktu keberangkatan kapal yang mungkin terjadi
+                    dan selambatnya 2 jam sebelum kapal berangkat sudah berada di terminal penumpang.</li>
+                <li>Check in ditutup 15 menit sebelum waktu keberangkatan.</li>
+            </ol>
         </div>
     </div>
 

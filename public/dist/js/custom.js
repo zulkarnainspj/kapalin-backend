@@ -15,4 +15,3 @@ $(function () {
         "responsive": true,
     });
 });
-

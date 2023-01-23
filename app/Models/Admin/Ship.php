@@ -21,6 +21,7 @@ class Ship extends Model
 
         $schedule_active = Schedule::where('ship_id', $this->id)
             ->whereBetween('etd', [$date, $last_date])
+            ->where('status', 1)
             ->orderBy('etd', 'asc')
             ->get();
         

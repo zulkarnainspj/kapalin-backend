@@ -111,4 +111,6 @@ Route::post('/employee/order', [Employee\TicketController::class, 'order'])->mid
 
 Route::get('/cus/order/{j_penumpang}/{pemesan}/{schedule}', [Customer\OrderController::class, 'index']);
 Route::post('/cus/submit', [Customer\OrderController::class, 'order']);
-Route::get('/cus/{t_code}', [Customer\OrderController::class, 'tiket']);
+Route::get('/cus/get/{email}', [Customer\OrderController::class, 'get_user_data']);
+Route::get('/cus/{t_code}', [Customer\OrderController::class, 'order_success']);
+Route::get('/cus/{t_code}/download', [Customer\OrderController::class, 'ticket']);
