@@ -37,4 +37,4 @@ Route::post('/register', RegisterController::class);
 Route::get('/check', [CheckController::class, 'check'])->middleware('jwt.verify');
 Route::post('/order', [OrderController::class, 'index']);
 
-Route::get('/transaction/{email}', [TransactionController::class, 'index']);
+Route::get('/transaction/{email}', [TransactionController::class, 'index'])->middleware('jwt.verify');
