@@ -29,10 +29,18 @@
             <div class="d-flex justify-content-between">
                 <div>
                     <h6 class="m-0" style="font-weight: normal; font-size: 12px">Kode Booking</h6>
-                    <h4 class="m-0" style="font-size: 20px">{{ $tiket->ticket_code }}</h4>
+                    <h4 class="m-0"
+                        style="font-size: 20px; {{ $tiket->status == 3 ? 'text-decoration:line-through' : '' }}">
+                        {{ $tiket->ticket_code }}</h4>
                 </div>
 
-                <a href="/cus/{{ $tiket->ticket_code }}/download" class="btn btn-sm btn-primary">Simpan Bukti</a>
+                @if ($tiket->status == 1 || $tiket->status == 2)
+                    <a href="/cus/{{ $tiket->ticket_code }}/download" class="btn btn-sm btn-primary">Simpan Bukti</a>
+                @elseif($tiket->status == 3)
+                    <img src="{{ url('') }}/dist/img/completed.png" style="width: 130px" alt="">
+                @elseif($tiket->status == 0)
+                    <img src="{{ url('') }}/dist/img/cancelled.png" style="width: 130px" alt="">
+                @endif
             </div>
 
             <h6 class="mt-3 mb-0" style="font-weight: normal; font-size: 12px">Pemesan</h6>
@@ -85,15 +93,17 @@
                     </tr>
                 </tfoot>
             </table>
-            <div class="d-flex justify-content-center mt-4">
-                {!! DNS2D::getBarcodeHTML($tiket->ticket_code, 'QRCODE', 5, 5) !!}
-            </div>
+            @if ($tiket->status == 1 || $tiket->status == 2)
+                <div class="d-flex justify-content-center mt-4">
+                    {!! DNS2D::getBarcodeHTML($tiket->ticket_code, 'QRCODE', 5, 5) !!}
+                </div>
 
-            <div class="text-center mt-3">
-                <h3>{{ $tiket->ticket_code }}</h3>
-            </div>
+                <div class="text-center mt-3 mb-5">
+                    <h3>{{ $tiket->ticket_code }}</h3>
+                </div>
+            @endif
 
-            <div class="col-md-12 mt-5" style="font-size: 12px">
+            <div class="col-md-12" style="font-size: 12px">
                 <p style="font-weight: bold" class="m-0">Penukaran Tiket</p>
                 <p class="m-0">Kantor Pelabuhan Sapeken</p>
 

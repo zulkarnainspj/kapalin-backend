@@ -93,6 +93,7 @@ class TicketController extends Controller
             ->where('ship_id', $ship_id)
             ->where('route_id', $route_id)
             ->where('etd', '>=', $date)
+            ->where('status', 1)
             ->get();
 
         return response()->json($schedule);

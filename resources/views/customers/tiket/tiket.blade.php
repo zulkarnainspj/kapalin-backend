@@ -106,7 +106,7 @@
 
                             <tr>
                                 <td>Rute</td>
-                                <td>: Sapeken - {{ $rute->name }}</td>
+                                <td>: {{ $rute->name }} - {{ $rute->next_route }}</td>
                             </tr>
                         </table>
                     </td>
