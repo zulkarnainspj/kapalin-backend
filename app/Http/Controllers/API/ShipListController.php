@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Schedule;
 use App\Models\Admin\Ship;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,15 @@ class ShipListController extends Controller
 {
     public function index()
     {
-        $ships = Ship::orderBy('name')->get();
+        $date = date_create()->format('Y-m-d') . ' 00:00:00';
+        $last_date = date('Y-m-d' . ' 23:59:59', strtotime($date . ' + 1 years'));
+
+        $ships = Schedule::select('name', 'ships.id', 'status')
+            ->join('ships', 'ships.id', '=', 'schedules.ship_id')
+            ->whereBetween('etd', [$date, $last_date])
+            ->where('status', 1)
+            ->distinct()
+            ->get();
 
         return response()->json([
             'success' => true,
