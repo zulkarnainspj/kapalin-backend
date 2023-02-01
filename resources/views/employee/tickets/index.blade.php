@@ -24,7 +24,7 @@
                 <h2 class="fs-3 fw-bold mt-1">Penjualan Tiket</h2>
                 <div class="col-md-6 mb-2">
                     <button type="submit" class="btn btn-md btn-success mr-2 text-light"
-                        style="float: right;"><b>Cetak</b></button>
+                        style="float: right;"><b>Order</b></button>
                 </div>
                 <!-- / Page Title-->
             </div>

@@ -26,10 +26,10 @@
                             <div class="mr-2 w-75">
                                 <input type="text" class="form-control" id="ticketCode"
                                     style="font-size: 30px; height:50px"
-                                    onkeydown="(event.keyCode == 13) ? validasiTiket() : ''" autocomplete="off" autofocus>
+                                    onkeydown="(event.keyCode == 13) ? validasiTiket() : ''" value="{{ isset($_GET['id']) ? $_GET['id'] : '' }}" autocomplete="off" autofocus>
                             </div>
                             <div>
-                                <button class="btn btn-success" style="height:50px; margin-left:10px" onclick="validasiTiket()">Cek</button>
+                                <button class="btn btn-success" style="height:50px; margin-left:10px" onclick="validasiTiket()">Check In</button>
                             </div>
                         </div>
                     </div>

@@ -170,7 +170,7 @@
                                     @foreach ($order_terbaru as $item)
                                         <tr>
                                             <td>
-                                                <span class="fw-bolder">{{ $item->ticket_code }}</span>
+                                                <a class="fw-bolder" style="text-decoration: none" href="/employee/validation/?id={{ $item->ticket_code }}">{{ $item->ticket_code }}</a>
                                             </td>
                                             <td>{{ $item->user->name }}</td>
                                             <td class="text-muted">{{ $item->person->name }}</td>

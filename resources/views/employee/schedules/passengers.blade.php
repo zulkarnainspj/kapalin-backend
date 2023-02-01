@@ -18,7 +18,8 @@
     <section class="container-fluid mb-3">
         <!-- Page Title-->
         <h2 class="fs-3 fw-bold my-3">Jadwal -> {{ $ship->name }}</h2>
-        <label for="" class="mb-4">{{ date_create($schedule->etd)->format('d/m/Y H:i') }} WIB | {{ $route->name }} - {{ $next_route->name }}</label>
+        <label for="" class="mb-4">{{ date_create($schedule->etd)->format('d/m/Y H:i') }} WIB |
+            {{ $route->name }} - {{ $next_route->name }}</label>
         <!-- / Page Title-->
 
         <div class="row g-4">
@@ -29,10 +30,12 @@
                             <thead>
                                 <tr class="text-center">
                                     <th>#</th>
+                                    <th>Kode Tiket</th>
                                     <th>Pemesan</th>
                                     <th>Nama Penumpang</th>
                                     <th>Usia</th>
                                     <th>Pembelian</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -44,10 +47,42 @@
                                     @endphp
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
+                                        <td class="text-center">
+                                            <a class="fw-bolder" style="text-decoration: none" href="/employee/validation/?id={{ $item->ticket_code }}">{{ $item->ticket_code }}</a>
+                                        </td>
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->person->name }}</td>
-                                        <td class="text-center">{{ ($diff->y > 0) ? $diff->y : '<1' }}</td>
-                                        <td class="text-center">{{ date_create($item->created_at)->format('d-m-Y H:i') }}</td>
+                                        <td class="text-center">{{ $diff->y > 0 ? $diff->y : '<1' }}</td>
+                                        <td class="text-center">{{ date_create($item->created_at)->format('d-m-Y H:i') }}
+                                        </td>
+                                        <td class="text-center">
+                                            @php
+                                                // 0 Batal, 1 Dipesan, 2 Check In, 3 Selesai
+                                                $badge_bg = '';
+                                                $text_color = '';
+                                                $text = '';
+                                                
+                                                if ($item->status == 1) {
+                                                    $badge_bg = 'bg-primary-faded';
+                                                    $text_color = 'text-primary';
+                                                    $text = 'dipesan';
+                                                } elseif ($item->status == 2) {
+                                                    $badge_bg = 'bg-warning-faded';
+                                                    $text_color = 'text-warning';
+                                                    $text = 'check in';
+                                                } elseif ($item->status == 3) {
+                                                    $badge_bg = 'bg-success-faded';
+                                                    $text_color = 'text-success';
+                                                    $text = 'selesai';
+                                                } elseif ($item->status == 0) {
+                                                    $badge_bg = 'bg-danger-faded';
+                                                    $text_color = 'text-danger';
+                                                    $text = 'batal';
+                                                }
+                                            @endphp
+                                            <span
+                                                class="badge rounded-pill {{ $badge_bg . ' ' . $text_color }}">{{ $text }}</span>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
