@@ -131,7 +131,7 @@
                             <div class="d-flex align-items-center">
                                 <div class="d-flex align-items-center" style="font-size: 20px">
                                     <span class="f-w-4 rounded f-h-1 bg-primary d-block me-2"></span>
-                                    <span class="text-muted">{{ date_create()->format('Y') }}</span>
+                                    <span class="text-muted">{{ date_create()->format('M Y') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -222,10 +222,20 @@
     </section>
 
     @php
-        $chart_data = '';
+        $chart_data = ['0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0', '0'];
+        $str_chart = "";
+        
         foreach ($chart as $item) {
-            $chart_data = $chart_data . $item->jum . ', ';
-        }
+            for ($i = 1; $i <= 31; $i++) {
+                if ($item->hari == $i) {
+                    $chart_data[$i] = $item->jum;
+                } 
+            }
+        }        
+
+        for ($i=1; $i <= 31; $i++) { 
+            $str_chart = $str_chart . $chart_data[$i] . ', ';
+        } 
     @endphp
 
     <script>
@@ -235,10 +245,11 @@
         new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'],
+                labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16',
+                    '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
                 datasets: [{
                     label: 'Tiket Terjual',
-                    data: [{{ $chart_data }}],
+                    data: [{{ $str_chart }}],
                     borderWidth: 1,
                     borderColor: '#0049fa'
                 }]

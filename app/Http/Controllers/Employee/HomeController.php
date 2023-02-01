@@ -29,8 +29,8 @@ class HomeController extends Controller
 
         $kapal = Ship::count();
 
-        $total_tiket = Ticket::whereYear('updated_at', $date
-            ->format('Y'))
+        $total_tiket = Ticket::whereMonth('created_at', $date->format('m'))
+            ->whereYear('created_at', $date->format('Y'))
             ->where('status', 3)
             ->count();
 
@@ -38,10 +38,11 @@ class HomeController extends Controller
             ->limit(10)
             ->get();
 
-        $chart = Ticket::select(DB::raw('count(id) as jum'), DB::raw('MONTH(created_at) as bulan'))
+        $chart = Ticket::select(DB::raw('count(id) as jum'), DB::raw('DAY(created_at) as hari'))
+            ->whereMonth('created_at', $date->format('m'))
             ->whereYear('created_at', $date->format('Y'))
             ->where('status', 3)
-            ->groupBy('bulan')
+            ->groupBy('hari')
             ->get();
 
         return view('employee.index', [

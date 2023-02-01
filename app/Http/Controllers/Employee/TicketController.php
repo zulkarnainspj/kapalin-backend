@@ -59,7 +59,7 @@ class TicketController extends Controller
             $ticket->schedule_id = $request->schedule;
             $ticket->ticket_code = $request->ticket_code;
             $ticket->price = ($schedule->price * $jumlahPenumpang);
-            $ticket->status = 2;
+            $ticket->status = 1;
             $ticket->save();
         }
         DB::commit();
