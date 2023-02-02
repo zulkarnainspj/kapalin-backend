@@ -106,7 +106,7 @@
 
                             <tr>
                                 <td>Rute</td>
-                                <td>: {{ $rute->name }} - {{ $rute->next_route }}</td>
+                                <td>: {{ $route->port }} - {{ $route->next_port }}</td>
                             </tr>
                         </table>
                     </td>

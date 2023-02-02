@@ -82,7 +82,7 @@
 
                                             <div class="col-md-3">
                                                 <input type="time" step="any" name="etd_time" id="etd_time"
-                                                    class="form-control" required>
+                                                    class="form-control" value="00:00" required>
                                             </div>
                                         </div>
                                     </div>
@@ -101,7 +101,7 @@
                                             </div>
 
                                             <div class="col-md-3">
-                                                <input type="time" step="any" name="eta_time" id="eta_time"
+                                                <input type="time" step="any" name="eta_time" id="eta_time" value="00:00"
                                                     class="form-control" required>
                                             </div>
                                         </div>

@@ -34,13 +34,16 @@
                         {{ $tiket->ticket_code }}</h4>
                 </div>
 
-                @if ($tiket->status == 1 || $tiket->status == 2)
-                    <a href="/cus/{{ $tiket->ticket_code }}/download" class="btn btn-sm btn-primary">Simpan Bukti</a>
-                @elseif($tiket->status == 3)
-                    <img src="{{ url('') }}/dist/img/completed.png" style="width: 130px" alt="">
-                @elseif($tiket->status == 0)
-                    <img src="{{ url('') }}/dist/img/cancelled.png" style="width: 130px" alt="">
-                @endif
+                <div>
+                    @if ($tiket->status == 1 || $tiket->status == 2)
+                        <a href="/cus/{{ $tiket->ticket_code }}/download" class="btn btn-sm btn-primary">Simpan
+                            Bukti</a>
+                    @elseif($tiket->status == 3)
+                        <img src="{{ url('') }}/dist/img/completed.png" style="width: 130px" alt="">
+                    @elseif($tiket->status == 0)
+                        <img src="{{ url('') }}/dist/img/cancelled.png" style="width: 130px" alt="">
+                    @endif
+                </div>
             </div>
 
             <h6 class="mt-3 mb-0" style="font-weight: normal; font-size: 12px">Pemesan</h6>
@@ -48,7 +51,7 @@
 
             <h6 class="mt-3 mb-0" style="font-weight: normal; font-size: 12px">Informasi Kapal</h6>
             <h4 class="m-0" style="font-size: 15px">{{ $tiket->schedule->ship->name }}</h4>
-            <h6 class="m-0" style="font-size: 12px">{{ $rute->name }} - {{ $next_route->name }}</h6>
+            <h6 class="m-0" style="font-size: 12px">{{ $route->port }} - {{ $route->next_port }}</h6>
             <h6 class="m-0" style="font-size: 12px">{{ date_create($tiket->schedule->etd)->format('d/m/Y H:i') }} WIB
                 - {{ date_create($tiket->schedule->eta)->format('d/m/Y H:i') }} WIB</h6>
 

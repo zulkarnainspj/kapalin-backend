@@ -32,7 +32,7 @@
                 <input type="hidden" name="uid" value="{{ $pemesan }}">
                 <input type="hidden" name="ticket_code" value="KB{{ date_create()->format('Hidysm') }}">
                 <h6 class="m-0">{{ $schedule->ship->name }}</h6>
-                <p class="m-0">Sapeken - {{ $rute->name }}</p>
+                <p class="m-0">{{ $route->port }} - {{ $route->next_port }}</p>
                 <p class="m-0">Rp. {{ number_format($price, 0, ',', '.') }} ({{ $j_penumpang }} org)</p>
 
                 <hr>

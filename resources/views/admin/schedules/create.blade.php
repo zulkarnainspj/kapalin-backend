@@ -111,24 +111,6 @@
                         </div>
                     </div>
 
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Gambar Jadwal Lengkap</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <input class="form-control form-control-lg" id="formFile" type="file"
-                                        accept="image/png, image/jpeg">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <img src="" alt="" class="img-thumbnail" id="imagepreview">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="col-md-12 d-flex justify-content-end mt-2">
                         <a href="/admin/schedules" class="btn btn-danger me-2">Batal</a>
                         <button type="submit" class="btn btn-success">Simpan</button>
@@ -138,14 +120,4 @@
         </div>
     </section>
 
-    <script>
-        function fr_file() {
-            var img_file = $('#formFile').mozFullPath();
-            console.log(img_file);
-        }
-
-        $('#formFile').change(function() {
-            console.log(this.files[0].mozFullPath);
-        });
-    </script>
 @endsection

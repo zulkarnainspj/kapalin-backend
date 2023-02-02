@@ -27,11 +27,12 @@ class OrderController extends Controller
         $pemesan = User::where('email', $pemesan)->first();
         $schedule = Schedule::find($schedule);
 
-        $route = Schedule::select('route_id', 'name')
-        ->join('routes', 'routes.id', '=', 'schedules.route_id')
-        ->join('ports', 'ports.id', '=', 'routes.next_port_id')
-        ->where('schedules.id', $schedule->id)
-        ->first();
+        $route = Schedule::select('route_id', 'p.name as port', 'np.name as next_port')
+            ->join('routes', 'routes.id', '=', 'schedules.route_id')
+            ->join('ports as p', 'p.id', '=', 'routes.port_id')
+            ->join('ports as np', 'np.id', '=', 'routes.next_port_id')
+            ->where('schedules.id', $schedule->id)
+            ->first();
 
         $price = Schedule::select('id', 'price')->where('id', $schedule->id)->first();
 
@@ -39,7 +40,7 @@ class OrderController extends Controller
             'j_penumpang' => $j_penumpang,
             'pemesan' => $pemesan,
             'schedule' => $schedule,
-            'rute' => $route,
+            'route' => $route,
             'price' => ($price->price * $j_penumpang),
         ]);
     }
@@ -81,24 +82,18 @@ class OrderController extends Controller
     {
         $ticket = Ticket::where('ticket_code', $t_code)->first();
 
-        $route = Schedule::select('route_id', 'name')
-        ->join('routes', 'routes.id', '=', 'schedules.route_id')
-        ->join('ports', 'ports.id', '=', 'routes.port_id')
-        ->where('schedules.id', $ticket->schedule->id)
-        ->first();
-
-        $next_route = Schedule::select('route_id', 'name')
-        ->join('routes', 'routes.id', '=', 'schedules.route_id')
-        ->join('ports', 'ports.id', '=', 'routes.next_port_id')
-        ->where('schedules.id', $ticket->schedule->id)
-        ->first();
+        $route = Schedule::select('route_id', 'p.name as port', 'np.name as next_port')
+            ->join('routes', 'routes.id', '=', 'schedules.route_id')
+            ->join('ports as p', 'p.id', '=', 'routes.port_id')
+            ->join('ports as np', 'np.id', '=', 'routes.next_port_id')
+            ->where('schedules.id', $ticket->schedule->id)
+            ->first();
 
         $passengers = Ticket::where('ticket_code', $t_code)->get();
 
         return view('customers.tiket.index', [
             'tiket' => $ticket,
-            'rute' => $route,
-            'next_route' => $next_route,
+            'route' => $route,
             'passengers' => $passengers
         ]);
     }
@@ -107,48 +102,41 @@ class OrderController extends Controller
     {
         $ticket = Ticket::where('ticket_code', $t_code)->first();
 
-        $route = Schedule::select('route_id', 'name')
-        ->join('routes', 'routes.id', '=', 'schedules.route_id')
-        ->join('ports', 'ports.id', '=', 'routes.port_id')
-        ->where('schedules.id', $ticket->schedule->id)
-        ->first();
-
-        $next_route = Schedule::select('route_id', 'name')
-        ->join('routes', 'routes.id', '=', 'schedules.route_id')
-        ->join('ports', 'ports.id', '=', 'routes.next_port_id')
-        ->where('schedules.id', $ticket->schedule->id)
-        ->first();
+        $route = Schedule::select('route_id', 'p.name as port', 'np.name as next_port')
+            ->join('routes', 'routes.id', '=', 'schedules.route_id')
+            ->join('ports as p', 'p.id', '=', 'routes.port_id')
+            ->join('ports as np', 'np.id', '=', 'routes.next_port_id')
+            ->where('schedules.id', $ticket->schedule->id)
+            ->first();
 
         $passengers = Ticket::where('ticket_code', $t_code)->get();
 
         try {
             $pdf = FacadePdf::loadView('customers.tiket.tiket', [
                 'tiket' => $ticket,
-                'rute' => $route,
-                'next_route' => $next_route,
+                'route' => $route,
                 'passengers' => $passengers
             ]);
 
             return $pdf->download("Kapalin_" . $t_code . ".pdf");
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return $e;
         }
-        
     }
 
     public function get_user_data($email)
     {
 
         $user_profile = User::select('name', 'no_id', 'gender', 'date_of_birth', 'email')
-            ->join('passengers', 'passengers.user_id', '=', 'users.id')
+            ->join('profiles', 'profiles.user_id', '=', 'users.id')
             ->where('email', $email)
             ->get();
-        
+
         $user_no_profile = User::where('email', $email)->get();
 
-        if (isset($user_profile->no_id)){
+        if (isset($user_profile->no_id)) {
             $user = $user_profile;
-        }else{
+        } else {
             $user = $user_no_profile;
         }
 
@@ -156,5 +144,3 @@ class OrderController extends Controller
         return response()->json($user);
     }
 }
-
-
