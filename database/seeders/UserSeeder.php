@@ -17,7 +17,6 @@ class UserSeeder extends Seeder
     {
         $user = new User;
         $user->name = 'Admin';
-        $user->phone = '01234';
         $user->email = 'admin@kapalin.com';
         $user->password = bcrypt('1234');
         $user->role = 0;

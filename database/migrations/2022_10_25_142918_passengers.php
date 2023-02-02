@@ -15,12 +15,11 @@ return new class extends Migration
     {
         Schema::create('passengers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
             $table->string('no_id');
+            $table->string('name');
             $table->date('date_of_birth');
             $table->smallInteger('gender'); // 1 Pria; 2 Wanita
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

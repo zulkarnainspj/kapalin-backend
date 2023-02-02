@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->string('no_id')->nullable();
             $table->date('date_of_birth')->nullable();
-            $table->text('address')->nullable();
+            $table->smallInteger('gender'); // 1 Pria; 2 Wanita
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
         });
