@@ -7,7 +7,7 @@
             <nav class="mb-0" aria-label="breadcrumb">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Admin & Petugas</li>
+                    <li class="breadcrumb-item active" aria-current="page">Pengguna</li>
                 </ol>
             </nav>
         </div>
@@ -17,7 +17,7 @@
     <section class="container-fluid mb-3">
         <div class="d-flex justify-content-between">
             <!-- Page Title-->
-            <h2 class="fs-3 fw-bold mt-1">Admin & Petugas</h2>
+            <h2 class="fs-3 fw-bold mt-1">Pengguna</h2>
             <div class="col-md-6 mb-2">
                 <a href="/admin/users/add" class="btn btn-md btn-success mr-2 text-light" style="float: right;"><b><i
                             class="fas fa-plus"></i> NEW</b></a>
@@ -34,9 +34,9 @@
                                 <tr class="text-center">
                                     <th>#</th>
                                     <th>Nama</th>
-                                    <th>HP</th>
                                     <th>Email</th>
                                     <th>Role</th>
+                                    <th>Terdaftar</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -45,7 +45,6 @@
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $item->name }}</td>
-                                        <td class="text-center">{{ $item->phone }}</td>
                                         <td class="text-center">{{ $item->email }}</td>
                                         <td class="text-center">
                                             @php
@@ -58,6 +57,7 @@
                                                 }
                                             @endphp
                                         </td>
+                                        <td class="text-center">{{ date_create($item->created_at)->format("d/m/y H:i:s") }}</td>
                                         <td align="center">
                                             <a href="/admin/users/edit/{{ $item->id }}"
                                                 class="btn btn-sm btn-warning text-light" title="Edit"><span

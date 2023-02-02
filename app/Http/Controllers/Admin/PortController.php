@@ -19,7 +19,7 @@ class PortController extends Controller
             'title' => 'Pelabuhan',
             'nvb' => 'ports',
             'ports' => $ports,
-            'origin_port' => $origin_port
+            'origin' => $origin_port
         ]);
     }
 

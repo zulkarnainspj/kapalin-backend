@@ -7,7 +7,7 @@
             <nav class="mb-0" aria-label="breadcrumb">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/admin/users">Admin & Petugas</a></li>
+                    <li class="breadcrumb-item"><a href="/admin/users">Pengguna</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Tambah</li>
                 </ol>
             </nav>
@@ -17,7 +17,7 @@
 
     <section class="container-fluid mb-3">
         <!-- Page Title-->
-        <h2 class="fs-3 fw-bold my-3">Tambah Admin / Petugas</h2>
+        <h2 class="fs-3 fw-bold my-3">Tambah Pengguna</h2>
 
         <div class="row g-4">
             <div class="col-md-12">
@@ -31,13 +31,6 @@
                                         <label for="name">Nama</label>
                                         <input type="text" name="name" id="name" class="form-control" autofocus
                                             autocomplete="off" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="hp">HP</label>
-                                        <input type="number" name="hp" id="hp" minlength="11" maxlength="13"
-                                            class="form-control" autocomplete="off" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -60,6 +53,7 @@
                                         <select name="role" id="role" class="form-control">
                                             <option value="0">Admin</option>
                                             <option value="1">Petugas</option>
+                                            <option value="2">Penumpang</option>
                                         </select>
                                     </div>
                                 </div>

@@ -105,18 +105,7 @@
                                 <i class="nav-icon bi bi-people-fill"></i>
                             </span>
                             <span class="menu-link">
-                                Admin & Petugas
-                            </span>
-                        </a>
-                    </li>
-
-                    <li class="menu-item {{ ($nvb == 'passengers') ? 'active' : '' }}">
-                        <a class="d-flex align-items-center" href="/admin/passengers">
-                            <span class="menu-icon">
-                                <i class="nav-icon fas fa-users"></i>
-                            </span>
-                            <span class="menu-link">
-                                Penumpang
+                                Pengguna
                             </span>
                         </a>
                     </li>

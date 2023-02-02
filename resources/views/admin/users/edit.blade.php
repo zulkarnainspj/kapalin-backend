@@ -7,7 +7,7 @@
             <nav class="mb-0" aria-label="breadcrumb">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/admin/users">Admin & Petugas</a></li>
+                    <li class="breadcrumb-item"><a href="/admin/users">Pengguna</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Ubah</li>
                 </ol>
             </nav>
@@ -18,7 +18,7 @@
 
     <section class="container-fluid mb-3">
         <!-- Page Title-->
-        <h2 class="fs-3 fw-bold my-3">Ubah Admin / Petugas</h2>
+        <h2 class="fs-3 fw-bold my-3">Ubah Pengguna</h2>
 
         <div class="row g-4">
             <div class="col-md-12">
@@ -31,6 +31,13 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="no_id">No ID</label>
+                                        <input type="text" name="no_id" id="no_id" class="form-control" autofocus
+                                            autocomplete="off" value="{{ $user->no_id }}" required>
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">Nama</label>
@@ -49,8 +56,13 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="address">Alamat</label>
-                                        <textarea name="address" id="address" cols="30" rows="2" class="form-control">{{ isset($user->profile->address) ? $user->profile->address : '' }}</textarea>
+                                        <label for="gender">Jenis Kelamin</label>
+                                        <select name="gender" id="gender" class="form-control">
+                                            <option value="1" {{ $user->gender == 1 ? 'selected' : '' }}>Pria
+                                            </option>
+                                            <option value="2" {{ $user->gender == 2 ? 'selected' : '' }}>Wanita
+                                            </option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -63,13 +75,6 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="hp">HP</label>
-                                        <input type="number" name="hp" id="hp" minlength="11" maxlength="13"
-                                            class="form-control" value="{{ $user->phone }}" autocomplete="off" required>
-                                    </div>
-                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="email">Email</label>
@@ -92,6 +97,8 @@
                                             <option value="0" {{ $user->role == 0 ? 'selected' : '' }}>Admin
                                             </option>
                                             <option value="1" {{ $user->role == 1 ? 'selected' : '' }}>Petugas
+                                            </option>
+                                            <option value="2" {{ $user->role == 2 ? 'selected' : '' }}>Penumpang
                                             </option>
                                         </select>
                                     </div>

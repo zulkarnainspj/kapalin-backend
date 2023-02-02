@@ -25,6 +25,13 @@
             <!-- / Page Title-->
         </div>
 
+        @if ($origin == 0)
+            <div class="col-md-12 my-2">
+                <div class="alert alert-warning">Silahkan pilih salah satu pelabuhan untuk dijadikan pelabuhan utama sebelum
+                    membuat rute</div>
+            </div>
+        @endif
+
         <div class="row g-4">
             <div class="col-md-12">
                 <div class="card h-100">

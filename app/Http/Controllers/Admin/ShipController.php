@@ -78,6 +78,8 @@ class ShipController extends Controller
         $ship = Ship::find($id);
         $ship->delete();
 
+        Alert::success('Sukses', $ship->name . ' berhasil dihapus');
+
         return redirect('/admin/ships');
     }
 }

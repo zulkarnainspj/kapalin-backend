@@ -25,7 +25,7 @@ class UserController extends Controller
     public function create()
     {
         return view('admin.users.create', [
-            'title' => 'Tambah Admin / Petugas',
+            'title' => 'Tambah Pengguna',
             'nvb' => 'users'
         ]);
     }
@@ -34,7 +34,6 @@ class UserController extends Controller
     {
         $user = new User;
         $user->name = $request->name;
-        $user->phone = $request->hp;
         $user->email = $request->email;
         $user->role = $request->role;
         $user->password = bcrypt($request->password);
@@ -50,7 +49,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         return view('admin.users.edit', [
-            'title' => 'Edit Admin / Petugas',
+            'title' => 'Pengguna',
             'nvb' => 'users',
             'user' => $user
         ]);
@@ -61,7 +60,6 @@ class UserController extends Controller
         DB::beginTransaction();
         $user = User::find($request->id);
         $user->name = $request->name;
-        $user->phone = $request->hp;
         $user->email = $request->email;
         $user->role = $request->role;
         $user->save();
@@ -70,14 +68,16 @@ class UserController extends Controller
         
         if ($profile) {
             $profile->user_id = $user->id;
+            $profile->no_id = $request->no_id;
             $profile->date_of_birth = $request->date_of_birth;
-            $profile->address = $request->address;
+            $profile->gender = $request->gender;
             $profile->save();
         }else{
             $profile = new Profile;
             $profile->user_id = $user->id;
+            $profile->no_id = $request->no_id;
             $profile->date_of_birth = $request->date_of_birth;
-            $profile->address = $request->address;
+            $profile->gender = $request->gender;
             $profile->save();
         }
         
