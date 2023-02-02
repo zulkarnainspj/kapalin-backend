@@ -20,8 +20,8 @@ class Ticket extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function person()
+    public function passenger()
     {
-        return $this->belongsTo(Person::class, 'person_id');
+        return $this->belongsTo(Passenger::class, 'passenger_id');
     }
 }
