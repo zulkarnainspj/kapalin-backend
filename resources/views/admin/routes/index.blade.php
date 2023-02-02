@@ -35,7 +35,6 @@
                                     <th>#</th>
                                     <th>Pelabuhan Asal</th>
                                     <th>Pelabuhan Tujuan</th>
-                                    <th>Jarak</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -45,8 +44,6 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $item->port->name }}</td>
                                         <td>{{ $item->next_port->name }}</td>
-                                        <td class="text-center">
-                                            {{ $item->distance != null ? $item->distance . ' Mil' : '' }}</td>
                                         <td align="center">
                                             <a href="/admin/routes/edit/{{ $item->id }}"
                                                 class="btn btn-sm btn-warning" title="Edit"><span

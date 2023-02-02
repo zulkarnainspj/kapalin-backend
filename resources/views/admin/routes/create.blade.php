@@ -53,14 +53,6 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="distance">Jarak (Mil)</label>
-                                        <input type="text" name="distance" id="distance" placeholder="ex. 34,4"
-                                            class="form-control" autofocus autocomplete="off">
-                                    </div>
-                                </div>
-
                                 <div class="col-md-12 d-flex justify-content-end">
                                     <a href="/admin/routes" class="btn btn-danger me-2">Cancel</a>
                                     <button type="submit" class="btn btn-success">Save</button>

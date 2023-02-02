@@ -38,7 +38,6 @@ class RouteController extends Controller
         $route = new Route;
         $route->port_id = $request->port;
         $route->next_port_id = $request->next_port;
-        $route->distance = $request->distance;
         $route->save();
 
         Alert::success('Sukses', 'Rute berhasil ditambahkan');
@@ -65,7 +64,6 @@ class RouteController extends Controller
         $route = Route::find($request->id);
         $route->port_id = $request->port;
         $route->next_port_id = $request->next_port;
-        $route->distance = $request->distance;
         $route->save();
 
         Alert::success('Sukses', 'Rute berhasil diperbarui');
