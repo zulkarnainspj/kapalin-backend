@@ -20,7 +20,8 @@ class TransactionController extends Controller
             ->join('routes', 'routes.id', '=', 'schedules.route_id')
             ->join('ports as p', 'p.id', '=', 'routes.port_id')
             ->join('ports as np', 'np.id', '=', 'routes.next_port_id')
-            ->orderBy('created_at', 'desc')->where('user_id', $user->id)                        
+            ->orderBy('created_at', 'desc')->where('user_id', $user->id)        
+            ->groupBy('tickets.ticket_code', 'ship', 'tickets.created_at', 'tickets.status', 'port', 'next_port')                
             ->get();
 
 

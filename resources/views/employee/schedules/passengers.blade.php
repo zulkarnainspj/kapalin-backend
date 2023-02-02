@@ -42,7 +42,7 @@
                                 @foreach ($ticket as $item)
                                     @php
                                         $date_now = date_create();
-                                        $date_of_birth = date_create($item->person->date_of_birth);
+                                        $date_of_birth = date_create($item->passenger->date_of_birth);
                                         $diff = date_diff($date_now, $date_of_birth);
                                     @endphp
                                     <tr>
@@ -51,7 +51,7 @@
                                             <a class="fw-bolder" style="text-decoration: none" href="/employee/validation/?id={{ $item->ticket_code }}">{{ $item->ticket_code }}</a>
                                         </td>
                                         <td>{{ $item->user->name }}</td>
-                                        <td>{{ $item->person->name }}</td>
+                                        <td>{{ $item->passenger->name }}</td>
                                         <td class="text-center">{{ $diff->y > 0 ? $diff->y : '<1' }}</td>
                                         <td class="text-center">{{ date_create($item->created_at)->format('d-m-Y H:i') }}
                                         </td>

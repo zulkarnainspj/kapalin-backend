@@ -173,7 +173,7 @@
                                                 <a class="fw-bolder" style="text-decoration: none" href="/employee/validation/?id={{ $item->ticket_code }}">{{ $item->ticket_code }}</a>
                                             </td>
                                             <td>{{ $item->user->name }}</td>
-                                            <td class="text-muted">{{ $item->person->name }}</td>
+                                            <td class="text-muted">{{ $item->passenger->name }}</td>
                                             <td class="text-muted">
                                                 {{ $item->schedule->route->port->name . ' - ' . $item->schedule->route->next_port->name }}
                                             </td>
