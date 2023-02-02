@@ -175,7 +175,7 @@
                                                 <span class="fw-bolder">{{ $item->ticket_code }}</span>
                                             </td>
                                             <td>{{ $item->user->name }}</td>
-                                            <td class="text-muted">{{ $item->person->name }}</td>
+                                            <td class="text-muted">{{ $item->passenger->name }}</td>
                                             <td class="text-muted">
                                                 {{ $item->schedule->route->port->name . ' - ' . $item->schedule->route->next_port->name }}
                                             </td>

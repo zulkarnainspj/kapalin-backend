@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Passenger;
 use App\Models\Admin\Route;
 use App\Models\Admin\Schedule;
 use App\Models\Admin\Ship;
@@ -46,16 +47,16 @@ class TicketController extends Controller
                 "gender.$i" => ['numeric', 'required'],
             ]);
 
-            $person = new Person;
-            $person->no_id = $request->no_id[$i];
-            $person->name = $request->name[$i];
-            $person->date_of_birth = $request->date_of_birth[$i];
-            $person->gender = $request->gender[$i];
-            $person->save();
+            $passenger = new Passenger;
+            $passenger->no_id = $request->no_id[$i];
+            $passenger->name = $request->name[$i];
+            $passenger->date_of_birth = $request->date_of_birth[$i];
+            $passenger->gender = $request->gender[$i];
+            $passenger->save();
 
             $ticket = new Ticket;
             $ticket->user_id = auth()->user()->id;
-            $ticket->person_id = $person->id;
+            $ticket->passenger_id = $passenger->id;
             $ticket->schedule_id = $request->schedule;
             $ticket->ticket_code = $request->ticket_code;
             $ticket->price = ($schedule->price * $jumlahPenumpang);
@@ -118,7 +119,7 @@ class TicketController extends Controller
             ->where('ticket_code', $tCode)
             ->first();
 
-        $person = Ticket::where('ticket_code', $tCode)->count();
+        $passenger = Ticket::where('ticket_code', $tCode)->count();
 
         $update_ticket = Ticket::where('ticket_code', $tCode)->update(['status' => 2]);
 
@@ -126,7 +127,7 @@ class TicketController extends Controller
 
         $data = [
             'ticket' => $ticket,
-            'person' => $person
+            'passenger' => $passenger
         ];
 
         return response()->json($data);
@@ -149,7 +150,7 @@ class TicketController extends Controller
             ->where('schedules.id', $ticket->schedule->id)
             ->first();
 
-        $persons = Ticket::where('ticket_code', $request->ticket_code)->get();
+        $passengers = Ticket::where('ticket_code', $request->ticket_code)->get();
 
         $update_ticket = Ticket::where('ticket_code', $request->ticket_code)->update(['status' => 3]);
         DB::commit();
@@ -159,7 +160,7 @@ class TicketController extends Controller
                 'tiket' => $ticket,
                 'route' => $route,
                 'next_route' => $next_route,
-                'persons' => $persons
+                'passengers' => $passengers
             ]);
 
             return $pdf->stream();
@@ -185,7 +186,7 @@ class TicketController extends Controller
         ->where('schedules.id', $ticket->schedule->id)
             ->first();
 
-        $persons = Ticket::where('ticket_code', $tCode)->get();
+        $passengers = Ticket::where('ticket_code', $tCode)->get();
 
         $update_ticket = Ticket::where('ticket_code', $tCode)->update(['status' => 3]);
         DB::commit();
@@ -195,7 +196,7 @@ class TicketController extends Controller
                 'tiket' => $ticket,
                 'route' => $route,
                 'next_route' => $next_route,
-                'persons' => $persons
+                'passengers' => $passengers
             ]);
 
             return $pdf->stream();

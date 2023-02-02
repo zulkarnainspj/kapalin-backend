@@ -140,7 +140,7 @@ function validasiTiket() {
     var ship = $('#ship');
     var route = $('#route');
     var uName = $('#pemesan');
-    var persons = $('#penumpang');
+    var passenger = $('#penumpang');
     var keberangkatan = $('#etd');
     var price = $('#harga');
     var tCodeLink = $('#tCodeLink');
@@ -155,7 +155,7 @@ function validasiTiket() {
                 ship.text(data.ticket.sname);
                 route.text('Sapeken - ' + data.ticket.pname);
                 uName.text(': ' + data.ticket.uname);
-                persons.text(': ' + data.person);
+                passenger.text(': ' + data.passenger);
 
                 tCodeLink.val(tCode);
 

@@ -130,21 +130,21 @@
                         @php
                             $jum = 0;
                         @endphp
-                        @foreach ($persons as $item)
+                        @foreach ($passengers as $item)
                             @php
                                 $date_now = date_create();
-                                $date_of_birth = date_create($item->person->date_of_birth);
+                                $date_of_birth = date_create($item->passenger->date_of_birth);
                                 $diff = date_diff($date_now, $date_of_birth);
                                 $jum++;
                             @endphp
                             <tr>
                                 <td align="center">{{ $loop->iteration }}</td>
-                                <td>{{ $item->person->name }}</td>
-                                <td align="center">{{ $item->person->no_id }}</td>
-                                <td align="center">{{ $item->person->gender == 1 ? 'Pria' : 'Wanita' }}</td>
+                                <td>{{ $item->passenger->name }}</td>
+                                <td align="center">{{ $item->passenger->no_id }}</td>
+                                <td align="center">{{ $item->passenger->gender == 1 ? 'Pria' : 'Wanita' }}</td>
                                 <td align="center">
                                     @php
-                                        $doh = $item->person->date_of_birth;
+                                        $doh = $item->passenger->date_of_birth;
                                         if ($doh) {
                                             if ($doh < 1) {
                                                 echo '<1';

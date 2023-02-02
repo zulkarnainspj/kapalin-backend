@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Passenger;
 use App\Models\Admin\Schedule;
 use App\Models\Admin\Ticket;
 use App\Models\Admin\User;
-use App\Models\Employee\Person;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Exception;
 use Illuminate\Http\Request;
@@ -48,44 +48,23 @@ class OrderController extends Controller
     {
         $jumlahPenumpang = $request->j_penumpang;
 
-        // for ($i=0; $i < $jumlahPenumpang; $i++) { 
-        //     echo '[PERSON]<br>';
-        //     echo 'No ID : ' . $request->no_id[$i] . '<br>';
-        //     echo 'Name : ' . $request->nama_penumpang[$i]  . '<br>';
-        //     echo 'Tgl Lahir : ' . $request->date_of_birth[$i]  . '<br>';
-        //     echo 'Jenis Kelamin : ' . $request->gender[$i]  . '<br><br>';
-        // }
-
         DB::beginTransaction();
         $schedule = Schedule::find($request->schedule_id);
-
-        // $route = Schedule::select('route_id', 'name')
-        // ->join('routes', 'routes.id', '=', 'schedules.route_id')
-        // ->join('ports', 'ports.id', '=', 'routes.next_port_id')
-        // ->where('schedules.id', $schedule->id)
-        // ->first();
 
         $pemesan = User::where('email', $request->email_pemesan)->first();
 
         for ($i = 0; $i < $jumlahPenumpang; $i++) {
-            // $request->validate([
-            //     'schedule' => ['required', 'numeric'],
-            //     "no_id.$i" => ['numeric', 'required'],
-            //     "name.$i" => ['required', 'min:3'],
-            //     "date_of_birth.$i" => ['rquired'],
-            //     "gender.$i" => ['numeric', 'required'],
-            // ]);
 
-            $person = new Person;
-            $person->no_id = $request->no_id[$i];
-            $person->name = $request->nama_penumpang[$i];
-            $person->date_of_birth = $request->date_of_birth[$i];
-            $person->gender = $request->gender[$i];
-            $person->save();
+            $passenger = new Passenger;
+            $passenger->no_id = $request->no_id[$i];
+            $passenger->name = $request->nama_penumpang[$i];
+            $passenger->date_of_birth = $request->date_of_birth[$i];
+            $passenger->gender = $request->gender[$i];
+            $passenger->save();
 
             $ticket = new Ticket;
             $ticket->user_id = $pemesan->id;
-            $ticket->person_id = $person->id;
+            $ticket->passenger_id = $passenger->id;
             $ticket->schedule_id = $schedule->id;
             $ticket->ticket_code = $request->ticket_code;
             $ticket->price = ($schedule->price * $jumlahPenumpang);
@@ -96,7 +75,6 @@ class OrderController extends Controller
         Alert::success('Sukses', 'Pembelian tiket berhasil');
 
         return redirect('/cus/' . $request->ticket_code);
-        // return redirect('/cus/' . 'KB112625224711');
     }
 
     public function order_success($t_code)
@@ -115,13 +93,13 @@ class OrderController extends Controller
         ->where('schedules.id', $ticket->schedule->id)
         ->first();
 
-        $persons = Ticket::where('ticket_code', $t_code)->get();
+        $passengers = Ticket::where('ticket_code', $t_code)->get();
 
         return view('customers.tiket.index', [
             'tiket' => $ticket,
             'rute' => $route,
             'next_route' => $next_route,
-            'persons' => $persons
+            'passengers' => $passengers
         ]);
     }
 
@@ -141,14 +119,14 @@ class OrderController extends Controller
         ->where('schedules.id', $ticket->schedule->id)
         ->first();
 
-        $persons = Ticket::where('ticket_code', $t_code)->get();
+        $passengers = Ticket::where('ticket_code', $t_code)->get();
 
         try {
             $pdf = FacadePdf::loadView('customers.tiket.tiket', [
                 'tiket' => $ticket,
                 'rute' => $route,
                 'next_route' => $next_route,
-                'persons' => $persons
+                'passengers' => $passengers
             ]);
 
             return $pdf->download("Kapalin_" . $t_code . ".pdf");

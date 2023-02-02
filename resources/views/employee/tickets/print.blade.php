@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     {{-- <meta name="viewport" content="width=device-width, initial-scale=1"> --}}
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0">
-    <title>Order</title>
+    <title>Cetak Tiket</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
@@ -32,7 +32,7 @@
 <body>
 
     <div class="container">
-        @foreach ($persons as $item)
+        @foreach ($passengers as $item)
             <div class="col-md-12 mt-3 text-center" style="color:#000000;">
                 <div style="font-size:10px; font-weight:bold">
                     <p style="margin:0">{{ $tiket->schedule->ship->name }}</p>
@@ -44,12 +44,12 @@
 
                 @php
                     $date_now = date_create();
-                    $date_of_birth = date_create($item->person->date_of_birth);
+                    $date_of_birth = date_create($item->passenger->date_of_birth);
                     $diff = date_diff($date_now, $date_of_birth);
                 @endphp
 
                 <div style="font-size:12px; margin-top:10px">
-                    <p>{{ $item->person->name }} / {{ $diff->y > 0 ? $diff->y : '<1' }} th</p>
+                    <p>{{ $item->passenger->name }} / {{ $diff->y > 0 ? $diff->y : '<1' }} th</p>
                 </div>
 
                 <div style="font-size:12px;">
