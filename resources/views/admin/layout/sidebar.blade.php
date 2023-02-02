@@ -1,6 +1,6 @@
 <!-- Page Aside-->
 <aside class="aside bg-white">
-    <div class="simplebar-wrapper">
+    <div class="simplebar-wrapper" style="background: url({{ url('') }}/dist/img/sidebar-bg.png); background-size:cover">
         <div data-pixr-simplebar>
             <div class="pb-6">
                 <!-- Mobile Logo-->

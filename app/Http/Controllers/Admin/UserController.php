@@ -34,7 +34,7 @@ class UserController extends Controller
     {
         $user = new User;
         $user->name = $request->name;
-        $user->email = $request->email;
+        $user->email = strtolower($request->email);
         $user->role = $request->role;
         $user->password = bcrypt($request->password);
         $user->save();
@@ -60,7 +60,7 @@ class UserController extends Controller
         DB::beginTransaction();
         $user = User::find($request->id);
         $user->name = $request->name;
-        $user->email = $request->email;
+        $user->email = strtolower($request->email);
         $user->role = $request->role;
         $user->save();
 

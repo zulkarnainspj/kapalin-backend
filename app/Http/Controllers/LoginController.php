@@ -26,7 +26,7 @@ class LoginController extends Controller
     {
         
         $user_credential = [
-            'email' => $request->email,
+            'email' => strtolower($request->email),
             'password' => $request->password,
             'status' => 1
         ];
