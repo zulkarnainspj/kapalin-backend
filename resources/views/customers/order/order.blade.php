@@ -70,8 +70,7 @@
                             </div>
 
                             <label for="nama_penumpang_{{ $i }}">Nama Lengkap</label>
-                            <input type="text" class="form-control mt-2" name="nama_penumpang[]"
-                                @error("nama_penumpang.$i") is-invalid @enderror
+                            <input type="text" class="form-control mt-2 @error("nama_penumpang.$i") is-invalid @enderror" name="nama_penumpang[]"
                                 id="nama_penumpang_{{ $i }}" style="border-color: #0984e3"
                                 value="{{ old('nama_penumpang.' . $i) }}" required>
 
@@ -84,9 +83,9 @@
 
                         <div class="form-group mt-2">
                             <label for="no_id_{{ $i }}">No. ID</label>
-                            <input type="number" class="form-control mt-2" name="no_id[]"
+                            <input type="number" class="form-control mt-2 @error("no_id.$i") is-invalid @enderror" name="no_id[]"
                                 id="no_id_{{ $i }}" style="border-color: #0984e3"
-                                placeholder="No. Identitas (KTP/SIM/PASPORT)" @error("no_id.$i") is-invalid @enderror
+                                placeholder="No. Identitas (KTP/SIM/PASPORT)" 
                                 value="{{ old('no_id.' . $i) }}" required>
                             @error("no_id.$i")
                                 <div class="invalid-feedback">

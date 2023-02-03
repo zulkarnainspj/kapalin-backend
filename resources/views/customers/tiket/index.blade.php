@@ -36,8 +36,18 @@
 
                 <div>
                     @if ($tiket->status == 1 || $tiket->status == 2)
-                        <a href="/cus/{{ $tiket->ticket_code }}/download" class="btn btn-sm btn-primary">Simpan
+                        <a href="/cus/{{ $tiket->ticket_code }}/download" id="downloadLink"
+                            onclick="$('#spnr').css('display', 'block'); $('#downloadLink').css('display', 'none'); setTimeout(function() {
+                            $('#spnr').css('display', 'none');
+                            $('#downloadLink').css('display', 'block');
+                        }, 8000)"
+                            class="btn btn-sm btn-primary">Simpan
                             Bukti</a>
+
+                        <button class="btn btn-sm btn-primary" id="spnr" style="display: none;" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                        </button>
                     @elseif($tiket->status == 3)
                         <img src="{{ url('') }}/dist/img/completed.png" style="width: 130px" alt="">
                     @elseif($tiket->status == 0)

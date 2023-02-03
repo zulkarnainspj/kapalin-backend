@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     {{-- <meta name="viewport" content="width=device-width, initial-scale=1"> --}}
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0">
-    <title>Order</title>
+    <title>Bukti Pemesanan</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
@@ -31,7 +31,8 @@
             <table class="table">
                 <tr>
                     <td>
-                        <h2>KAPALIN</h2>
+                         <img src="{{ url('') }}/apollo/assets/images/logos/kapalin-logo.png"
+                                class="img-responsive mr-2" style="height: 50px" alt="">
                         <h5>Bukti Pemesanan Tiket</h5>
                         <p>Bukti ini harus sesuai dengan Kartu Identitas (KTP/SIM/PASSPORT)</p>
                     </td>
@@ -45,7 +46,7 @@
                 </tr>
             </table>
 
-            <table style="width: 500px">
+            <table class="m-0" style="width: 500px">
                 <tr>
                     <td>
                         <h6 class="mt-2">Kode Booking : </h6>

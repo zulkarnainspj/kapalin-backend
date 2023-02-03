@@ -86,8 +86,8 @@ Route::get('/employee/schedules', [Employee\ScheduleController::class, 'index'])
 Route::get('/employee/schedules/{id}', [Employee\ScheduleController::class, 'schedule'])->middleware('auth');
 Route::get('/employee/schedules/enable/{id}', [Employee\ScheduleController::class, 'enable'])->middleware('auth');
 Route::get('/employee/schedules/disable/{id}', [Employee\ScheduleController::class, 'disable'])->middleware('auth');
+Route::get('/employee/report/{id}', [Employee\ScheduleController::class, 'report'])->middleware('auth');
 Route::get('/employee/schedules/{ship_id}/{schedule_id}', [Employee\ScheduleController::class, 'passenger'])->middleware('auth');
-
 
 Route::get('/employee/tickets', [Employee\TicketController::class, 'index'])->middleware('auth');
 Route::post('/employee/tickets/print', [Employee\TicketController::class, 'print'])->middleware('auth');
@@ -101,6 +101,7 @@ Route::get('/employee/tickets/price/{schedule_id}', [Employee\TicketController::
 Route::get('/employee/tickets/validate/{tCode}', [Employee\TicketController::class, 'check'])->middleware('auth');
 
 Route::post('/employee/order', [Employee\TicketController::class, 'order'])->middleware('auth');
+
 
 
 /*

@@ -55,6 +55,12 @@ class OrderController extends Controller
         $pemesan = User::where('email', $request->email_pemesan)->first();
 
         for ($i = 0; $i < $jumlahPenumpang; $i++) {
+            $request->validate([
+                "no_id.$i" => ['numeric', 'required', 'digits_between:12,18'],
+                "nama_penumpang.$i" => ['required', 'min:3', 'string'],
+                "date_of_birth.$i" => ['required'],
+                "gender.$i" => ['numeric', 'required'],
+            ]);
 
             $passenger = new Passenger;
             $passenger->no_id = $request->no_id[$i];

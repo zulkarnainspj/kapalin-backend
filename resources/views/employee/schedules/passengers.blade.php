@@ -16,11 +16,18 @@
     <!-- / Breadcrumbs-->
 
     <section class="container-fluid mb-3">
-        <!-- Page Title-->
-        <h2 class="fs-3 fw-bold my-3">Jadwal -> {{ $ship->name }}</h2>
-        <label for="" class="mb-4">{{ date_create($schedule->etd)->format('d/m/Y H:i') }} WIB |
-            {{ $route->name }} - {{ $next_route->name }}</label>
-        <!-- / Page Title-->
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h2 class="fs-3 fw-bold my-3">Jadwal -> {{ $ship->name }}</h2>
+                <label for="" class="mb-4">{{ date_create($schedule->etd)->format('d/m/Y H:i') }} WIB |
+                    {{ $route->name }} - {{ $next_route->name }}</label>
+            </div>
+
+            <div class="col-md-6 mb-2">
+                <a href="/employee/report/{{ $schedule->id }}" target="_blank" class="btn btn-md btn-success mr-2 text-light" style="float: right;"><b><i
+                            class="fas fa-plus"></i> Cetak Laporan</b></a>
+            </div>
+        </div>
 
         <div class="row g-4">
             <div class="col-md-12">
@@ -48,7 +55,8 @@
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td class="text-center">
-                                            <a class="fw-bolder" style="text-decoration: none" href="/employee/validation/?id={{ $item->ticket_code }}">{{ $item->ticket_code }}</a>
+                                            <a class="fw-bolder" style="text-decoration: none"
+                                                href="/employee/validation/?id={{ $item->ticket_code }}">{{ $item->ticket_code }}</a>
                                         </td>
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->passenger->name }}</td>

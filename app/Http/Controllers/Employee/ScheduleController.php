@@ -9,6 +9,8 @@ use App\Models\Admin\Ship;
 use App\Models\Admin\Ticket;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Exception;
 
 class ScheduleController extends Controller
 {
@@ -85,5 +87,36 @@ class ScheduleController extends Controller
         Alert::success('Sukses', 'Penjualan tiket pada jadwal ini di aktifkan');
 
         return redirect('/employee/schedules/' . $schedule->ship_id);
+    }
+
+    public function report($id)
+    {
+        $schedule = Schedule::find($id);
+
+        $ticket = Ticket::select('no_id', 'name', 'gender', 'date_of_birth')
+            ->join('passengers', 'passengers.id', '=', 'tickets.passenger_id')
+            ->where('schedule_id', $id)
+            ->where('status', 3)
+            ->orderBy('name', 'desc')
+            ->get();
+
+        $route = Schedule::select('route_id', 'p.name as port', 'np.name as next_port')
+            ->join('routes', 'routes.id', '=', 'schedules.route_id')
+            ->join('ports as p', 'p.id', '=', 'routes.port_id')
+            ->join('ports as np', 'np.id', '=', 'routes.next_port_id')
+            ->where('schedules.id', $id)
+            ->first();
+
+        try {
+            $pdf = FacadePdf::loadView('employee.schedules.report', [
+                'schedule' => $schedule,
+                'ticket' => $ticket,
+                'route' => $route,
+            ]);
+
+            return $pdf->stream();
+        } catch (Exception $e) {
+            return $e;
+        }
     }
 }
