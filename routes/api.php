@@ -6,6 +6,7 @@ use App\Http\Controllers\API\Auth\CheckController;
 use App\Http\Controllers\API\Auth\LoginController;
 use App\Http\Controllers\API\ShipListController;
 use App\Http\Controllers\API\Auth\RegisterController;
+use App\Http\Controllers\API\Customer\AccountController;
 use App\Http\Controllers\API\Customer\OrderController;
 use App\Http\Controllers\API\Customer\TransactionController;
 use Illuminate\Http\Request;
@@ -37,4 +38,5 @@ Route::post('/register', RegisterController::class);
 Route::get('/check', [CheckController::class, 'check'])->middleware('jwt.verify');
 Route::post('/order', [OrderController::class, 'index']);
 
+Route::get('/account/{id}', [AccountController::class, 'index'])->middleware('jwt.verify');
 Route::get('/transaction/{email}', [TransactionController::class, 'index'])->middleware('jwt.verify');

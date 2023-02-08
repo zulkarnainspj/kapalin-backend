@@ -70,9 +70,10 @@
                             </div>
 
                             <label for="nama_penumpang_{{ $i }}">Nama Lengkap</label>
-                            <input type="text" class="form-control mt-2 @error("nama_penumpang.$i") is-invalid @enderror" name="nama_penumpang[]"
-                                id="nama_penumpang_{{ $i }}" style="border-color: #0984e3"
-                                value="{{ old('nama_penumpang.' . $i) }}" required>
+                            <input type="text"
+                                class="form-control mt-2 @error("nama_penumpang.$i") is-invalid @enderror"
+                                name="nama_penumpang[]" id="nama_penumpang_{{ $i }}"
+                                style="border-color: #0984e3" value="{{ old('nama_penumpang.' . $i) }}" required>
 
                             @error("nama_penumpang.$i")
                                 <div class="invalid-feedback">
@@ -83,10 +84,10 @@
 
                         <div class="form-group mt-2">
                             <label for="no_id_{{ $i }}">No. ID</label>
-                            <input type="number" class="form-control mt-2 @error("no_id.$i") is-invalid @enderror" name="no_id[]"
-                                id="no_id_{{ $i }}" style="border-color: #0984e3"
-                                placeholder="No. Identitas (KTP/SIM/PASPORT)" 
-                                value="{{ old('no_id.' . $i) }}" required>
+                            <input type="number" class="form-control mt-2 @error("no_id.$i") is-invalid @enderror"
+                                name="no_id[]" id="no_id_{{ $i }}" style="border-color: #0984e3"
+                                placeholder="No. Identitas (KTP/SIM/PASPORT)" value="{{ old('no_id.' . $i) }}"
+                                required>
                             @error("no_id.$i")
                                 <div class="invalid-feedback">
                                     {{ str_replace("no id.$i", 'No. Identitas', $message) }}
@@ -149,18 +150,14 @@
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {
-                        $.each(data, function(key, values) {
-                            name = data[key].name;
-                            no_id = data[key].no_id;
-                            gender = data[key].gender;
-                            date_of_birth = data[key].date_of_birth;
-                        });
+                        name = data.name;
+                        no_id = data.no_id;
+                        gender = data.gender;
+                        date_of_birth = data.date_of_birth;
 
                         $('#nama_penumpang_0').val(name);
-                        $('#no_id_0').val(no_id ? no_id : '');
-                        if (gender) {
-                            $('#gender_0').val(gender);
-                        }
+                        $('#no_id_0').val(no_id);
+                        $('#gender_0').val(gender);
                         $('#date_of_birth_0').val(date_of_birth);
                     }
                 });

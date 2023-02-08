@@ -136,7 +136,7 @@ class OrderController extends Controller
         $user_profile = User::select('name', 'no_id', 'gender', 'date_of_birth', 'email')
             ->join('profiles', 'profiles.user_id', '=', 'users.id')
             ->where('email', $email)
-            ->get();
+            ->first();
 
         $user_no_profile = User::where('email', $email)->get();
 
