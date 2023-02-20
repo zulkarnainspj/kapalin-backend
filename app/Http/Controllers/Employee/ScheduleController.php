@@ -97,7 +97,7 @@ class ScheduleController extends Controller
             ->join('passengers', 'passengers.id', '=', 'tickets.passenger_id')
             ->where('schedule_id', $id)
             ->where('status', 3)
-            ->orderBy('name', 'desc')
+            ->orderBy('name', 'asc')
             ->get();
 
         $route = Schedule::select('route_id', 'p.name as port', 'np.name as next_port')
