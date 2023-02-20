@@ -32,6 +32,12 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => ['required', 'min:3'],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:6'],
+        ]);
+
         $user = new User;
         $user->name = $request->name;
         $user->email = strtolower($request->email);
@@ -57,11 +63,21 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'name' => ['required', 'min:3'],
+            'email' => ['required', 'email'],
+            'password' => ['min:6', 'nullable'],
+            'no_id' => ['min:12', 'max:18'],
+        ]);
+
         DB::beginTransaction();
         $user = User::find($request->id);
         $user->name = $request->name;
         $user->email = strtolower($request->email);
         $user->role = $request->role;
+        if ($user->password != ""){
+            $user->password = bcrypt($request->password);
+        }
         $user->save();
 
         $profile = Profile::find($user->id);

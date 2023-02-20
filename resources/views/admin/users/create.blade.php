@@ -29,22 +29,42 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">Nama</label>
-                                        <input type="text" name="name" id="name" class="form-control" autofocus
-                                            autocomplete="off" required>
+                                        <input type="text" name="name" id="name"
+                                            class="form-control @error('name') is-invalid @enderror"
+                                            value="{{ old('name') }}" autofocus autocomplete="off" required>
+                                        @error('name')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input type="email" name="email" id="email" class="form-control"
-                                            autocomplete="off" required>
+                                        <input type="email" name="email" id="email"
+                                            class="form-control @error('email') is-invalid @enderror" autocomplete="off"
+                                            value="{{ old('email') }}" required>
+
+                                        @error('email')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="password">Password</label>
-                                        <input type="password" name="password" id="password" class="form-control"
-                                            autocomplete="off" required>
+                                        <input type="password" name="password" id="password"
+                                            class="form-control @error('password') is-invalid @enderror" autocomplete="off"
+                                            required>
+
+                                        @error('password')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">

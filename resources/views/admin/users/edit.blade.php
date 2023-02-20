@@ -31,19 +31,35 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                 <div class="col-md-6">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="no_id">No ID</label>
-                                        <input type="text" name="no_id" id="no_id" class="form-control" autofocus
-                                            autocomplete="off" value="{{ isset($user->profile->no_id) ? $user->profile->no_id : '' }}" required>
+                                        <input type="text" name="no_id" id="no_id"
+                                            class="form-control @error('no_id') is-invalid @enderror" autofocus
+                                            autocomplete="off"
+                                            value="{{ isset($user->profile->no_id) ? $user->profile->no_id : '' }}"
+                                            required>
+
+                                        @error('no_id')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">Nama</label>
-                                        <input type="text" name="name" id="name" class="form-control" autofocus
+                                        <input type="text" name="name" id="name"
+                                            class="form-control @error('name') is-invalid @enderror" autofocus
                                             autocomplete="off" value="{{ $user->name }}" required>
                                     </div>
+
+                                    @error('name')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -79,17 +95,30 @@
                                     <div class="form-group">
                                         <label for="email">Email</label>
                                         <input type="email" name="email" id="email" value="{{ $user->email }}"
-                                            class="form-control" autocomplete="off" required>
+                                            class="form-control @error('email') is-invalid @enderror" autocomplete="off"
+                                            required>
+
+                                        @error('email')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="password">Password</label>
-                                                <input type="password" name="password" id="password" class="form-control"
-                                                    autocomplete="off">
-                                                <label for="" style="font-size:12px">Isi password jika ingin diubah</label>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password" name="password" id="password"
+                                            class="form-control @error('password') is-invalid @enderror" autocomplete="off">
+                                        <label for="" style="font-size:12px">Isi password jika ingin diubah</label>
+
+                                        @error('password')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
                                             </div>
-                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="role">Role</label>
