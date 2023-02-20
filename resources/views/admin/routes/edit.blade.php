@@ -43,7 +43,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="next_port">Pelabuhan Tujuan</label>
-                                        <select name="next_port" id="next_port" class="form-control">
+                                        <select name="next_port_id" id="next_port" class="form-control @error('next_port_id') is-invalid @enderror">
                                             @foreach ($next_ports as $next_port)
                                                 @if ($next_port->name != 'Sapeken')
                                                     <option value="{{ $next_port->id }}"
@@ -53,6 +53,12 @@
                                                 @endif
                                             @endforeach
                                         </select>
+
+                                        @error('next_port_id')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
 

@@ -62,11 +62,11 @@
                                             <a href="/admin/users/edit/{{ $item->id }}"
                                                 class="btn btn-sm btn-warning text-light" title="Edit"><span
                                                     class="fas fa-fw fa-edit"></span></a>
-                                            @if ($item->tcount() == 0)
+                                            @if ($item->tcount() == 0 && $item->admin_count() > 1)
                                             <a href="/admin/users/remove/{{ $item->id }}"
                                                 onclick="return confirm('Are you sure you want to remove this data?');"
                                                 class="btn btn-sm btn-danger" title="Remove"><span
-                                                    class="fas fa-fw fa-trash"></span></a>
+                                                    class="fas fa-fw fa-trash"></span></a>                                                
                                            @endif
                                         </td>
                                     </tr>

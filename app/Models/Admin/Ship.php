@@ -27,4 +27,11 @@ class Ship extends Model
         
         return $schedule_active;
     }
+
+    public function checkSchedule()
+    {
+        $check = Schedule::where('ship_id', $this->id)->count();
+
+        return $check;
+    }
 }

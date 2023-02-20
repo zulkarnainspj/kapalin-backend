@@ -35,9 +35,13 @@ class RouteController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'next_port_id' => ['unique:routes'],            
+        ]);
+
         $route = new Route;
         $route->port_id = $request->port;
-        $route->next_port_id = $request->next_port;
+        $route->next_port_id = $request->next_port_id;
         $route->save();
 
         Alert::success('Sukses', 'Rute berhasil ditambahkan');
@@ -61,6 +65,10 @@ class RouteController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'next_port_id' => ['unique:routes'],
+        ]);
+
         $route = Route::find($request->id);
         $route->port_id = $request->port;
         $route->next_port_id = $request->next_port;
@@ -75,6 +83,8 @@ class RouteController extends Controller
     {
         $route = Route::find($id);
         $route->delete();
+
+        Alert::success('Sukses', 'Rute berhasil dihapus');
 
         return redirect('/admin/routes');
     }

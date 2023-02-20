@@ -54,7 +54,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="price">Harga</label>
-                                        <input type="number" class="form-control" name="price" placeholder="ex. 20000">
+                                        <input type="number" class="form-control" name="price" placeholder="ex. 20000" required>
                                     </div>
                                 </div>
                             </div>

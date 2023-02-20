@@ -8,6 +8,7 @@ use App\Models\Admin\Schedule;
 use App\Models\Admin\Ship;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ScheduleController extends Controller
@@ -38,6 +39,7 @@ class ScheduleController extends Controller
 
     public function store(Request $request)
     {
+        
         $schedule = new Schedule;
         $schedule->ship_id = $request->ship;
         $schedule->route_id = $request->route;
@@ -143,5 +145,15 @@ class ScheduleController extends Controller
         Alert::success('Sukses', 'Penjualan tiket pada jadwal ini di aktifkan');
 
         return redirect('/admin/schedules/' . $schedule->ship_id);
+    }
+
+    public function destroy($ship_id, $schedule_id)   
+    {
+        $schedule = Schedule::find($schedule_id);
+        $schedule->delete();
+
+        Alert::success('Sukses', 'Jadwal berhasil dihapus');
+
+        return redirect('/admin/schedules/' . $ship_id);
     }
 }

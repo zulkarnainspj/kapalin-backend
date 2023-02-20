@@ -33,6 +33,11 @@ class PortController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'code' => ['required', 'max:3', 'unique:ports'],
+            'name' => ['required', 'min:3'],
+        ]);
+
         $port = new Port;
         $port->code = $request->code;
         $port->name = $request->name;
@@ -56,6 +61,11 @@ class PortController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'code' => ['required', 'max:3', 'unique:ports'],
+            'name' => ['required', 'min:3'],
+        ]);
+        
         $port = Port::find($request->id);
         $port->code = $request->code;
         $port->name = $request->name;

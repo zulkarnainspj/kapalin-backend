@@ -70,4 +70,11 @@ class User extends Authenticatable implements JWTSubject
 
         return $ticket_count;
     }
+
+    public function admin_count()
+    {
+        $admin_count = User::where('role', 0)->count();
+
+        return $admin_count;
+    }
 }

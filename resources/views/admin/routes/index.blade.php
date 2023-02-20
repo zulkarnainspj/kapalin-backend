@@ -48,11 +48,12 @@
                                             <a href="/admin/routes/edit/{{ $item->id }}"
                                                 class="btn btn-sm btn-warning" title="Edit"><span
                                                     class="fas fa-fw fa-edit"></span></a>
+                                            @if ($item->checkSchedule() == 0)
                                             <a href="/admin/routes/remove/{{ $item->id }}"
                                                 onclick="return confirm('Are you sure you want to remove this data?');"
                                                 class="btn btn-sm btn-danger" title="Remove"><span
                                                     class="fas fa-fw fa-trash"></span></a>
-
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

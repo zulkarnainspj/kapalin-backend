@@ -30,14 +30,27 @@
                                     <div class="form-group">
                                         <label for="code">Kode</label>
                                         <input type="text" name="code" id="code" placeholder="ex. SPK"
-                                            class="form-control" maxlength="4" autofocus autocomplete="off">
+                                            class="form-control @error('code') is-invalid @enderror"
+                                            value="{{ old('code') }}" maxlength="4" autofocus autocomplete="off">
+
+                                        @error('code')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">Nama Pelabuhan</label>
                                         <input type="text" name="name" id="name" placeholder="ex. Sapeken"
-                                            class="form-control" autocomplete="off">
+                                            class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" autocomplete="off">
+                                        
+                                        @error('name')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror  
                                     </div>
                                 </div>
 

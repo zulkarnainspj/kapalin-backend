@@ -70,6 +70,7 @@ Route::post('/admin/schedules/ships/store', [Admin\ScheduleController::class, 's
 Route::get('/admin/schedules/enable/{id}', [Admin\ScheduleController::class, 'enable'])->middleware('auth');
 Route::get('/admin/schedules/disable/{id}', [Admin\ScheduleController::class, 'disable'])->middleware('auth');
 Route::get('/admin/schedules/{ship_id}/edit/{schedule_id}', [Admin\ScheduleController::class, 'edit'])->middleware('auth');
+Route::get('/admin/schedules/{ship_id}/remove/{schedule_id}', [Admin\ScheduleController::class, 'destroy'])->middleware('auth');
 Route::post('/admin/schedules/ships/update', [Admin\ScheduleController::class, 'update'])->middleware('auth');
 
 

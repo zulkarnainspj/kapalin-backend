@@ -30,7 +30,7 @@
                                     <div class="form-group">
                                         <label for="name">Nama Kapal</label>
                                         <input type="text" name="name" id="name"
-                                            class="form-control @error('name') is-invalid @enderror" autofocus
+                                            class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" autofocus
                                             autocomplete="off">
 
                                         @error('name')
@@ -44,7 +44,7 @@
                                     <div class="form-group">
                                         <label for="capacity">Kapasitas Penumpang</label>
                                         <input type="number" name="capacity" id="capacity"
-                                            class="form-control @error('capacity') is-invalid @enderror" autocomplete="off">
+                                            class="form-control @error('capacity') is-invalid @enderror" value="{{ old('capacity') }}" autocomplete="off">
                                         @error('capacity')
                                             <div class="invalid-feedback">
                                                 {{ $message }}

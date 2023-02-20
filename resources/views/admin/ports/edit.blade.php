@@ -31,15 +31,27 @@
                                     <div class="form-group">
                                         <label for="code">Kode</label>
                                         <input type="text" name="code" id="code" placeholder="ex. SPK"
-                                            class="form-control" maxlength="4" value="{{ $port->code }}" autofocus
+                                            class="form-control @error('code') is-invalid @enderror" maxlength="4" value="{{ $port->code }}" autofocus
                                             autocomplete="off">
+                                        
+                                        @error('code')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">Nama Pelabuhan</label>
                                         <input type="text" name="name" id="name" value="{{ $port->name }}"
-                                            placeholder="ex. Sapeken" class="form-control" autocomplete="off">
+                                            placeholder="ex. Sapeken" class="form-control @error('name') is-invalid @enderror" autocomplete="off">
+                                        
+                                        @error('name')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror 
                                     </div>
                                 </div>
 

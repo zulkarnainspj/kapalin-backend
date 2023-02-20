@@ -33,4 +33,11 @@ class Route extends Model
     {
         return Port::findOrFail($this->next_port_id);
     }
+
+    public function checkSchedule()
+    {
+        $check = Schedule::where('route_id', $this->id)->count();
+
+        return $check;
+    }
 }
