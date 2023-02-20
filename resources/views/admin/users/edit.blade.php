@@ -35,7 +35,7 @@
                                     <div class="form-group">
                                         <label for="no_id">No ID</label>
                                         <input type="text" name="no_id" id="no_id" class="form-control" autofocus
-                                            autocomplete="off" value="{{ $user->no_id }}" required>
+                                            autocomplete="off" value="{{ isset($user->profile->no_id) ? $user->profile->no_id : '' }}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -86,7 +86,7 @@
                                             <div class="form-group">
                                                 <label for="password">Password</label>
                                                 <input type="password" name="password" id="password" class="form-control"
-                                                    autocomplete="off" required>
+                                                    autocomplete="off">
                                                 <label for="" style="font-size:12px">Isi password jika ingin diubah</label>
                                             </div>
                                         </div>

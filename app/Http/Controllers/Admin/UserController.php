@@ -90,8 +90,15 @@ class UserController extends Controller
 
     public function destroy($id)
     {
+        DB::beginTransaction();
+        $profile = Profile::where('user_id', $id)->first();
+        if ($profile){
+            $profile->delete();
+        }
+
         $user = User::find($id);
         $user->delete();
+        DB::commit();
 
         Alert::success('Sukses', $user->name . ' berhasil dihapus');
 

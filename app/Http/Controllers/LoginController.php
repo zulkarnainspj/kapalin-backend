@@ -14,6 +14,9 @@ class LoginController extends Controller
                 return redirect('/admin');
             } elseif (auth()->user()->role == 1) {
                 return redirect('/employee');
+            }else{
+                Auth::logout();
+                return back()->with('loginError', 'Login failed!');
             }
         } else {
             return view('login.index', [

@@ -58,4 +58,16 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasOne(Profile::class, 'user_id');
     }
+
+    public function ticket()
+    {
+        return $this->hasMany(Ticket::class, 'user_id');
+    }
+
+    public function tcount()
+    {
+        $ticket_count = Ticket::where('user_id', $this->id)->count();
+
+        return $ticket_count;
+    }
 }

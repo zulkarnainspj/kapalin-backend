@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="next_port">Pelabuhan Asal</label>
+                                        <label for="next_port">Pelabuhan Tujuan</label>
                                         <select name="next_port" id="next_port" class="form-control">
                                             @foreach ($next_ports as $next_port)
                                                 @if ($next_port->name != 'Sapeken')
