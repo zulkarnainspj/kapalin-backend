@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class ScheduleController extends Controller
 {
@@ -69,9 +70,14 @@ class ScheduleController extends Controller
 
     public function disable($id)
     {
+        DB::beginTransaction();
         $schedule = Schedule::find($id);
         $schedule->status = 0;
         $schedule->save();
+
+        $ticket = Ticket::where('schedule_id', $id)->update(['pending' => 1]);
+
+        DB::commit();
 
         Alert::success('Sukses', 'Penjualan tiket pada jadwal ini di nonaktifkan');
 
@@ -80,9 +86,13 @@ class ScheduleController extends Controller
 
     public function enable($id)
     {
+        DB::beginTransaction();
         $schedule = Schedule::find($id);
         $schedule->status = 1;
         $schedule->save();
+
+        $ticket = Ticket::where('schedule_id', $id)->update(['pending' => 0]);
+        DB::commit();
 
         Alert::success('Sukses', 'Penjualan tiket pada jadwal ini di aktifkan');
 

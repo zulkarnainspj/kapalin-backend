@@ -24,8 +24,9 @@
             </div>
 
             <div class="col-md-6 mb-2">
-                <a href="/employee/report/{{ $schedule->id }}" target="_blank" class="btn btn-md btn-success mr-2 text-light" style="float: right;"><b><i
-                            class="fas fa-plus"></i> Cetak Laporan</b></a>
+                <a href="/employee/report/{{ $schedule->id }}" target="_blank"
+                    class="btn btn-md btn-success mr-2 text-light" style="float: right;"><b><i class="fas fa-plus"></i>
+                        Cetak Laporan</b></a>
             </div>
         </div>
 
@@ -70,23 +71,30 @@
                                                 $text_color = '';
                                                 $text = '';
                                                 
-                                                if ($item->status == 1) {
-                                                    $badge_bg = 'bg-primary-faded';
-                                                    $text_color = 'text-primary';
-                                                    $text = 'dipesan';
-                                                } elseif ($item->status == 2) {
-                                                    $badge_bg = 'bg-warning-faded';
-                                                    $text_color = 'text-warning';
-                                                    $text = 'check in';
-                                                } elseif ($item->status == 3) {
-                                                    $badge_bg = 'bg-success-faded';
-                                                    $text_color = 'text-success';
-                                                    $text = 'selesai';
-                                                } elseif ($item->status == 0) {
-                                                    $badge_bg = 'bg-danger-faded';
-                                                    $text_color = 'text-danger';
-                                                    $text = 'batal';
+                                                if ($item->pending == 0) {
+                                                    if ($item->status == 1) {
+                                                        $badge_bg = 'bg-primary-faded';
+                                                        $text_color = 'text-primary';
+                                                        $text = 'dipesan';
+                                                    } elseif ($item->status == 2) {
+                                                        $badge_bg = 'bg-warning-faded';
+                                                        $text_color = 'text-warning';
+                                                        $text = 'check in';
+                                                    } elseif ($item->status == 3) {
+                                                        $badge_bg = 'bg-success-faded';
+                                                        $text_color = 'text-success';
+                                                        $text = 'selesai';
+                                                    } elseif ($item->status == 0) {
+                                                        $badge_bg = 'bg-danger-faded';
+                                                        $text_color = 'text-danger';
+                                                        $text = 'batal';
+                                                    }
+                                                } else {
+                                                    $badge_bg = 'bg-secondary';
+                                                    $text_color = 'text-dark';
+                                                    $text = 'pending';
                                                 }
+                                                
                                             @endphp
                                             <span
                                                 class="badge rounded-pill {{ $badge_bg . ' ' . $text_color }}">{{ $text }}</span>

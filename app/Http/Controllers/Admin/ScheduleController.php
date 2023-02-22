@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Route;
 use App\Models\Admin\Schedule;
 use App\Models\Admin\Ship;
+use App\Models\Admin\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -127,9 +128,14 @@ class ScheduleController extends Controller
 
     public function disable($id)
     {
+        DB::beginTransaction();
         $schedule = Schedule::find($id);
         $schedule->status = 0;
         $schedule->save();
+
+        $ticket = Ticket::where('schedule_id', $id)->update(['pending', 1]);
+
+        DB::commit();
 
         Alert::success('Sukses', 'Penjualan tiket pada jadwal ini di nonaktifkan');
 
@@ -138,9 +144,13 @@ class ScheduleController extends Controller
 
     public function enable($id)
     {
+        DB::beginTransaction();
         $schedule = Schedule::find($id);
         $schedule->status = 1;
         $schedule->save();
+
+        $ticket = Ticket::where('schedule_id', $id)->update(['pending', 0]);
+        DB::commit();
 
         Alert::success('Sukses', 'Penjualan tiket pada jadwal ini di aktifkan');
 

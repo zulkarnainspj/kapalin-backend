@@ -188,22 +188,28 @@
                                                     $text_color = '';
                                                     $text = '';
                                                     
-                                                    if ($item->status == 1) {
-                                                        $badge_bg = 'bg-primary-faded';
-                                                        $text_color = 'text-primary';
-                                                        $text = 'dipesan';
-                                                    } elseif ($item->status == 2) {
-                                                        $badge_bg = 'bg-warning-faded';
-                                                        $text_color = 'text-warning';
-                                                        $text = 'check in';
-                                                    } elseif ($item->status == 3) {
-                                                        $badge_bg = 'bg-success-faded';
-                                                        $text_color = 'text-success';
-                                                        $text = 'selesai';
-                                                    } elseif ($item->status == 0) {
-                                                        $badge_bg = 'bg-danger-faded';
-                                                        $text_color = 'text-danger';
-                                                        $text = 'batal';
+                                                    if ($item->pending == 0) {
+                                                        if ($item->status == 1) {
+                                                            $badge_bg = 'bg-primary-faded';
+                                                            $text_color = 'text-primary';
+                                                            $text = 'dipesan';
+                                                        } elseif ($item->status == 2) {
+                                                            $badge_bg = 'bg-warning-faded';
+                                                            $text_color = 'text-warning';
+                                                            $text = 'check in';
+                                                        } elseif ($item->status == 3) {
+                                                            $badge_bg = 'bg-success-faded';
+                                                            $text_color = 'text-success';
+                                                            $text = 'selesai';
+                                                        } elseif ($item->status == 0) {
+                                                            $badge_bg = 'bg-danger-faded';
+                                                            $text_color = 'text-danger';
+                                                            $text = 'batal';
+                                                        }
+                                                    } else {
+                                                        $badge_bg = 'bg-secondary';
+                                                        $text_color = 'text-dark';
+                                                        $text = 'pending';
                                                     }
                                                 @endphp
                                                 <span
