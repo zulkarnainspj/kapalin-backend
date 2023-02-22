@@ -85,33 +85,19 @@
                                             <span
                                                 class="badge rounded-pill {{ $badge_bg . ' ' . $text_color }}">{{ $text }}</span>
                                         </td>
-                                        <td>
-                                            <div class="dropdown text-center">
-                                                <button
-                                                    class="btn btn-link dropdown-toggle dropdown-toggle-icon fw-bold p-0"
-                                                    type="button" id="dropdownOrder-0" data-bs-toggle="dropdown"
-                                                    aria-expanded="false">
-                                                    <i class="ri-more-2-line"></i>
-                                                </button>
-                                                <ul class="dropdown-menu dropdown" aria-labelledby="dropdownOrder-0">
-                                                    <li>
-                                                        <a class="dropdown-item"
-                                                            href="/employee/schedules/{{ $ship->id }}/{{ $item->id }}">Lihat
-                                                            Data Penumpang</a>
-                                                    </li>
+                                        <td align="center">
+                                            <a href="/employee/schedules/{{ $ship->id }}/{{ $item->id }}"
+                                                class="btn btn-sm btn-primary" title="Lihat Data Penumpang">
+                                                <i class="bi bi-people-fill"></i></a>
 
-                                                    <li>
-                                                        @if ($penjualan == 'aktif')
-                                                            <a class="dropdown-item"
-                                                                href="/employee/schedules/disable/{{ $item->id }}">Non
-                                                                Aktifkan Penjualan Tiket</a>
-                                                        @elseif ($penjualan == 'nonaktif')
-                                                            <a class="dropdown-item"
-                                                                href="/employee/schedules/enable/{{ $item->id }}">Aktifkan Penjualan Tiket</a>
-                                                        @endif
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                            @if ($penjualan == 'aktif')
+                                                <a class="btn btn-sm btn-danger text-light" title="Non Aktifkan Penjualan Tiket"
+                                                    href="/employee/schedules/disable/{{ $item->id }}"><i class="bi bi-calendar-x-fill"></i></a>
+                                            @elseif ($penjualan == 'nonaktif')
+                                                <a class="btn btn-sm btn-success text-light" title="Aktifkan Penjualan Tiket"
+                                                    href="/employee/schedules/enable/{{ $item->id }}"><i class="bi bi-calendar-check-fill"></i></a>
+                                            @endif
+
                                         </td>
                                     </tr>
                                 @endforeach
