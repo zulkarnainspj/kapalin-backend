@@ -14,7 +14,7 @@
     </div>
 
 
-    <form action="/employee/order" method="POST">
+    <form action="/employee/order" method="POST" autocomplete="off">
         @csrf
         <input type="hidden" name="ticket_code" value="KB{{ date_create()->format('Hidysm') }}">
         <input type="hidden" name="price" id="price" value="0">
@@ -34,10 +34,12 @@
                     <b>Terjadi kesalahan, silahkan periksa kembali data!</b>
                 </div>
             @endif
-            
+
             @if (session('tCode'))
                 <div class="alert alert-success">
-                    <p class="m-0">Pembelian Tiket dengan Kode <strong>{{ session('tCode') }}</strong> Berhasil, <a href="/employee/tickets/manual/print/{{ session('tCode') }}" style="font-weight: bold" target="_blank">Klik disini</a> untuk mencetak tiket</p> 
+                    <p class="m-0">Pembelian Tiket dengan Kode <strong>{{ session('tCode') }}</strong> Berhasil, <a
+                            href="/employee/tickets/manual/print/{{ session('tCode') }}" style="font-weight: bold"
+                            target="_blank">Klik disini</a> untuk mencetak tiket</p>
                 </div>
             @endif
 
@@ -89,7 +91,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="no_id">No. Identitas (Opsional)</label>
+                                <label for="no_id">No. Identitas *</label>
                                 <input type="text" class="form-control @error('no_id.0') is-invalid @enderror"
                                     name="no_id[]" value="{{ old('no_id.0') }}" id="no_id"
                                     placeholder="KTP/SIM/PASSPORT/KIA">
@@ -102,9 +104,15 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="date_of_birth">Tanggal Lahir (Opsional)</label>
+                                        <label for="date_of_birth">Tanggal Lahir *</label>
                                         <input type="date" step="any" class="form-control" name="date_of_birth[]"
-                                            value="{{ old('date_of_birth.0') }}" id="date_of_birth">
+                                            value="{{ old('date_of_birth.0') }}" id="date_of_birth" required>
+
+                                        @error('date_of_birth.0')
+                                            <div class="invalid-feedback">
+                                                {{ str_replace('date_of_birth.0', 'Tangal Lahir', $message) }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
 

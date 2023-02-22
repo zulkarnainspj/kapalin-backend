@@ -41,9 +41,9 @@ class TicketController extends Controller
                 'ship' => ['required', 'numeric', 'not_in:0'],
                 'route' => ['required', 'numeric', 'not_in:0'],
                 'schedule' => ['required', 'numeric', 'not_in:0'],
-                "no_id.$i" => ['numeric', 'nullable'],
+                "no_id.$i" => ['required', 'numeric', 'nullable'],
                 "name.$i" => ['required', 'min:3'],
-                "date_of_birth.$i" => ['nullable'],
+                "date_of_birth.$i" => ['required', 'nullable'],
                 "gender.$i" => ['numeric', 'required'],
             ]);
 
