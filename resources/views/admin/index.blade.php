@@ -37,7 +37,7 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center">
-                            <span class="fs-9 ms-2" style="color: rgb(156, 156, 156)">Total tiket yang dipesan hari ini di
+                            <span class="fs-9 ms-2" style="color: rgb(156, 156, 156)">Total tiket yang dipesan minggu ini di
                                 seluruh jadwal yang tersedia</span>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                         <div class="d-flex align-items-center">
                             <span class="fs-9 ms-2" style="color: rgb(156, 156, 156)">Total penumpang yang sudah check in
                                 dan mencetak tiket di
-                                loket hari ini di seluruh jadwal yang tersedia</span>
+                                loket minggu ini di seluruh jadwal yang tersedia</span>
                         </div>
                     </div>
                 </div>
@@ -121,7 +121,7 @@
             <div class="col-12 col-lg-12">
                 <div class="card mb-4 h-100">
                     <div class="card-header justify-content-between align-items-center d-flex">
-                        <h6 class="card-title m-0">Penjualan Tiket Tahun Ini</h6>
+                        <h6 class="card-title m-0">Penjualan Tiket Bulan Ini</h6>
                     </div>
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-2">
@@ -224,22 +224,23 @@
     </section>
 
     @php
-        $chart_data = ['0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0', '0'];
-        $str_chart = "";
+        $chart_data = ['0', '0', '0', '0', '0', '0'];
+        $str_chart = '';
+        $iteration = 1;
         
         foreach ($chart as $item) {
-            for ($i = 1; $i <= 31; $i++) {
-                if ($item->hari == $i) {
+            for ($i = 1; $i <= 5; $i++) {
+                if ($iteration == $i) {
                     $chart_data[$i] = $item->jum;
-                } 
+                }
             }
-        }        
-
-        for ($i=1; $i <= 31; $i++) { 
+        
+            $iteration++;
+        }
+        
+        for ($i = 1; $i <= 5; $i++) {
             $str_chart = $str_chart . $chart_data[$i] . ', ';
-        }        
-        
-        
+        }
     @endphp
 
     <script>
@@ -249,9 +250,7 @@
         new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16',
-                    '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'
-                ],
+                labels: ['Minggu 1', 'Minggu 2', 'Minggu 3', 'Minggu 4', 'Minggu 5'],
                 datasets: [{
                     label: 'Tiket Terjual',
                     data: [{{ $str_chart }}],

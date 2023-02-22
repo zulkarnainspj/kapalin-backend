@@ -16,11 +16,11 @@ class HomeController extends Controller
         $date = date_create();
 
         $dipesan = Ticket::where('status', '>', 0)
-            ->whereDate('created_at', $date->format('Y-m-d'))
+            ->whereRaw('WEEK(created_at) = WEEK(CURRENT_DATE()) AND YEAR(created_at) = YEAR(CURRENT_DATE())')
             ->count();
 
         $checkin = Ticket::where('status', 3)
-            ->whereDate('updated_at', $date->format('Y-m-d'))
+            ->whereRaw('WEEK(updated_at) = WEEK(CURRENT_DATE()) AND YEAR(updated_at) = YEAR(CURRENT_DATE())')
             ->count();
 
         $jadawal_aktif = Schedule::where('status', 1)
@@ -38,13 +38,13 @@ class HomeController extends Controller
             ->limit(10)
             ->get();
 
-        $chart = Ticket::select(DB::raw('count(id) as jum'), DB::raw('DAY(created_at) as hari'))
+        $chart = Ticket::select(DB::raw('count(id) as jum'), DB::raw('WEEK(created_at) as minggu'))
             ->whereMonth('created_at', $date->format('m'))
             ->whereYear('created_at', $date->format('Y'))
             ->where('status', 3)
-            ->groupBy('hari')
+            ->groupBy('minggu')
             ->get();
-
+        
         return view('employee.index', [
             'title' => 'Dashboard',
             'nvb' => 'home',
