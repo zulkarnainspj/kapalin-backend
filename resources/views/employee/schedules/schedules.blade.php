@@ -1,5 +1,17 @@
 @extends('employee.layout.main')
 @section('container')
+    <script>
+        function updatePassenger(shipID, scheduleID, val) {
+            $('#ship').val(shipID);
+            $('#schedule').val(scheduleID);
+            $('#inputJumlah').val(val);
+            $('#exampleModal').modal('show');
+
+            setTimeout(() => {
+                $('#inputJumlah').focus();
+            }, 1000);            
+        }
+    </script>
     <!-- Breadcrumbs-->
     <div class="bg-white border-bottom py-3 mb-3">
         <div
@@ -24,7 +36,7 @@
             <div class="col-md-12">
                 <div class="card h-100">
                     <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table id="example1" class="table table-bordered table-striped" style="font-size: 13px;">
                             <thead>
                                 <tr class="text-center">
                                     <th>#</th>
@@ -33,7 +45,9 @@
                                     <th>ETD (Berangkat)</th>
                                     <th>ETA (Tiba)</th>
                                     <th>Harga</th>
-                                    <th>Penumpang</th>
+                                    <th>Penumpang<br>Bawaan</th>
+                                    <th>Penumpang<br>Baru</th>
+                                    <th>Kapasitas</th>
                                     <th>Penjualan</th>
                                     <th>Action</th>
                                 </tr>
@@ -50,8 +64,10 @@
                                             {{ date_create($item->eta)->format('d-m-Y H:i') }}</td>
                                         <td class="text-center">
                                             {{ 'Rp ' . number_format($item->price, 0, ',', '.') }}</td>
+                                        <td class="text-center">{{ $item->passengers }}</td>
+                                        <td class="text-center">{{ $item->pCount() }}</td>
                                         <td class="text-center">
-                                            {{ $item->pCount() }}/{{ $item->ship->kapasitas }}</td>
+                                            {{ $item->pCount() + $item->passengers . '/' . $item->ship->kapasitas }}</td>
                                         <td class="text-center">
                                             @php
                                                 // 0 Tidak Aktif, 1 Aktif
@@ -90,12 +106,22 @@
                                                 class="btn btn-sm btn-primary" title="Lihat Data Penumpang">
                                                 <i class="bi bi-people-fill"></i></a>
 
+                                            <button type="button" class="btn btn-sm btn-warning" title="Perbarui Jumlah Penumpang"
+                                                data-toggle="modal" data-target="#exampleModal"
+                                                onclick="updatePassenger({{ $ship->id }}, {{ $item->id }}, {{ $item->passengers }})">
+                                                <i class="bi bi-pencil-square"></i></a>
+                                            </button>
+
                                             @if ($penjualan == 'aktif')
-                                                <a class="btn btn-sm btn-danger text-light" title="Non Aktifkan Penjualan Tiket"
-                                                    href="/employee/schedules/disable/{{ $item->id }}"><i class="bi bi-calendar-x-fill"></i></a>
+                                                <a class="btn btn-sm btn-danger text-light"
+                                                    title="Non Aktifkan Penjualan Tiket"
+                                                    href="/employee/schedules/disable/{{ $item->id }}"><i
+                                                        class="bi bi-calendar-x-fill"></i></a>
                                             @elseif ($penjualan == 'nonaktif')
-                                                <a class="btn btn-sm btn-success text-light" title="Aktifkan Penjualan Tiket"
-                                                    href="/employee/schedules/enable/{{ $item->id }}"><i class="bi bi-calendar-check-fill"></i></a>
+                                                <a class="btn btn-sm btn-success text-light"
+                                                    title="Aktifkan Penjualan Tiket"
+                                                    href="/employee/schedules/enable/{{ $item->id }}"><i
+                                                        class="bi bi-calendar-check-fill"></i></a>
                                             @endif
 
                                         </td>
@@ -107,5 +133,31 @@
                 </div>
             </div>
         </div>
+
+        <form action="{{ route('update-passengers-count') }}" method="POST">
+            @csrf
+            <input type="hidden" name="ship_id" id="ship">
+            <input type="hidden" name="schedule_id" id="schedule">
+            <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Perbarui Jumlah Penumpang</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="number" name="jumlah_penumpang" class="form-control w-50" id="inputJumlah">
+                            <label for="" class="small">Isi dengan jumlah penumpang dari pelabuhan sebelumnya</label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
+                            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Batal</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>        
     </section>
 @endsection

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->dateTime('eta');
             $table->dateTime('etd');
             $table->float('price');
+            $table->integer('passengers');
             $table->integer('status')->default(1); // 1 Aktif, 0 Tidak Aktif
             $table->timestamps();
             $table->foreign('ship_id')->references('id')->on('ships');

@@ -88,6 +88,7 @@ Route::get('/employee/schedules/{id}', [Employee\ScheduleController::class, 'sch
 Route::get('/employee/schedules/enable/{id}', [Employee\ScheduleController::class, 'enable'])->middleware('auth');
 Route::get('/employee/schedules/disable/{id}', [Employee\ScheduleController::class, 'disable'])->middleware('auth');
 Route::get('/employee/report/{id}', [Employee\ScheduleController::class, 'report'])->middleware('auth');
+Route::post('/employee/schedules/update/passenger/', [Employee\ScheduleController::class, 'passenger_count'])->middleware('auth')->name('update-passengers-count');
 Route::get('/employee/schedules/{ship_id}/{schedule_id}', [Employee\ScheduleController::class, 'passenger'])->middleware('auth');
 
 Route::get('/employee/tickets', [Employee\TicketController::class, 'index'])->middleware('auth');

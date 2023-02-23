@@ -129,4 +129,15 @@ class ScheduleController extends Controller
             return $e;
         }
     }
+
+    public function passenger_count(Request $request)
+    {
+        $schedule = Schedule::findOrFail($request->schedule_id);
+        $schedule->passengers = $request->jumlah_penumpang;
+        $schedule->save();
+
+        Alert::success('Sukses', 'Jumlah penumpang behasil diperbarui');
+
+        return redirect('/employee/schedules/' . $schedule->ship_id);
+    }
 }
