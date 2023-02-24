@@ -25,6 +25,8 @@
             <div class="col-md-12">
                 <form action="/admin/schedules/ships/store" method="post">
                     @csrf
+                    <input type="hidden" name="plb_count" id="plbCount" value="1">
+
                     <div class="card mb-3">
                         <div class="card-header">
                             <h3>Informasi Kapal</h3>
@@ -39,36 +41,15 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="route">Rute</label>
-                                        <select name="route" class="form-control" id="route">
-                                            @foreach ($routes as $route)
-                                                <option value="{{ $route->id }}">
-                                                    {{ $route->port->name . ' - ' . $route->next_port->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                        <label for="port">Pelabuhan Asal</label>
+                                        <input type="text" class="form-control" name="" id="" value="{{ $origin_port->name }}" readonly>
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="price">Harga</label>
-                                        <input type="number" class="form-control" name="price" placeholder="ex. 20000" required>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Jadwal</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <div class="form-group">
                                         <label for="etd_date">ETD (Keberangkatan)</label>
                                         <div class="row">
@@ -83,17 +64,43 @@
                                             <div class="col-md-3">
                                                 <input type="time" step="any" name="etd_time" id="etd_time"
                                                     class="form-control" value="00:00" required>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
 
-                                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between">
+                                <h3>Jadwal</h3>
+                                <button type="button" class="btn btn-primary" onclick="addSchedule()">Tambah Pelabuhan Tujuan</button>
+                            </div>
+                        </div>
+                        <div class="card-body" id="containerJadwal">
+                            <div class="row" id="jadwal">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="route">Pelabuhan Tujuan</label>
+                                        <select name="route[]" class="form-control" id="route">
+                                            @foreach ($routes as $route)
+                                                <option value="{{ $route->id }}">
+                                                    {{ $route->next_port->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-5">
                                     <div class="form-group">
                                         <label for="eta_date">ETA (Kedatangan)</label>
                                         <div class="row">
                                             <div class="col-md-9">
-                                                <input type="date" step="any" name="eta_date" id="eta_date"
+                                                <input type="date" step="any" name="eta_date[]" id="eta_date"
                                                     class="form-control" required>
                                                 <label for="" style="font-weight: normal; font-size:12px">Perkiraan
                                                     waktu tiba
@@ -101,10 +108,17 @@
                                             </div>
 
                                             <div class="col-md-3">
-                                                <input type="time" step="any" name="eta_time" id="eta_time" value="00:00"
-                                                    class="form-control" required>
+                                                <input type="time" step="any" name="eta_time[]" id="eta_time"
+                                                    class="form-control" value="00:00" required>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="price">Harga</label>
+                                        <input type="number" class="form-control" name="price[]" placeholder="ex. 20000" required>
                                     </div>
                                 </div>
                             </div>
@@ -119,4 +133,16 @@
             </div>
         </div>
     </section>
+
+    <script>
+            var x = 1;
+
+        function addSchedule(){
+            x = x+1;
+
+            $('#plbCount').val(x);
+
+            $('#jadwal').clone().appendTo('#containerJadwal');
+        }
+    </script>
 @endsection

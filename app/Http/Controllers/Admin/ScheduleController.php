@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Port;
 use App\Models\Admin\Route;
 use App\Models\Admin\Schedule;
 use App\Models\Admin\Ship;
@@ -29,25 +30,32 @@ class ScheduleController extends Controller
     {
         $ships = Ship::orderBy('name')->get();
         $routes = Route::get();
+        $origin_port = Port::where('origin_port', 1)->first();
 
         return view('admin.schedules.create', [
             'title' => 'Jadwal',
             'nvb' => 'schedules',
             'ships' => $ships,
-            'routes' => $routes
+            'routes' => $routes,
+            'origin_port' => $origin_port
         ]);
     }
 
     public function store(Request $request)
     {
-        
-        $schedule = new Schedule;
-        $schedule->ship_id = $request->ship;
-        $schedule->route_id = $request->route;
-        $schedule->eta = $request->eta_date . ' ' . $request->eta_time;
-        $schedule->etd = $request->etd_date . ' ' . $request->etd_time;
-        $schedule->price = $request->price;
-        $schedule->save();
+        $jumlah_pelabuhan = $request->plb_count;
+
+        DB::beginTransaction();
+        for ($i = 0; $i < $jumlah_pelabuhan; $i++) {
+            $schedule = new Schedule;
+            $schedule->ship_id = $request->ship;
+            $schedule->etd = $request->etd_date . ' ' . $request->etd_time;
+            $schedule->route_id = $request->route[$i];
+            $schedule->eta = $request->eta_date[$i] . ' ' . $request->eta_time[$i];
+            $schedule->price = $request->price[$i];
+            $schedule->save();
+        }
+        DB::commit();
 
         Alert::success('Sukses', 'Jadwal berhasil ditambahkan');
 
@@ -58,23 +66,32 @@ class ScheduleController extends Controller
     {
         $ship = Ship::find($id);
         $routes = Route::get();
+        $origin_port = Port::where('origin_port', 1)->first();
+
         return view('admin.schedules.create2', [
             'title' => 'Jadwal',
             'nvb' => 'schedules',
             'ship' => $ship,
-            'routes' => $routes
+            'routes' => $routes,
+            'origin_port' => $origin_port
         ]);
     }
 
     public function store2(Request $request)
     {
-        $schedule = new Schedule;
-        $schedule->ship_id = $request->ship;
-        $schedule->route_id = $request->route;
-        $schedule->eta = $request->eta_date . ' ' . $request->eta_time;
-        $schedule->etd = $request->etd_date . ' ' . $request->etd_time;
-        $schedule->price = $request->price;
-        $schedule->save();
+        $jumlah_pelabuhan = $request->plb_count;
+
+        DB::beginTransaction();
+        for ($i = 0; $i < $jumlah_pelabuhan; $i++) {
+            $schedule = new Schedule;
+            $schedule->ship_id = $request->ship;
+            $schedule->etd = $request->etd_date . ' ' . $request->etd_time;
+            $schedule->route_id = $request->route[$i];
+            $schedule->eta = $request->eta_date[$i] . ' ' . $request->eta_time[$i];
+            $schedule->price = $request->price[$i];
+            $schedule->save();
+        }
+        DB::commit();
 
         Alert::success('Sukses', 'Jadwal berhasil ditambahkan');
 
@@ -100,7 +117,7 @@ class ScheduleController extends Controller
         $ship = Ship::findOrFail($ship_id);
         $routes = Route::get();
 
-        
+
         return view('admin.schedules.edit', [
             'title' => 'Edit Jadwal',
             'nvb' => 'schedules',
@@ -157,7 +174,7 @@ class ScheduleController extends Controller
         return redirect('/admin/schedules/' . $schedule->ship_id);
     }
 
-    public function destroy($ship_id, $schedule_id)   
+    public function destroy($ship_id, $schedule_id)
     {
         $schedule = Schedule::find($schedule_id);
         $schedule->delete();
