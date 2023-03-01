@@ -198,6 +198,10 @@
                                                             $text_color = 'text-warning';
                                                             $text = 'check in';
                                                         } elseif ($item->status == 3) {
+                                                            $badge_bg = 'bg-warning-faded';
+                                                            $text_color = 'text-warning';
+                                                            $text = 'pending';
+                                                        } elseif ($item->status == 4) {
                                                             $badge_bg = 'bg-success-faded';
                                                             $text_color = 'text-success';
                                                             $text = 'selesai';

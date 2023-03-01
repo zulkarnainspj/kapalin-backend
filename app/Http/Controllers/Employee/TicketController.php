@@ -89,7 +89,7 @@ class TicketController extends Controller
     {
         $date = date_create();
 
-        $schedule = Schedule::select('id', 'etd')
+        $schedule = Schedule::select('id', 'etd', 'kelas')
             ->orderBy('eta', 'desc')
             ->where('ship_id', $ship_id)
             ->where('route_id', $route_id)
@@ -110,7 +110,7 @@ class TicketController extends Controller
     public function check($tCode)
     {
         DB::beginTransaction();
-        $ticket = Ticket::select('users.name as uname', 'ports.name as pname', 'ships.name as sname', 'ticket_code', 'etd', 'tickets.price')
+        $ticket = Ticket::select('users.name as uname', 'ports.name as pname', 'ships.name as sname', 'ticket_code', 'etd', 'tickets.price', 'kelas', 'tickets.status as status')
             ->join('users', 'users.id', '=', 'tickets.user_id')
             ->join('schedules', 'schedules.id', '=', 'tickets.schedule_id')
             ->join('routes', 'routes.id', '=', 'schedules.route_id')
@@ -121,7 +121,13 @@ class TicketController extends Controller
 
         $passenger = Ticket::where('ticket_code', $tCode)->count();
 
-        $update_ticket = Ticket::where('ticket_code', $tCode)->update(['status' => 2]);
+        if ($ticket->status == 1 || $ticket->status == 2) {
+            $update_ticket = Ticket::where('ticket_code', $tCode)->update(['status' => 2]);
+        }else if($ticket->status == 4){
+        }else{
+            $ticket = '';
+            $passenger = '';
+        }
 
         DB::commit();
 
@@ -152,7 +158,7 @@ class TicketController extends Controller
 
         $passengers = Ticket::where('ticket_code', $request->ticket_code)->get();
 
-        $update_ticket = Ticket::where('ticket_code', $request->ticket_code)->update(['status' => 3]);
+        $update_ticket = Ticket::where('ticket_code', $request->ticket_code)->update(['status' => 4]);
         DB::commit();
 
         try {
@@ -175,20 +181,20 @@ class TicketController extends Controller
         $ticket = Ticket::where('ticket_code', $tCode)->first();
 
         $route = Schedule::select('route_id', 'name')
-        ->join('routes', 'routes.id', '=', 'schedules.route_id')
-        ->join('ports', 'ports.id', '=', 'routes.port_id')
-        ->where('schedules.id', $ticket->schedule->id)
+            ->join('routes', 'routes.id', '=', 'schedules.route_id')
+            ->join('ports', 'ports.id', '=', 'routes.port_id')
+            ->where('schedules.id', $ticket->schedule->id)
             ->first();
 
         $next_route = Schedule::select('route_id', 'name')
-        ->join('routes', 'routes.id', '=', 'schedules.route_id')
-        ->join('ports', 'ports.id', '=', 'routes.next_port_id')
-        ->where('schedules.id', $ticket->schedule->id)
+            ->join('routes', 'routes.id', '=', 'schedules.route_id')
+            ->join('ports', 'ports.id', '=', 'routes.next_port_id')
+            ->where('schedules.id', $ticket->schedule->id)
             ->first();
 
         $passengers = Ticket::where('ticket_code', $tCode)->get();
 
-        $update_ticket = Ticket::where('ticket_code', $tCode)->update(['status' => 3]);
+        $update_ticket = Ticket::where('ticket_code', $tCode)->update(['status' => 4]);
         DB::commit();
 
         try {

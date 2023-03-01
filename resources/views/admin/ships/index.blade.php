@@ -35,6 +35,7 @@
                                     <th>#</th>
                                     <th>Nama</th>
                                     <th>Kapasitas Penumpang</th>
+                                    <th>Kelas</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -44,15 +45,28 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td class="text-center">{{ $item->kapasitas }}</td>
+                                        <td class="text-center">
+                                            @php
+                                                $result = array();
+                                            @endphp
+                                            @foreach ($item->ship_class as $shipClass)
+                                                @php
+                                                    $result[] = $shipClass->classes->name;
+                                                @endphp
+                                            @endforeach
+
+                                            @php
+                                                echo implode(', ', $result);
+                                            @endphp
+                                        </td>
                                         <td align="center">
-                                            <a href="/admin/ships/edit/{{ $item->id }}"
-                                                class="btn btn-sm btn-warning" title="Edit"><span
-                                                    class="fas fa-fw fa-edit"></span></a>
+                                            <a href="/admin/ships/edit/{{ $item->id }}" class="btn btn-sm btn-warning"
+                                                title="Edit"><span class="fas fa-fw fa-edit"></span></a>
                                             @if ($item->checkSchedule() == 0)
-                                            <a href="/admin/ships/remove/{{ $item->id }}"
-                                                onclick="return confirm('Are you sure you want to remove this data?');"
-                                                class="btn btn-sm btn-danger" title="Remove"><span
-                                                    class="fas fa-fw fa-trash"></span></a>
+                                                <a href="/admin/ships/remove/{{ $item->id }}"
+                                                    onclick="return confirm('Are you sure you want to remove this data?');"
+                                                    class="btn btn-sm btn-danger" title="Remove"><span
+                                                        class="fas fa-fw fa-trash"></span></a>
                                             @endif
                                         </td>
                                     </tr>

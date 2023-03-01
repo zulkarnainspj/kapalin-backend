@@ -18,10 +18,10 @@
         <div class="d-flex justify-content-between">
             <!-- Page Title-->
             <h2 class="fs-3 fw-bold mt-1">Jadwal</h2>
-            <div class="col-md-6 mb-2">
+            {{-- <div class="col-md-6 mb-2">
                 <a href="/admin/schedules/add" class="btn btn-md btn-success mr-2 text-light" style="float: right;"><b><i
                             class="fas fa-plus"></i> NEW</b></a>
-            </div>
+            </div> --}}
             <!-- / Page Title-->
         </div>
 
@@ -41,9 +41,9 @@
                                 @foreach ($ships as $item)
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td>{{ $item->ship->name }}</td>
+                                        <td>{{ $item->name }}</td>
                                         <td align="center">
-                                            <a href="/admin/schedules/{{ $item->ship->id }}" class="btn btn-sm btn-primary"
+                                            <a href="/admin/schedules/{{ $item->id }}" class="btn btn-sm btn-primary"
                                                 title="Jadwal">
                                                 <i class="bi bi-calendar2-range-fill"></i></a>
 

@@ -66,6 +66,17 @@
 
                     <li class="menu-section mt-4">Tiket</li>
 
+                    <li class="menu-item {{ ($nvb == 'payment') ? 'active' : '' }}">
+                        <a class="d-flex align-items-center" href="{{ route('employee-payment') }}">
+                            <span class="menu-icon">
+                                <i class="bi bi-credit-card"></i>
+                            </span>
+                            <span class="menu-link">
+                                Validasi Pembayaran
+                            </span>
+                        </a>
+                    </li>
+
                     <li class="menu-item {{ ($nvb == 'validation') ? 'active' : '' }}">
                         <a class="d-flex align-items-center" href="/employee/validation/">
                             <span class="menu-icon">

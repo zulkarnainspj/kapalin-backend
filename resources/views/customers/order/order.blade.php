@@ -22,7 +22,7 @@
 </head>
 
 <body>
-
+    @include('sweetalert::alert')
     <div class="container">
         <div class="col-md-12 mt-3" style="color:#636e72">
             <form action="/cus/submit" method="POST" autocomplete="off">
@@ -33,7 +33,8 @@
                 <input type="hidden" name="ticket_code" value="KB{{ date_create()->format('Hidysm') }}">
                 <h6 class="m-0">{{ $schedule->ship->name }}</h6>
                 <p class="m-0">{{ $route->port }} - {{ $route->next_port }}</p>
-                <p class="m-0">Rp. {{ number_format($price, 0, ',', '.') }} ({{ $j_penumpang }} org)</p>
+                <p class="m-0">Rp. {{ number_format($price, 0, ',', '.') }} ({{ $j_penumpang }} org) -
+                    {{ $schedule->kelas }}</p>
 
                 <hr>
 
@@ -132,7 +133,7 @@
 
 
                 <div class="col-md-12 text-center mt-4 mb-5">
-                    <button class="btn btn-primary">Pesan</button>
+                    <button type="submit" class="btn btn-primary">Pesan</button>
                 </div>
             </form>
         </div>

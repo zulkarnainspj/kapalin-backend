@@ -63,11 +63,11 @@
                                         <td class="text-center">
                                             {{ date_create($item->eta)->format('d-m-Y H:i') }}</td>
                                         <td class="text-center">
-                                            {{ 'Rp ' . number_format($item->price, 0, ',', '.') }}</td>
+                                            {{ 'Rp ' . number_format($item->price, 0, ',', '.') }} ({{ $item->kelas }})</td>
                                         <td class="text-center">{{ $item->passengers }}</td>
                                         <td class="text-center">{{ $item->pCount() }}</td>
                                         <td class="text-center">
-                                            {{ $item->pCount() + $item->passengers . '/' . $item->ship->kapasitas }}</td>
+                                            {{ $item->pCount() + $item->passengers . '/' . $item->capacity()->capacity }}</td>
                                         <td class="text-center">
                                             @php
                                                 // 0 Tidak Aktif, 1 Aktif

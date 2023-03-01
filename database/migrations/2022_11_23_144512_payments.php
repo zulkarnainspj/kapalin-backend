@@ -13,10 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ships', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->bigInteger('kapasitas')->nullable();
+            $table->string('name')->nullable();
+            $table->string('bank')->nullable();
+            $table->string('account_number')->nullable();
+            $table->text('receipt')->nullable();
+            $table->smallInteger('status')->default(1); // 0 Tidak Valid, 1 Menunggu Pembayaran, 2 Pending, 3 Sukses
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ships');
+        Schema::dropIfExists('payments');
     }
 };

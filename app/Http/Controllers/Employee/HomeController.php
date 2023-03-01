@@ -19,8 +19,7 @@ class HomeController extends Controller
             ->whereRaw('WEEK(created_at) = WEEK(CURRENT_DATE()) AND YEAR(created_at) = YEAR(CURRENT_DATE())')
             ->count();
 
-        $checkin = Ticket::where('status', 3)
-            ->whereRaw('WEEK(updated_at) = WEEK(CURRENT_DATE()) AND YEAR(updated_at) = YEAR(CURRENT_DATE())')
+        $checkin = Ticket::whereRaw('WEEK(updated_at) = WEEK(CURRENT_DATE()) AND YEAR(updated_at) = YEAR(CURRENT_DATE()) AND status IN (2,4)')
             ->count();
 
         $jadawal_aktif = Schedule::where('status', 1)
@@ -31,7 +30,7 @@ class HomeController extends Controller
 
         $total_tiket = Ticket::whereMonth('created_at', $date->format('m'))
             ->whereYear('created_at', $date->format('Y'))
-            ->where('status', 3)
+            ->where('status', 4)
             ->count();
 
         $order_terbaru = Ticket::orderBy('updated_at', 'desc')
@@ -41,7 +40,7 @@ class HomeController extends Controller
         $chart = Ticket::select(DB::raw('count(id) as jum'), DB::raw('WEEK(created_at) as minggu'))
             ->whereMonth('created_at', $date->format('m'))
             ->whereYear('created_at', $date->format('Y'))
-            ->where('status', 3)
+            ->where('status', 4)
             ->groupBy('minggu')
             ->get();
         

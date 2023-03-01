@@ -37,6 +37,13 @@ Route::get('/admin/ships/edit/{id}', [Admin\ShipController::class, 'edit'])->mid
 Route::post('/admin/ships/update', [Admin\ShipController::class, 'update'])->middleware('auth');
 Route::get('/admin/ships/remove/{id}', [Admin\ShipController::class, 'destroy'])->middleware('auth');
 
+Route::get('/admin/class', [Admin\ShipClassController::class, 'index'])->middleware('auth')->name('admin-class');
+Route::get('/admin/class/add', [Admin\ShipClassController::class, 'add'])->middleware('auth')->name('admin-class-add');
+Route::post('/admin/class/store', [Admin\ShipClassController::class, 'store'])->middleware('auth')->name('admin-class-store');
+Route::get('/admin/class/edit', [Admin\ShipClassController::class, 'edit'])->middleware('auth')->name('admin-class-edit');
+Route::post('/admin/class/update', [Admin\ShipClassController::class, 'update'])->middleware('auth')->name( 'admin-class-update');
+Route::get('/admin/class/remove', [Admin\ShipClassController::class, 'remove'])->middleware('auth')->name('admin-class-remove');
+
 Route::get('/admin/ports', [Admin\PortController::class, 'index'])->middleware('auth');
 Route::get('/admin/ports/add', [Admin\PortController::class, 'create'])->middleware('auth');
 Route::post('/admin/ports/store', [Admin\PortController::class, 'store'])->middleware('auth');
@@ -74,7 +81,6 @@ Route::get('/admin/schedules/{ship_id}/remove/{schedule_id}', [Admin\ScheduleCon
 Route::post('/admin/schedules/ships/update', [Admin\ScheduleController::class, 'update'])->middleware('auth');
 
 
-
 /*
 |--------------------------------------------------------------------------
 | Petugas
@@ -102,6 +108,12 @@ Route::get('/employee/tickets/schedule/{ship_id}/{route_id}', [Employee\TicketCo
 Route::get('/employee/tickets/price/{schedule_id}', [Employee\TicketController::class, 'price'])->middleware('auth');
 Route::get('/employee/tickets/validate/{tCode}', [Employee\TicketController::class, 'check'])->middleware('auth');
 
+Route::get('/employee/payments', [Employee\PaymentController::class, 'index'])->middleware('auth')->name('employee-payment');
+Route::get('/employee/payments/confirm/{tcode}/{payid}', [Employee\PaymentController::class, 'confirm'])->middleware('auth')->name('employee-payment-confirm');
+Route::get('/employee/payments/reject/{tcode}/{payid}', [Employee\PaymentController::class, 'reject'])->middleware('auth')->name('employee-payment-reject');
+
+Route::get('/employee/payments/ticket/{tcode}', [Employee\PaymentController::class, 'ticket_information'])->middleware('auth')->name('employee-payment-ticket');
+
 Route::post('/employee/order', [Employee\TicketController::class, 'order'])->middleware('auth');
 
 
@@ -114,6 +126,7 @@ Route::post('/employee/order', [Employee\TicketController::class, 'order'])->mid
 
 Route::get('/cus/order/{j_penumpang}/{pemesan}/{schedule}', [Customer\OrderController::class, 'index']);
 Route::post('/cus/submit', [Customer\OrderController::class, 'order']);
+Route::post('/cus/get/ticket', [Customer\OrderController::class, 'payment'])->name('cus-payment');
 Route::get('/cus/get/{email}', [Customer\OrderController::class, 'get_user_data']);
 Route::get('/cus/{t_code}', [Customer\OrderController::class, 'order_success']);
 Route::get('/cus/{t_code}/download', [Customer\OrderController::class, 'ticket']);

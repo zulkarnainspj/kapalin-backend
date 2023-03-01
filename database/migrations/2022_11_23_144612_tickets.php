@@ -18,14 +18,16 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('passenger_id');
             $table->unsignedBigInteger('schedule_id');
+            $table->unsignedBigInteger('payment_id');
             $table->string('ticket_code');
             $table->float('price');
-            $table->integer('status')->default(1); // 0 Batal, 1 Dipesan, 2 Check In, 3 Selesai
+            $table->integer('status')->default(1); // 0 Batal, 1 Dipesan, 2 Check In, 3 Menunggu Pembayaran, 4 Selesai
             $table->boolean('pending')->default(0); // 0 False, 1 True
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('passenger_id')->references('id')->on('passengers');
             $table->foreign('schedule_id')->references('id')->on('schedules');
+            $table->foreign('payment_id')->references('id')->on('payments');
         });
     }
 

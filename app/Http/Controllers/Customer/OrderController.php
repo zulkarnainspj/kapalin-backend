@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Passenger;
+use App\Models\Admin\Payment;
 use App\Models\Admin\Schedule;
 use App\Models\Admin\Ticket;
 use App\Models\Admin\User;
@@ -54,6 +55,9 @@ class OrderController extends Controller
 
         $pemesan = User::where('email', $request->email_pemesan)->first();
 
+        $pembayaran = new Payment;
+        $pembayaran->save();
+
         for ($i = 0; $i < $jumlahPenumpang; $i++) {
             $request->validate([
                 "no_id.$i" => ['numeric', 'required', 'digits_between:12,18'],
@@ -73,13 +77,44 @@ class OrderController extends Controller
             $ticket->user_id = $pemesan->id;
             $ticket->passenger_id = $passenger->id;
             $ticket->schedule_id = $schedule->id;
+            $ticket->payment_id = $pembayaran->id;
             $ticket->ticket_code = $request->ticket_code;
             $ticket->price = ($schedule->price * $jumlahPenumpang);
+            $ticket->status = 3;
             $ticket->save();
         }
+
         DB::commit();
 
         Alert::success('Sukses', 'Pembelian tiket berhasil');
+
+        return redirect('/cus/' . $request->ticket_code);
+    }
+
+    public function payment(Request $request)
+    {
+        $request->validate([
+            'receipt' => 'required|image|mimes:jpeg,png,jpg|max:20048',
+            'name' => ['required', 'min:3'],
+            'no_rek' => ['required'],
+            'bank' => ['required']
+        ]);
+
+        DB::beginTransaction();
+        $img = $request->file('receipt')->store('uploads', 'public');
+
+        $ticket = Ticket::where('ticket_code', $request->ticket_code)->first();
+
+        $payment = Payment::find($ticket->payment_id);
+        $payment->name = $request->name;
+        $payment->bank = $request->bank;
+        $payment->account_number = $request->no_rek;
+        $payment->receipt = $img;
+        $payment->status = 2;
+        $payment->save();
+        DB::commit();
+
+        Alert::success('Berhasil', 'Informasi pembayaran berhasil disimpan, silahkan tunggu proses verifikasi');
 
         return redirect('/cus/' . $request->ticket_code);
     }
@@ -97,11 +132,21 @@ class OrderController extends Controller
 
         $passengers = Ticket::where('ticket_code', $t_code)->get();
 
-        return view('customers.tiket.index', [
-            'tiket' => $ticket,
-            'route' => $route,
-            'passengers' => $passengers
-        ]);
+        if ($ticket->payment->status == 1){
+            return view('customers.tiket.payment', [
+                'tiket' => $ticket,
+                'route' => $route,
+                'passengers' => $passengers
+            ]);
+        }else{
+            return view('customers.tiket.index', [
+                'tiket' => $ticket,
+                'route' => $route,
+                'passengers' => $passengers
+            ]);
+        }
+
+        
     }
 
     public function ticket($t_code)

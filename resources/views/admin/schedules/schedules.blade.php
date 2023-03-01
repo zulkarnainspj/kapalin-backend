@@ -39,6 +39,7 @@
                                     <th>Tujuan</th>
                                     <th>ETD (Berangkat)</th>
                                     <th>ETA (Tiba)</th>
+                                    <th>Kelas</th>
                                     <th>Harga</th>
                                     <th>Penjualan</th>
                                     <th>Action</th>
@@ -54,6 +55,7 @@
                                             {{ date_create($item->etd)->format('d-m-Y H:i') }}</td>
                                         <td class="text-center">
                                             {{ date_create($item->eta)->format('d-m-Y H:i') }}</td>
+                                        <td class="text-center">{{ $item->kelas }}</td>
                                         <td class="text-center">{{ 'Rp ' . number_format($item->price, 0, ',', '.') }}</td>
                                         <td class="text-center">
                                             @php
@@ -91,10 +93,12 @@
                                         <td align="center">
                                             @if ($penjualan == 'aktif')
                                                 <a href="/admin/schedules/disable/{{ $item->id }}"
-                                                    class="btn btn-sm btn-danger" title="Nonaktifkan Penjualan Tiket"><i class="bi bi-x-square"></i></a>
+                                                    class="btn btn-sm btn-danger" title="Nonaktifkan Penjualan Tiket"><i
+                                                        class="bi bi-x-square"></i></a>
                                             @elseif ($penjualan == 'nonaktif')
                                                 <a href="/admin/schedules/enable/{{ $item->id }}"
-                                                    class="btn btn-sm btn-primary" title="Aktifkan Penjualan Tiket"><i class="bi bi-check-square"></i></a>
+                                                    class="btn btn-sm btn-primary" title="Aktifkan Penjualan Tiket"><i
+                                                        class="bi bi-check-square"></i></a>
                                             @endif
 
                                             <a href="/admin/schedules/{{ $item->ship->id }}/edit/{{ $item->id }}"

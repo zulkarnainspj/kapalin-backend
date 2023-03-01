@@ -110,9 +110,34 @@ function getSchedules() {
                 etd_hours = (etd.getHours() < 10) ? '0' + etd.getHours() : etd.getHours();
                 etd_minutes = (etd.getMinutes() < 10) ? '0' + etd.getMinutes() : etd.getMinutes();
                 etd_format = etd.getDate() + '-' + (etd.getMonth() + 1) + '-' + etd.getFullYear() + ' ' + etd_hours + ':' + etd_minutes;
-                $('#schedule').append('<option value="' + schedule_id + '">' + etd_format + '</option>');
+                kelas = data[key].kelas;
+                $('#schedule').append('<option value="' + schedule_id + '">' + etd_format + ' (' + kelas + ')' + '</option>');
 
             });
+        }
+
+    });
+}
+
+function getTicketInformation(tcode) {
+
+    $.ajax({
+        url: "/employee/payments/ticket/" + tcode,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            $('#pemesan').text(data.ticket.user.name);
+            $('#kapal').text(data.ticket.schedule.ship.name);
+            $('#rute').text(data.route.port + ' - ' + data.route.next_port);
+            temp_etd = data.ticket.schedule.etd;
+            const etd = new Date(temp_etd);
+            etd_hours = (etd.getHours() < 10) ? '0' + etd.getHours() : etd.getHours();
+            etd_minutes = (etd.getMinutes() < 10) ? '0' + etd.getMinutes() : etd.getMinutes();
+            etd_format = etd.getDate() + '/' + (etd.getMonth() + 1) + '/' + etd.getFullYear() + ' ' + etd_hours + ':' + etd_minutes;
+            $('#etd').text(etd_format);
+            $('#penumpang').text(data.passengers);
+
+
         }
 
     });
@@ -152,7 +177,7 @@ function validasiTiket() {
         success: function (data) {
             if (data.ticket) {
                 $('#OnError').css('display', 'none');
-                ship.text(data.ticket.sname);
+                ship.text(data.ticket.sname + ' (' + data.ticket.kelas + ')');
                 route.text('Sapeken - ' + data.ticket.pname);
                 uName.text(': ' + data.ticket.uname);
                 passenger.text(': ' + data.passenger);
@@ -171,7 +196,7 @@ function validasiTiket() {
                 // Price
                 price.text(formatRupiah(Math.floor(data.ticket.price), 'Rp. '));
                 $('#informasiTiket').css('display', 'block');
-            }else{
+            } else {
                 $('#OnError').css('display', 'block');
                 $('#informasiTiket').css('display', 'none');
             }

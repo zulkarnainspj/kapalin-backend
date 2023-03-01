@@ -109,6 +109,11 @@
                                 <td>Rute</td>
                                 <td>: {{ $route->port }} - {{ $route->next_port }}</td>
                             </tr>
+
+                            <tr>
+                                <td>Kelas</td>
+                                <td>: {{ $tiket->schedule->kelas }}</td>
+                            </tr>
                         </table>
                     </td>
                 </tr>

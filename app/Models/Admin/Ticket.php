@@ -24,4 +24,9 @@ class Ticket extends Model
     {
         return $this->belongsTo(Passenger::class, 'passenger_id');
     }
+
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class, 'payment_id', 'id');
+    }
 }

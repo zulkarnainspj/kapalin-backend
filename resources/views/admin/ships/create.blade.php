@@ -18,20 +18,21 @@
     <section class="container-fluid mb-3">
         <!-- Page Title-->
         <h2 class="fs-3 fw-bold my-3">Tambah Data Kapal</h2>
-
-        <div class="row g-4">
-            <div class="col-md-12">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <form action="/admin/ships/store" method="post">
-                            @csrf
+        <form action="/admin/ships/store" method="post">
+            @csrf
+            <div class="row g-4">
+                <div class="col-md-12">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4 class="mb-3">Informasi Kapal</h4>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">Nama Kapal</label>
                                         <input type="text" name="name" id="name"
-                                            class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" autofocus
-                                            autocomplete="off">
+                                            placeholder="ex. KM Sabuk Nusantara 91"
+                                            class="form-control @error('name') is-invalid @enderror"
+                                            value="{{ old('name') }}" autofocus autocomplete="off">
 
                                         @error('name')
                                             <div class="invalid-feedback">
@@ -40,29 +41,82 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="capacity">Kapasitas Penumpang</label>
                                         <input type="number" name="capacity" id="capacity"
-                                            class="form-control @error('capacity') is-invalid @enderror" value="{{ old('capacity') }}" autocomplete="off">
+                                            class="form-control @error('capacity') is-invalid @enderror"
+                                            value="{{ old('capacity') }}" autocomplete="off">
                                         @error('capacity')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> --}}
+                            </div>
 
+                            <div class="row">
+                                <h4 class="mb-3">Informasi Kelas Kapal</h4>
+                                <div class="col-md-12">
+                                    @php
+                                        $cls = 0;
+                                    @endphp
+                                    <div class="row">
+                                        @foreach ($classes as $item)
+                                            <div class="col-md-3 d-flex justify-content-start align-items-center">
+                                                <div class="form-check form-check me-3  ">
+                                                    <input class="form-check-input" name="kelas[]" type="checkbox"
+                                                        id="inlineCheckbox{{ $item->id }}" value="{{ $item->id }}"
+                                                        onclick="isiKapasitas({{ $item->id }})">
+                                                    <label class="form-check-label"
+                                                        for="inlineCheckbox{{ $item->id }}">{{ $item->name }}</label>
+                                                </div>
+                                                <input type="number" class="form-control" id="id{{ $item->id }}"
+                                                    name="capacity_{{ $item->id }}" placeholder="Kapasitas ex. 100"
+                                                    disabled>
+                                            </div>
+
+                                            <?php $cls++; ?>
+                                        @endforeach
+                                    </div>
+
+                                    @if ($cls == 0)
+                                        <div class="alert alert-warning">Belum ada daftar kelas, silahkan tambahkan terlebih
+                                            dahulu</div>
+                                    @endif
+
+                                    <div class="col-md-12 mt-3">
+                                        <label for="" class="small" style="font-style:italic">Tambahkan kelas di
+                                            Menu Kelas Kapal</label>
+                                    </div>
+                                </div>
                                 <div class="col-md-12 d-flex justify-content-end">
                                     <a href="/admin/ships" class="btn btn-md btn-danger me-2">Cancel</a>
-                                    <button type="submit" class="btn btn-md btn-success">Save</button>
+                                    <button type="submit"
+                                        class="btn btn-md btn-success {{ $cls == 0 ? 'disabled' : '' }}">Save</button>
                                 </div>
                             </div>
-                        </form>
+
+                        </div>
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card-body -->
                 </div>
             </div>
-        </div>
+        </form>
     </section>
+
+    <script>
+        function isiKapasitas(x) {
+            var chk = $('#inlineCheckbox' + x).is(":checked");
+            var id = "#id" + x;
+
+            if (chk == true) {
+                $(id).prop("disabled", false);
+                $(id).focus();
+            }else{
+                $(id).prop("disabled", true);
+            }
+        }
+    </script>
 @endsection

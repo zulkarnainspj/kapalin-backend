@@ -12,7 +12,7 @@
     <style>
         @page {
             margin: 5px;
-            size: 45mm 97mm;
+            size: 45mm 110mm;
         }
 
         .tbl td,
@@ -50,6 +50,7 @@
 
                 <div style="font-size:12px; margin-top:10px">
                     <p>{{ $item->passenger->name }} / {{ $diff->y > 0 ? $diff->y : '<1' }} th</p>
+                    <p>({{ $item->schedule->kelas }})</p>
                 </div>
 
                 <div style="font-size:12px;">

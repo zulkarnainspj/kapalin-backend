@@ -13,19 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('schedules', function (Blueprint $table) {
+        Schema::create('ship_classes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('ship_id');
-            $table->unsignedBigInteger('route_id');
-            $table->dateTime('eta');
-            $table->dateTime('etd');
-            $table->float('price');
-            $table->integer('passengers')->default(0);
-            $table->string('kelas');
-            $table->integer('status')->default(1); // 1 Aktif, 0 Tidak Aktif
+            $table->unsignedBigInteger('class_id');
+            $table->integer('capacity');
             $table->timestamps();
             $table->foreign('ship_id')->references('id')->on('ships');
-            $table->foreign('route_id')->references('id')->on('routes');
+            $table->foreign('class_id')->references('id')->on('classes');
         });
     }
 
@@ -36,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('schedules');
+        Schema::dropIfExists('ship_classes');
     }
 };

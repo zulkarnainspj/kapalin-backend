@@ -34,4 +34,9 @@ class Ship extends Model
 
         return $check;
     }
+
+    public function ship_class()
+    {
+        return $this->hasMany(ShipClassTx::class, 'ship_id', 'id');
+    }
 }

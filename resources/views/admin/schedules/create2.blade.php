@@ -35,7 +35,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="ship">Kapal</label>
+                                        <label for="ship" style="font-weight:bold">Kapal</label>
                                         <select name="ship" class="form-control" id="ship" readonly>
                                             <option value="{{ $ship->id }}">{{ $ship->name }}</option>
                                         </select>
@@ -44,14 +44,15 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="port">Pelabuhan Asal</label>
-                                        <input type="text" class="form-control" name="" id="" value="{{ $origin_port->name }}" readonly>
+                                        <label for="port" style="font-weight:bold">Pelabuhan Asal</label>
+                                        <input type="text" class="form-control" name="" id=""
+                                            value="{{ $origin_port->name }}" readonly>
                                     </div>
                                 </div>
 
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        <label for="etd_date">ETD (Keberangkatan)</label>
+                                        <label for="etd_date" style="font-weight:bold">ETD (Keberangkatan)</label>
                                         <div class="row">
                                             <div class="col-md-9">
                                                 <input type="date" step="any" name="etd_date" id="etd_date"
@@ -77,14 +78,15 @@
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
                                 <h3>Jadwal</h3>
-                                <button type="button" class="btn btn-primary" onclick="addSchedule()">Tambah Pelabuhan Tujuan</button>
+                                <button type="button" class="btn btn-primary" onclick="addSchedule()">Tambah Pelabuhan
+                                    Tujuan</button>
                             </div>
                         </div>
                         <div class="card-body" id="containerJadwal">
                             <div class="row" id="jadwal">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="route">Pelabuhan Tujuan</label>
+                                        <label for="route" style="font-weight:bold">Pelabuhan Tujuan</label>
                                         <select name="route[]" class="form-control" id="route">
                                             @foreach ($routes as $route)
                                                 <option value="{{ $route->id }}">
@@ -97,7 +99,7 @@
 
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        <label for="eta_date">ETA (Kedatangan)</label>
+                                        <label for="eta_date" style="font-weight:bold">ETA (Kedatangan)</label>
                                         <div class="row">
                                             <div class="col-md-9">
                                                 <input type="date" step="any" name="eta_date[]" id="eta_date"
@@ -117,10 +119,22 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="price">Harga</label>
-                                        <input type="number" class="form-control" name="price[]" placeholder="ex. 20000" required>
+                                        <label for="price" style="font-weight:bold">Harga</label>
+                                        <div class="row align-items-center">
+                                            @foreach ($ship->ship_class as $shipClass)
+                                                <div class="col-md-4">
+                                                    {{ $shipClass->classes->name }}
+                                                </div>
+                                                <div class="col-md-8 mt-2">                                                    
+                                                    <input type="number" class="form-control" name="price[]"
+                                                        placeholder="ex. 20000" required>
+                                                </div>
+                                            @endforeach
+                                        </div>
+
                                     </div>
                                 </div>
+                                <hr>
                             </div>
                         </div>
                     </div>
@@ -135,10 +149,10 @@
     </section>
 
     <script>
-            var x = 1;
+        var x = 1;
 
-        function addSchedule(){
-            x = x+1;
+        function addSchedule() {
+            x = x + 1;
 
             $('#plbCount').val(x);
 

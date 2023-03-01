@@ -64,6 +64,17 @@
                         </a>
                     </li>
 
+                    <li class="menu-item {{ $nvb == 'class' ? 'active' : '' }}">
+                        <a class="d-flex align-items-center" href="{{ route('admin-class') }}">
+                            <span class="menu-icon">
+                                <i class="nav-icon fas fa-bed"></i>
+                            </span>
+                            <span class="menu-link">
+                                Kelas
+                            </span>
+                        </a>
+                    </li>
+
                     <li class="menu-item {{ $nvb == 'ports' ? 'active' : '' }}">
                         <a class="d-flex align-items-center" href="/admin/ports">
                             <span class="menu-icon">

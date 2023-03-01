@@ -23,14 +23,17 @@
 </head>
 
 <body>
-
+    @include('sweetalert::alert')
     <div class="container">
         <div class="col-md-12 mt-3" style="color:#636e72">
+            @if ($tiket->status == 3)
+                <div class="alert alert-warning">Pembayaran sedang diverifikasi</div>
+            @endif
             <div class="d-flex justify-content-between">
                 <div>
                     <h6 class="m-0" style="font-weight: normal; font-size: 12px">Kode Booking</h6>
                     <h4 class="m-0"
-                        style="font-size: 20px; {{ $tiket->status == 3 ? 'text-decoration:line-through' : '' }}">
+                        style="font-size: 20px; {{ $tiket->status == 4 ? 'text-decoration:line-through' : '' }}">
                         {{ $tiket->ticket_code }}</h4>
                 </div>
 
@@ -44,11 +47,14 @@
                             class="btn btn-sm btn-primary">Simpan
                             Bukti</a>
 
-                        <button class="btn btn-sm btn-primary" id="spnr" style="display: none;" type="button" disabled>
+                        <button class="btn btn-sm btn-primary" id="spnr" style="display: none;" type="button"
+                            disabled>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             <span class="sr-only">Loading...</span>
                         </button>
                     @elseif($tiket->status == 3)
+                        <div class="badge bg-warning">Pending</div>
+                    @elseif($tiket->status == 4)
                         <img src="{{ url('') }}/dist/img/completed.png" style="width: 130px" alt="">
                     @elseif($tiket->status == 0)
                         <img src="{{ url('') }}/dist/img/cancelled.png" style="width: 130px" alt="">
@@ -61,8 +67,10 @@
 
             <h6 class="mt-3 mb-0" style="font-weight: normal; font-size: 12px">Informasi Kapal</h6>
             <h4 class="m-0" style="font-size: 15px">{{ $tiket->schedule->ship->name }}</h4>
+            <h6 class="m-0" style="font-size: 12px">({{ $tiket->schedule->kelas }})</h6>
             <h6 class="m-0" style="font-size: 12px">{{ $route->port }} - {{ $route->next_port }}</h6>
-            <h6 class="m-0" style="font-size: 12px">{{ date_create($tiket->schedule->etd)->format('d/m/Y H:i') }} WIB
+            <h6 class="m-0" style="font-size: 12px">{{ date_create($tiket->schedule->etd)->format('d/m/Y H:i') }}
+                WIB
                 - {{ date_create($tiket->schedule->eta)->format('d/m/Y H:i') }} WIB</h6>
 
             <h6 class="mt-3 mb-2" style="font-weight: normal; font-size: 12px">Penumpang</h6>

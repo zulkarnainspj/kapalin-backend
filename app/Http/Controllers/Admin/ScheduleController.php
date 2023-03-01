@@ -7,6 +7,7 @@ use App\Models\Admin\Port;
 use App\Models\Admin\Route;
 use App\Models\Admin\Schedule;
 use App\Models\Admin\Ship;
+use App\Models\Admin\ShipClassTx;
 use App\Models\Admin\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +18,7 @@ class ScheduleController extends Controller
 {
     public function index()
     {
-        $ships = Schedule::select('ship_id')->groupBy('ship_id')->get();
+        $ships = Ship::orderBy('name')->get();
 
         return view('admin.schedules.index', [
             'title' => 'Jadwal',
@@ -44,9 +45,10 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
         $jumlah_pelabuhan = $request->plb_count;
+             
 
         DB::beginTransaction();
-        for ($i = 0; $i < $jumlah_pelabuhan; $i++) {
+        for ($i = 0; $i < $jumlah_pelabuhan; $i++) {            
             $schedule = new Schedule;
             $schedule->ship_id = $request->ship;
             $schedule->etd = $request->etd_date . ' ' . $request->etd_time;
@@ -80,16 +82,22 @@ class ScheduleController extends Controller
     public function store2(Request $request)
     {
         $jumlah_pelabuhan = $request->plb_count;
+        $kelas = ShipClassTx::where('ship_id', $request->ship)->get();
 
+        $prc = 0;
         DB::beginTransaction();
         for ($i = 0; $i < $jumlah_pelabuhan; $i++) {
-            $schedule = new Schedule;
-            $schedule->ship_id = $request->ship;
-            $schedule->etd = $request->etd_date . ' ' . $request->etd_time;
-            $schedule->route_id = $request->route[$i];
-            $schedule->eta = $request->eta_date[$i] . ' ' . $request->eta_time[$i];
-            $schedule->price = $request->price[$i];
-            $schedule->save();
+            foreach ($kelas as $kls) {
+                $schedule = new Schedule;
+                $schedule->ship_id = $request->ship;
+                $schedule->etd = $request->etd_date . ' ' . $request->etd_time;
+                $schedule->route_id = $request->route[$i];
+                $schedule->kelas = $kls->classes->name;
+                $schedule->eta = $request->eta_date[$i] . ' ' . $request->eta_time[$i];
+                $schedule->price = $request->price[$prc];
+                $schedule->save();
+                $prc++;
+            }
         }
         DB::commit();
 
@@ -101,7 +109,9 @@ class ScheduleController extends Controller
     public function schedule($id)
     {
         $ship = Ship::find($id);
-        $schedules = Schedule::where('ship_id', $id)->orderBy('etd', 'desc')->get();
+        $schedules = Schedule::where('ship_id', $id)
+        ->orderBy('etd', 'desc')        
+        ->get();
 
         return view('admin.schedules.schedules', [
             'title' => 'Jadwal',

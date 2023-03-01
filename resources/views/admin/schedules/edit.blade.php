@@ -34,7 +34,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="ship">Kapal</label>
+                                        <label for="ship" style="font-weight:bold">Kapal</label>
                                         <select name="ship" class="form-control" id="ship" readonly>
                                             <option value="{{ $ship->id }}">{{ $ship->name }}</option>
                                         </select>
@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="route">Rute</label>
+                                        <label for="route" style="font-weight:bold">Rute</label>
                                         <select name="route" class="form-control" id="route">
                                             @foreach ($routes as $route)
                                                 <option value="{{ $route->id }}"
@@ -56,7 +56,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="price">Harga</label>
+                                        <label for="price" style="font-weight:bold">Harga ({{ $schedule->kelas }})</label>
                                         <input type="number" class="form-control" name="price" placeholder="ex. 20000"
                                             value="{{ $schedule->price }}">
                                     </div>
@@ -73,7 +73,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="etd_date">ETD (Keberangkatan)</label>
+                                        <label for="etd_date" style="font-weight:bold">ETD (Keberangkatan)</label>
                                         <div class="row">
                                             <div class="col-md-9">
                                                 <input type="date" step="any" name="etd_date" id="etd_date"
@@ -95,7 +95,7 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="eta_date">ETA (Kedatangan)</label>
+                                        <label for="eta_date" style="font-weight:bold">ETA (Kedatangan)</label>
                                         <div class="row">
                                             <div class="col-md-9">
                                                 <input type="date" step="any" name="eta_date" id="eta_date"

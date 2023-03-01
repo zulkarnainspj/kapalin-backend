@@ -106,7 +106,7 @@ class ScheduleController extends Controller
         $ticket = Ticket::select('no_id', 'name', 'gender', 'date_of_birth')
             ->join('passengers', 'passengers.id', '=', 'tickets.passenger_id')
             ->where('schedule_id', $id)
-            ->where('status', 3)
+            ->where('status', 4)
             ->orderBy('name', 'asc')
             ->get();
 

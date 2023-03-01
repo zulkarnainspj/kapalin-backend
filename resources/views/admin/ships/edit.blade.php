@@ -25,6 +25,7 @@
                         <form action="/admin/ships/update" method="post">
                             @csrf
                             <input type="hidden" name="id" value="{{ $ship->id }}">
+                            <h4 class="mb-3">Informasi Kapal</h4>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -50,6 +51,32 @@
                                                 {{ $message }}
                                             </div>
                                         @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="mb-3">Informasi Kelas Kapal</h4>
+                                <div class="col-md-12">
+                                    @php
+                                        $cls = 0;
+                                    @endphp
+                                    @foreach ($classes as $item)
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="kelas[]" type="checkbox"
+                                                id="inlineCheckbox{{ $cls }}" value="{{ $item->id }}" {{ isset($ship->ship_class[$cls]->class_id) == $item->id ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="inlineCheckbox{{ $cls }}">{{ $item->name }}</label>
+                                        </div>
+                                        <?php $cls++ ?>
+                                    @endforeach
+
+                                    @if($cls == 0)
+                                        <div class="alert alert-warning">Belum ada daftar kelas, silahkan tambahkan terlebih dahulu</div>
+                                    @endif
+
+                                    <div class="col-md-12 mt-3">
+                                        <label for="" class="small" style="font-style:italic">Tambahkan kelas di
+                                            Menu Kelas Kapal</label>
                                     </div>
                                 </div>
 
