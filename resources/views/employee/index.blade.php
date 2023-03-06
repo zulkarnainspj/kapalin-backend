@@ -92,7 +92,7 @@
             <div class="col-12 col-sm-6 col-xxl-3">
                 <div class="card h-100">
                     <div class="card-header justify-content-between align-items-center d-flex border-0 pb-0">
-                        <h6 class="card-title m-0 text-muted fs-xs text-uppercase fw-bolder tracking-wide">Kapal Beroprasi
+                        <h6 class="card-title m-0 text-muted fs-xs text-uppercase fw-bolder tracking-wide">Kapal Beroperasi
                         </h6>
                     </div>
                     <div class="card-body">

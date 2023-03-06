@@ -22,7 +22,7 @@ class Schedule extends Model
     
     public function pCount()
     {
-        $person = Ticket::where('schedule_id', $this->id)->count();
+        $person = Ticket::where('schedule_id', $this->id)->whereRaw('status IN (1,4)')->count();
 
         return $person;
     }
